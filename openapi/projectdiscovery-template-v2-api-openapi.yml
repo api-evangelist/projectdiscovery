@@ -1,0 +1,373 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset template/v2 API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: template/v2
+paths:
+  /v2/template/search:
+    get:
+      summary: Search Templates
+      tags:
+      - template/v2
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - public
+          - private
+          - public_private
+          default: public_private
+        in: query
+        name: scope
+        description: Scope of templates to search (public or private)
+      - schema:
+          type: integer
+          default: 50
+        in: query
+        name: limit
+        description: Maximum number of results to return
+      - schema:
+          type: integer
+          default: 0
+        in: query
+        name: offset
+        description: Number of results to skip for pagination
+      - schema:
+          type: string
+          items:
+            type: string
+        in: query
+        name: fields
+        description: Specific fields to return in the response
+        style: form
+        explode: true
+      - schema:
+          type: string
+        in: query
+        name: sort_asc
+        description: Field to sort results in ascending order
+      - schema:
+          type: string
+        in: query
+        name: sort_desc
+        description: Field to sort results in descending order
+      - schema:
+          type: string
+        in: query
+        name: q
+        description: Search query string
+      - schema:
+          type: boolean
+          default: false
+        in: query
+        name: highlight
+        description: Whether to highlight search matches in results
+      - schema:
+          type: integer
+          default: 5
+        in: query
+        name: facet_size
+        description: Number of facets to return in the response
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+      responses:
+        '200':
+          description: Successful search response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - results
+                - total
+                - count
+                - facets
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TemplateData'
+                  total:
+                    type: integer
+                    description: Total number of matching results
+                  count:
+                    type: integer
+                    description: Number of results in this response
+                  facets:
+                    $ref: '#/components/schemas/TemplateStats'
+                  message:
+                    type: string
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/MessageResponse'
+      security:
+      - X-API-Key: []
+      description: Search templates with filtering, sorting, and faceting capabilities
+      operationId: get-v2-template-search
+components:
+  schemas:
+    Classification:
+      description: Classification of template including additional metadata like cve-id, cwe-id etc
+      type: object
+      properties:
+        cve-id:
+          type: array
+          items:
+            type: string
+          description: CVE IDs for the template
+        cwe-id:
+          type: array
+          items:
+            type: string
+          description: CWE IDs for the template
+        cvss-metrics:
+          type: string
+          description: CVSS Metrics for the template
+        cvss-score:
+          type: number
+          format: float
+          description: CVSS Score for the template
+        epss-score:
+          type: number
+          format: float
+          description: EPSS Score for the template
+        epss-percentile:
+          type: number
+          format: float
+          description: EPSS Percentile for the template
+        cpe:
+          type: string
+          description: CPE for the template
+    TemplateStats:
+      type: object
+      x-examples:
+        Example 1:
+          date: '2024-02-03T08:40:19.911720715Z'
+          statistics:
+            authors:
+              0h1in9e: 1
+              0ri2n: 13
+              0ut0fb4nd: 1
+              0w4ys: 3
+            classification:
+              total: 4772
+              cvss-metrics: 4650
+              cvss-score: 2999
+              cve-id: 2349
+              cwe-id: 4679
+            description: 6665
+            directory:
+              total: 0
+            name: 7810
+            references: 5369
+            remediation: 2231
+            severity:
+              total: 7810
+              critical: 947
+              high: 1563
+              medium: 1457
+              low: 257
+              info: 3551
+              unknown: 35
+            tags:
+              '360': 1
+              '3600': 1
+              '''rpcms''': 1
+            total: 7810
+            type:
+              total: 7810
+              http: 7005
+              dns: 21
+              network: 134
+              file: 312
+              ssl: 27
+              websocket: 0
+              workflow: 191
+              headless: 16
+          template-version: main
+      required:
+      - buckets
+      - missing
+      - other
+      - total
+      properties:
+        is_new:
+          $ref: '#/components/schemas/StatBuckets'
+        creation_stats:
+          $ref: '#/components/schemas/StatBuckets'
+        author:
+          $ref: '#/components/schemas/StatBuckets'
+        is_early:
+          $ref: '#/components/schemas/StatBuckets'
+        dir:
+          $ref: '#/components/schemas/StatBuckets'
+        product:
+          $ref: '#/components/schemas/StatBuckets'
+        severity:
+          $ref: '#/components/schemas/StatBuckets'
+        tags:
+          $ref: '#/components/schemas/StatBuckets'
+        type:
+          $ref: '#/components/schemas/StatBuckets'
+        vendor:
+          $ref: '#/components/schemas/StatBuckets'
+    AIMeta:
+      type: object
+      properties:
+        model_used:
+          description: The AI model used to generate the template
+          type: string
+        is_prompt_by_human:
+          description: Whether the prompt was written by a human
+          type: boolean
+        is_template_by_human:
+          description: Whether the template was written by a human
+          type: boolean
+        prompt:
+          description: The prompt used to generate the template
+          type: string
+    StatBuckets:
+      title: StatBuckets
+      type: object
+      properties:
+        buckets:
+          type: object
+          additionalProperties:
+            type: integer
+        missing:
+          type: integer
+        other:
+          type: integer
+        total:
+          type: integer
+    TemplateData:
+      description: Template Document or object
+      type: object
+      properties:
+        uri:
+          type: string
+          description: The URI of the template (could be a path or a ksuid)
+        id:
+          type: string
+          description: The ID of the template
+        name:
+          type: string
+          description: The name of the template
+        author:
+          type: array
+          description: The authors of the template
+          items:
+            type: string
+        tags:
+          type: array
+          description: The tags of the template
+          items:
+            type: string
+        severity:
+          type: string
+          description: The severity of the template
+        type:
+          type: string
+          description: The type of the template
+        dir:
+          type: string
+        ref:
+          type: string
+        vendor:
+          type: string
+          description: The vendor of the template
+        product:
+          type: string
+          description: The product of the template
+        classification:
+          $ref: '#/components/schemas/Classification'
+          description: Classification of template including additional metadata like cve-id, cwe-id etc
+        metadata:
+          type: object
+        digest:
+          type: string
+          description: The digest of the template
+        created_at:
+          type: string
+          format: date-time
+          description: The time when template was created
+        updated_at:
+          type: string
+          format: date-time
+          description: The time when template was updated
+        release_tag:
+          type: string
+          description: The release tag of the template (contains tag when the file was first released)
+        is_early:
+          type: boolean
+          description: True if template is in early access
+        raw:
+          type: string
+          description: The raw unparsed template
+        template_id:
+          type: string
+        description:
+          type: string
+        filename:
+          type: string
+        impact:
+          type: string
+        ai_meta:
+          $ref: '#/components/schemas/AIMeta'
+        references:
+          type: array
+          items:
+            type: string
+        template_type:
+          enum:
+          - public
+          - user
+          - shared
+        is_draft:
+          type: boolean
+        is_github:
+          type: boolean
+        is_new:
+          type: boolean
+        is_pdteam:
+          description: Is the template from pdteam
+          type: boolean
+        remediation:
+          type: string
+  responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

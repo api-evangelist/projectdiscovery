@@ -1,0 +1,119 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset history API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: history
+paths:
+  /v1/scans/vulns/history:
+    get:
+      summary: Get scan log stats of given scan id
+      tags:
+      - history
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VulnerabilityHistoryDetail'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-vulns-history
+      parameters:
+      - schema:
+          type: array
+          items:
+            type: string
+        in: query
+        name: vuln_hash
+      - schema:
+          type: integer
+          format: int64
+          default: 5
+        in: query
+        name: history_limit
+        required: false
+        description: Specifies the maximum number of revisions to be returned.
+components:
+  schemas:
+    VulnerabilityHistoryDetail:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/VulnerabilityHistory'
+    VulnerabilityHistory:
+      type: object
+      properties:
+        history_count:
+          type: integer
+          format: int64
+          description: The total number of revisions for the vulnerability.
+        history:
+          type: array
+          items:
+            type: object
+            properties:
+              severity:
+                type: string
+              target:
+                type: string
+              template_id:
+                type: string
+              matched:
+                type: boolean
+              timestamp:
+                type: string
+                format: date-time
+              vuln_hash:
+                type: string
+              event:
+                type: string
+          description: A list of events associated with the vulnerability.
+      required:
+      - history_count
+      - history
+  responses:
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

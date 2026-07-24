@@ -1,0 +1,235 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset Team API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: Team
+paths:
+  /v1/team/audit_log:
+    get:
+      summary: Get audit logs for team
+      tags:
+      - Team
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - message
+                - data
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserAuditLogItems'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+      operationId: get-v1-audit-log
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: email
+        description: filter by specific user
+      - schema:
+          type: string
+        in: query
+        name: action
+        description: filter by specific action name
+      - schema:
+          type: integer
+        in: query
+        name: offset
+        description: number of rows to skip
+      - schema:
+          type: integer
+        in: query
+        name: limit
+        description: number of rows to get
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: start_date
+        description: start date from which you want to get logs
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: end_date
+        description: end date till which you want to get logs
+      - schema:
+          type: string
+          enum:
+          - current_month
+          - last_month
+          - last_3_months
+          - last_6_months
+          - last_12_months
+        in: query
+        name: time_range
+        description: time range to get logs
+      - schema:
+          type: string
+          enum:
+          - api
+          - platform
+          - unknown
+        in: query
+        name: source
+        description: filter by request source (api, platform, unknown)
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/team/audit_log/search:
+    get:
+      summary: Smart search across audit logs
+      tags:
+      - Team
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - message
+                - data
+                properties:
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserAuditLogItems'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+      operationId: get-v1-team-audit-log-search
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+          maxLength: 200
+        in: query
+        name: q
+        required: true
+        description: 'Search query. Automatically detects search intent:
+
+          - Status code (404, 200, 500) → Searches status_code field
+
+          - Source (api, platform, unknown) → Searches source field
+
+          - IP address (192.168.x.x) → Searches ip field
+
+          - Email (user@example.com) → Searches email field
+
+          - HTTP method (GET, POST, PUT) → Searches method field
+
+          - Path (/v1/scans, enumerate) → Searches path_name and path fields
+
+          - General text → Searches across path, path_name, request, response
+
+          '
+      - schema:
+          type: integer
+          default: 0
+        in: query
+        name: offset
+        description: number of rows to skip
+      - schema:
+          type: integer
+          default: 100
+        in: query
+        name: limit
+        description: number of rows to get (max 100)
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        required: true
+        description: '''Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'''
+components:
+  responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+  schemas:
+    UserAuditLogItems:
+      title: UserAuditLogItems
+      type: object
+      required:
+      - created_at
+      - email
+      - action
+      - status
+      - method
+      - ip
+      - path
+      properties:
+        created_at:
+          type: string
+        email:
+          type: string
+        action:
+          type: string
+        status:
+          type: integer
+        method:
+          type: string
+        ip:
+          type: string
+        path:
+          type: string
+        source:
+          type: string
+          nullable: true
+          enum:
+          - api
+          - platform
+          - unknown
+          description: Request origin - "api" for x-api-key authentication, "platform" for JWT token, "unknown" for fallback. NULL for historical records (displayed as "-" in UI)
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

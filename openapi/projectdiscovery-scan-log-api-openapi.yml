@@ -1,0 +1,167 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset scan_log API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: scan_log
+paths:
+  /v1/scans/{scan_id}/scan_log/export:
+    parameters:
+    - schema:
+        type: string
+      name: scan_id
+      in: path
+      required: true
+    get:
+      summary: Export scan log of given scan id
+      tags:
+      - scan_log
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - url
+                properties:
+                  url:
+                    type: string
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  export_id:
+                    type: string
+                required:
+                - export_id
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-scans-id-scan-log-export
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      - schema:
+          type: integer
+          format: int64
+        in: query
+        name: rescan_count
+      - schema:
+          type: string
+        in: query
+        name: host
+        description: target to search in log
+      - schema:
+          type: string
+        in: query
+        name: template
+        description: template to search in log
+      - schema:
+          type: string
+        in: query
+        name: matched
+        description: status to search in log
+      - schema:
+          type: string
+          format: date-time
+        in: query
+        name: time
+        description: time to filter the logs
+      - schema:
+          type: string
+        in: query
+        name: search
+        description: string to search in error, target and template
+      - schema:
+          type: string
+        in: query
+        name: error
+        description: error to search in log
+      - schema:
+          $ref: '#/components/schemas/LogExportFormat'
+        name: format
+        in: query
+        description: format of the log file
+      - schema:
+          type: boolean
+        in: query
+        name: async
+      - schema:
+          type: string
+        in: query
+        name: alert_email
+      - schema:
+          type: string
+          enum:
+          - error
+          - info
+          - all_logs
+          default: all_logs
+          x-go-type-name: ScanLogExportSeverityTypes
+        in: query
+        name: severity
+components:
+  schemas:
+    LogExportFormat:
+      title: LogExportFormat
+      type: string
+      enum:
+      - raw
+      - json
+      - csv
+  responses:
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

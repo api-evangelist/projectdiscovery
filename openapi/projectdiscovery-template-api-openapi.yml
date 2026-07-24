@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset Template API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: Template
+paths:
+  /v1/template/share/{template_id}:
+    parameters:
+    - schema:
+        type: string
+      name: template_id
+      in: path
+      required: true
+      description: unique template ID
+    patch:
+      summary: Update Shared Template
+      tags:
+      - Template
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateSharedTemplateResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: patch-v1-template-share-template_id
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ttl:
+                  type: string
+                share_type:
+                  type: string
+                users:
+                  type: array
+                  items:
+                    type: integer
+                emails:
+                  type: array
+                  items:
+                    type: string
+                organizations:
+                  type: array
+                  items:
+                    type: string
+    delete:
+      summary: Unshare/Delete template
+      tags:
+      - Template
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: delete-v1-template-share-template_id
+components:
+  responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    UpdateSharedTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - result
+            properties:
+              message:
+                type: string
+              result:
+                $ref: '#/components/schemas/SharedTemplateMetaData'
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+  schemas:
+    SharedTemplateMetaData:
+      title: SharedTemplateMetaData
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+        organizations:
+          type: array
+          items:
+            type: string
+        share_type:
+          type: string
+        template_id:
+          type: string
+        users_email:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

@@ -1,0 +1,185 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset users API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: users
+paths:
+  /v1/user/apikey:
+    get:
+      summary: Get API Key
+      tags:
+      - users
+      responses:
+        '200':
+          $ref: '#/components/responses/GetUserAPIKeyResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-user-apikey
+      security:
+      - X-API-Key: []
+      description: Get user api-key
+    post:
+      summary: Create API Key
+      tags:
+      - users
+      operationId: post-v1-user-apikey
+      responses:
+        '200':
+          $ref: '#/components/responses/GetUserAPIKeyResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      description: Create user api-key, this won't create a new api-key if it already exists.
+    delete:
+      summary: Delete API Key
+      tags:
+      - users
+      operationId: delete-v1-user-apikey
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteUserAPIKeyResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      description: Delete user api-key
+  /v1/user/apikey/rotate:
+    post:
+      summary: Rotate API Key
+      tags:
+      - users
+      operationId: post-v1-user-apikey-rotate
+      responses:
+        '200':
+          $ref: '#/components/responses/PostApiKeyRotateResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      description: Rotate user api-key
+components:
+  responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    GetUserAPIKeyResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              api_key:
+                type: string
+            required:
+            - message
+            - api_key
+    DeleteUserAPIKeyResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+            - message
+    PostApiKeyRotateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              api_key:
+                type: string
+            required:
+            - message
+            - api_key
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

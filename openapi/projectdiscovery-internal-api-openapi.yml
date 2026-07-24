@@ -1,0 +1,584 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset internal API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: internal
+paths:
+  /v1/user/team:
+    get:
+      summary: Get Team
+      operationId: get-v1-user-team
+      tags:
+      - internal
+      responses:
+        '200':
+          $ref: '#/components/responses/GetTeamResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      description: Get a team metadata
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    post:
+      summary: Create Workspace
+      tags:
+      - internal
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  team_id:
+                    type: string
+                required:
+                - message
+                - team_id
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: post-v1-user-team
+      requestBody:
+        $ref: '#/components/requestBodies/CreateTeamRequest'
+      security:
+      - X-API-Key: []
+      description: 'Create a new team '
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    patch:
+      summary: Update Team
+      operationId: patch-v1-user-team
+      tags:
+      - internal
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateTeamResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      requestBody:
+        $ref: '#/components/requestBodies/CreateTeamRequest'
+      description: Update a existing team
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    delete:
+      summary: Delete Team
+      tags:
+      - internal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team_id:
+                  type: string
+              required:
+              - team_id
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: delete-v1-user-team
+      security:
+      - X-API-Key: []
+      description: Delete team (require 0 members)
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/user/team/member:
+    get:
+      summary: Get Team Members
+      tags:
+      - internal
+      responses:
+        '200':
+          $ref: '#/components/responses/GetTeamMembersResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-user-team-member
+      security:
+      - X-API-Key: []
+      description: Get team member list
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    post:
+      summary: Add Team Member
+      operationId: post-v1-user-team-member
+      tags:
+      - internal
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      requestBody:
+        $ref: '#/components/requestBodies/AddTeamMemberRequest'
+      description: Invite a new team member
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    delete:
+      summary: Delete Team Member
+      operationId: delete-v1-user-team-member
+      tags:
+      - internal
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      requestBody:
+        $ref: '#/components/requestBodies/DeleteTeamMemberRequest'
+      description: Delete a team member using member email
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    patch:
+      summary: Update Team Member
+      operationId: patch-v1-user-team-member
+      tags:
+      - internal
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      requestBody:
+        $ref: '#/components/requestBodies/PatchTeamMemberRequest'
+      description: Accept team invite
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/user/team/default-members:
+    get:
+      summary: Get Default Team Members
+      operationId: get-v1-user-team-default-members
+      tags:
+      - internal
+      responses:
+        '200':
+          $ref: '#/components/responses/GetDefaultTeamMembersResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      description: Retrieve the list of configured default team members
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+        required: true
+    post:
+      summary: Set Default Team Members
+      operationId: post-v1-user-team-default-members
+      tags:
+      - internal
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      requestBody:
+        $ref: '#/components/requestBodies/SetDefaultTeamMembersRequest'
+      description: Set (replace) the list of default team members
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+        required: true
+    delete:
+      summary: Delete Default Team Members
+      operationId: delete-v1-user-team-default-members
+      tags:
+      - internal
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      requestBody:
+        $ref: '#/components/requestBodies/DeleteDefaultTeamMemberRequest'
+      description: Delete default team members (specific or all)
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+        required: true
+components:
+  responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    GetDefaultTeamMembersResponse:
+      description: Default team members response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              members:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    role:
+                      type: string
+                  required:
+                  - email
+                  - role
+            required:
+            - message
+            - members
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    GetTeamResponse:
+      description: Get the workspace details
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              workspaces:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkspaceItem'
+              message:
+                type: string
+              name:
+                type: string
+            required:
+            - message
+    GetTeamMembersResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              max_team_members:
+                type: integer
+              members:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamMemberItem'
+            required:
+            - message
+            - members
+            - max_team_members
+    UpdateTeamResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              message:
+                type: string
+            required:
+            - message
+  requestBodies:
+    SetDefaultTeamMembersRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              members:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    role:
+                      type: string
+                      enum:
+                      - ADMIN
+                      - MEMBER
+                      - VIEWER
+                      - GUEST
+                  required:
+                  - email
+                  - role
+            required:
+            - members
+    DeleteDefaultTeamMemberRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: Email of specific member to remove. Omit to remove all
+    PatchTeamMemberRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              role:
+                type: string
+                description: Team member role. Valid values are ADMIN, MEMBER, VIEWER, GUEST.
+            required:
+            - email
+    DeleteTeamMemberRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+            required:
+            - email
+    CreateTeamRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+            required:
+            - name
+    AddTeamMemberRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+            required:
+            - email
+  schemas:
+    TeamMemberItem:
+      title: TeamMemberItem
+      type: object
+      properties:
+        email:
+          type: string
+        status:
+          type: string
+        role:
+          type: string
+          description: Team member role. Values are OWNER, ADMIN, MEMBER, VIEWER, GUEST.
+        invited_at:
+          type: string
+        accepted_at:
+          type: string
+        profile_image:
+          type: string
+        last_sign_in:
+          type: string
+      required:
+      - email
+      - status
+      - role
+    WorkspaceItem:
+      title: TeamMemberItem
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+        member_count:
+          type: integer
+        owner_email:
+          type: string
+      required:
+      - id
+      - name
+      - created_at
+      - member_count
+      - owner_email
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

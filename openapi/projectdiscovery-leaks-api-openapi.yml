@@ -1,0 +1,725 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset Leaks API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: Leaks
+paths:
+  /v1/leaks:
+    get:
+      summary: Get all leaked credentials
+      description: Returns all leaks (personal, employee, customer) with optional type filtering. Replaces the need for separate endpoint calls.
+      tags:
+      - Leaks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        url:
+                          type: string
+                        username:
+                          type: string
+                        password:
+                          type: string
+                        device_ip:
+                          type: string
+                        hostname:
+                          type: string
+                        os:
+                          type: string
+                        malware_path:
+                          type: string
+                        country:
+                          type: string
+                        log_date:
+                          type: string
+                        hardware_id:
+                          type: string
+                        domain:
+                          type: string
+                        email_domain:
+                          type: string
+                        url_domain:
+                          type: string
+                        fetched_at:
+                          type: string
+                        status:
+                          type: string
+                        user_type:
+                          type: string
+                          description: Classification of leak type (personal, employee, customer, external_vendor_leaks, organization_leaks)
+                  total_leaks:
+                    type: number
+                  total_pages:
+                    type: number
+                  total_count:
+                    type: number
+                  summary:
+                    type: object
+                    properties:
+                      total_leaks:
+                        type: number
+                      personal_leaks:
+                        type: number
+                      employee_leaks:
+                        type: number
+                      customer_leaks:
+                        type: number
+                      external_vendor_leaks:
+                        type: number
+                        description: Employee leaks on external vendor systems (login URL domain != email domain)
+                      organization_leaks:
+                        type: number
+                        description: Employee leaks on organization systems (login URL domain == email domain)
+                  group_summary:
+                    type: array
+                    description: Group summary data when group_by parameter is used
+                    items:
+                      type: object
+                      additionalProperties: true
+                      description: Dynamic group summary with field name as key and count
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-leaks
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - all
+          - personal
+          - employee
+          - customer
+          - external_vendor_leaks
+          - organization_leaks
+          default: all
+        in: query
+        name: type
+        description: Filter by specific leak type (single value only)
+      - schema:
+          type: string
+        in: query
+        name: domain
+        description: Filter leaks by specific domain (applies to employee/customer leaks)
+      - schema:
+          type: string
+        in: query
+        name: email
+        description: Filter leaks by specific email (can be personal, employee, or customer email from user's authorized results)
+      - schema:
+          type: string
+        in: query
+        name: search
+        description: Search query to filter results across all fields
+      - schema:
+          type: number
+        in: query
+        name: limit
+        description: Number of results per page for pagination
+      - schema:
+          type: number
+        in: query
+        name: page_number
+        description: Page number for pagination (starts from 1)
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: start_date
+        description: time filter start date
+      - schema:
+          type: string
+          default: all_time
+          enum:
+          - all_time
+          - current_month
+          - last_month
+          - last_3_months
+          - last_6_months
+          - last_12_months
+        in: query
+        name: time_range
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: end_date
+        description: time filter end date
+      - schema:
+          type: string
+          enum:
+          - url
+          - username
+          - log_date
+          - country
+          - device_ip
+          - host_username
+          - hostname
+          - os
+          - hardware_id
+          - malware_path
+        in: query
+        name: sort_by
+        description: supported sort fields
+      - schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        in: query
+        name: sort_order
+        description: supported sort order (asc or desc)
+      - schema:
+          type: string
+          enum:
+          - fixed
+          - open
+        in: query
+        name: status
+        description: supported status (fixed or open)
+      - schema:
+          type: string
+          enum:
+          - url
+          - country
+          - device_ip
+          - hostname
+          - email
+          - hardware_id
+        in: query
+        name: group_by
+        description: Group results by field - returns group summaries when used without field-specific filtering
+      - schema:
+          type: string
+        in: query
+        name: url
+        description: Filter by specific URL (used with group_by for drill-down)
+      - schema:
+          type: string
+        in: query
+        name: country
+        description: Filter by specific country (used with group_by for drill-down)
+      - schema:
+          type: string
+        in: query
+        name: device_ip
+        description: Filter by specific device IP (used with group_by for drill-down)
+      - schema:
+          type: string
+        in: query
+        name: hostname
+        description: Filter by specific hostname (used with group_by for drill-down)
+      - schema:
+          type: string
+        in: query
+        name: hardware_id
+        description: Filter by specific hardware ID (used with group_by for drill-down)
+  /v1/leaks/stats/domain:
+    get:
+      summary: Get leak statistics for a domain (Public)
+      description: Public endpoint - no authentication required. Returns leak statistics for any domain including employee/customer leak counts, geographic distribution, and top compromised services.
+      tags:
+      - Leaks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  leak_devices_count:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DevicesCount'
+                  leak_customers_count:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CustomersCount'
+                  leak_user_count:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsersCount'
+                  leak_employees_count:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EmployeesCount'
+                  combolist_exposure:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CombolistExposureCount'
+                  leak_country_stats:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeakCountryStats'
+                  top_used_urls_by_customers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsedUrlsCount'
+                  top_used_urls_by_employees:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsedUrlsCount'
+                  top_used_urls_by_user:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsedUrlsCount'
+                  leak_customers_timeline:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksTimeline'
+                  leak_user_timeline:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksTimeline'
+                  leak_employees_timeline:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksTimeline'
+                  customers_sample_data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksUsersSampleData'
+                  employees_sample_data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksUsersSampleData'
+                  user_sample_data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksUsersSampleData'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-leaks-stats-domain
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: domain
+      - schema:
+          type: boolean
+        in: query
+        name: unmask_email
+  /v1/leaks/stats/email:
+    get:
+      summary: Get leak statistics for an email (Public)
+      description: Public endpoint - no authentication required. Returns leak statistics for any email address including leak classification, compromised services, and risk timeline.
+      tags:
+      - Leaks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  leak_devices_count:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DevicesCount'
+                  leak_customers_count:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CustomersCount'
+                  leak_user_count:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsersCount'
+                  leak_employees_count:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EmployeesCount'
+                  combolist_exposure:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CombolistExposureCount'
+                  leak_country_stats:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeakCountryStats'
+                  top_used_urls_by_customers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsedUrlsCount'
+                  top_used_urls_by_employees:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsedUrlsCount'
+                  top_used_urls_by_user:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsedUrlsCount'
+                  leak_customers_timeline:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksTimeline'
+                  leak_user_timeline:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksTimeline'
+                  leak_employees_timeline:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksTimeline'
+                  customers_sample_data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksUsersSampleData'
+                  employees_sample_data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksUsersSampleData'
+                  user_sample_data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LeaksUsersSampleData'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-leaks-stats-email
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: email
+        description: Email to get stats for
+      - schema:
+          type: boolean
+        in: query
+        name: unmask_email
+  /v1/leaks/status:
+    post:
+      summary: Update leak status
+      description: Mark leaks as fixed or reopen them. Requires authentication and domain verification for employee/customer leaks. See [Domain Verification](/cloud/credential-monitoring#domain-verification) for setup instructions.
+      tags:
+      - Leaks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  leak_id:
+                    type: string
+                  new_status:
+                    $ref: '#/components/schemas/LeaksEntityStatus'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          description: Access denied - Insufficient permissions to update this leak status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Access denied: you don''t have access to this leak'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: post-v1-leaks-status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                leakid:
+                  type: string
+                leakids:
+                  type: array
+                  items:
+                    type: string
+                status:
+                  $ref: '#/components/schemas/LeaksEntityStatus'
+  /v1/leaks/info:
+    post:
+      summary: Get leak information by ID
+      description: Retrieve detailed leak information by leak ID. Passwords are unmasked after domain verification. See [Domain Verification](/cloud/credential-monitoring#domain-verification) for setup instructions.
+      tags:
+      - Leaks
+      operationId: post-v1-leaks-info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - leakid
+              properties:
+                leakid:
+                  type: string
+                  description: 32-character MD5 hash identifying the leak
+                  pattern: ^[a-fA-F0-9]{32}$
+                  example: b3652f2555841f7652badd9804859f4e
+      responses:
+        '200':
+          description: Leak information retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      url:
+                        type: string
+                      username:
+                        type: string
+                      password:
+                        type: string
+                      device_ip:
+                        type: string
+                      hostname:
+                        type: string
+                      os:
+                        type: string
+                      malware_path:
+                        type: string
+                      country:
+                        type: string
+                      log_date:
+                        type: string
+                      hardware_id:
+                        type: string
+                      domain:
+                        type: string
+                        description: Domain this leak is associated with - used for filtering
+                      email_domain:
+                        type: string
+                        description: Domain extracted from email addresses
+                      fetched_at:
+                        type: string
+                      status:
+                        type: string
+        '400':
+          description: Bad request - Invalid leak ID format or missing leak ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Invalid leak ID format
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          description: Access denied - Insufficient permissions to access this leak
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Access denied: you don''t have access to this leak'
+        '404':
+          description: Leak not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Leak not found
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+  schemas:
+    DevicesCount:
+      title: DevicesCount
+      type: object
+      properties:
+        devices:
+          type: number
+    LeaksEntityStatus:
+      title: LeaksEntityStatus
+      enum:
+      - fixed
+      - open
+      - NA
+    LeaksUsersSampleData:
+      title: LeaksUsersSampleData
+      type: object
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+        url:
+          type: string
+        country:
+          type: string
+        log_date:
+          type: string
+    CombolistExposureCount:
+      title: CombolistExposureCount
+      type: object
+      properties:
+        combolist_exposure:
+          type: number
+    CustomersCount:
+      title: CustomersCount
+      type: object
+      properties:
+        customers:
+          type: number
+    UsedUrlsCount:
+      title: UsedUrlsCount
+      type: object
+      properties:
+        count:
+          type: number
+        url:
+          type: string
+    LeaksTimeline:
+      title: LeaksTimeline
+      type: object
+      properties:
+        CredentialsCount:
+          type: number
+        Month:
+          type: number
+        Year:
+          type: number
+    EmployeesCount:
+      title: EmployeesCount
+      type: object
+      properties:
+        employees:
+          type: number
+    LeakCountryStats:
+      title: LeakCountryStats
+      type: object
+      properties:
+        Country:
+          type: string
+        CredentialsCount:
+          type: number
+    UsersCount:
+      title: UsersCount
+      type: object
+      properties:
+        user:
+          type: number
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

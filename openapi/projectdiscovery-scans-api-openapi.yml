@@ -1,0 +1,2331 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset scans API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: scans
+paths:
+  /v1/scans:
+    get:
+      summary: Get Scan List
+      tags:
+      - scans
+      responses:
+        '200':
+          $ref: '#/components/responses/GetScansStatusResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '499':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans
+      description: Get user scans status
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: integer
+        in: query
+        name: offset
+        description: number of scan-status results to skip
+      - schema:
+          type: integer
+        in: query
+        name: limit
+        description: number of scan-status results to fetch
+      - schema:
+          type: string
+        in: query
+        name: search
+        description: search term for running scans
+      - schema:
+          type: string
+        in: query
+        name: status
+        description: filter by status (failed, finished, queued, running, starting, uploaded, scheduled)
+      - schema:
+          type: string
+        in: query
+        name: sort_asc
+        description: comma separated ascending sorting e.g sort_asc=created_at,severity
+      - schema:
+          type: string
+        in: query
+        name: sort_desc
+        description: comma separated descending sorting e.g sort_desc=created_at,severity
+      - schema:
+          type: boolean
+        in: query
+        name: is_internal
+        description: filter by internal scans
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      x-internal: false
+    post:
+      summary: Create Scan
+      tags:
+      - scans
+      operationId: post-v1-scans
+      responses:
+        '200':
+          $ref: '#/components/responses/TriggerUserScanResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      description: Trigger a scan
+      security:
+      - X-API-Key: []
+      requestBody:
+        $ref: '#/components/requestBodies/TriggerUserScanRequest'
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    delete:
+      summary: Delete Scan in bulk
+      tags:
+      - scans
+      operationId: delete-v1-scans
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteScansResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - scan_ids
+              properties:
+                scan_ids:
+                  type: array
+                  items:
+                    type: string
+      description: Delete scans using scan ids
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/scans/{scan_id}:
+    parameters:
+    - schema:
+        type: string
+      name: scan_id
+      in: path
+      required: true
+    get:
+      summary: Get Scan
+      tags:
+      - scans
+      responses:
+        '200':
+          $ref: '#/components/responses/GetScanDetailsResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '499':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-scan_id
+      description: Get details of a scan by scan ID
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    delete:
+      summary: Delete Scan
+      tags:
+      - scans
+      operationId: delete-v1-scans-scan_id
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteScansResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      description: Delete a scan using scanId
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+    patch:
+      summary: Update Scan
+      tags:
+      - scans
+      operationId: patch-v1-scans-scan_id
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      description: Update scan metadata
+      security:
+      - X-API-Key: []
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateScanRequest'
+      parameters:
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+  /v1/scans/import:
+    post:
+      summary: Import OSS Scan
+      tags:
+      - scans
+      operationId: post-v1-scans-import
+      responses:
+        '200':
+          $ref: '#/components/responses/ImportScanResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      description: Import scan details
+      security:
+      - X-API-Key: []
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: name
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/scans/{scan_id}/stop:
+    parameters:
+    - schema:
+        type: string
+      name: scan_id
+      in: path
+      required: true
+    post:
+      summary: Stop Scan
+      tags:
+      - scans
+      operationId: post-v1-scans-scan_id-stop
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteScansResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      description: Stop a running scan, not applied in any other state.
+      parameters:
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+  /v1/scans/{scan_id}/rescan:
+    parameters:
+    - schema:
+        type: string
+      name: scan_id
+      in: path
+      required: true
+    post:
+      summary: Rescan scan
+      tags:
+      - scans
+      operationId: post-v1-scans-scan_id-rescan
+      responses:
+        '200':
+          $ref: '#/components/responses/TriggerUserScanResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      description: Re-run a existing scan
+      parameters:
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+  /v1/scans/{vuln_id}/retest:
+    parameters:
+    - schema:
+        type: string
+      name: vuln_id
+      in: path
+      required: true
+    post:
+      summary: Retest vulnerability
+      tags:
+      - scans
+      operationId: post-v1-scans-vuln_id-retest
+      responses:
+        '200':
+          $ref: '#/components/responses/PostRescanVulnResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      description: Retest a scan vulnerability
+      parameters:
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                socks5_proxy:
+                  type: string
+                agent_id:
+                  type: string
+                agent_tags:
+                  type: array
+                  items:
+                    type: string
+                agent_networks:
+                  type: array
+                  items:
+                    type: string
+  /v1/scans/schedule:
+    get:
+      summary: Get Scan Schedules
+      tags:
+      - scans
+      responses:
+        '200':
+          $ref: '#/components/responses/GetScanScheduleResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-schedule
+      description: Get scan schedules for a user
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    post:
+      summary: Set Scan Schedule
+      tags:
+      - scans
+      operationId: post-v1-scans-schedule
+      responses:
+        '200':
+          $ref: '#/components/responses/SetScanScheduleResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      description: 'set a scan schedule for a user '
+      requestBody:
+        $ref: '#/components/requestBodies/SetScanScheduleRequest'
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    delete:
+      summary: Delete Scan Schedule
+      tags:
+      - scans
+      operationId: delete-v1-scans-schedule
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteScanScheduleResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: scan_id
+        required: true
+        description: scan_id of schedule to be deleted
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      security:
+      - X-API-Key: []
+      description: Delete scan schedule for a user
+  /v1/scans/scan_ips:
+    get:
+      summary: Get Scan IPs
+      tags:
+      - scans
+      responses:
+        '200':
+          $ref: '#/components/responses/StaticScanIPsResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-scan_ips
+      security:
+      - X-API-Key: []
+      description: Get user static scan IPs list
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/scans/{scan_id}/import:
+    parameters:
+    - schema:
+        type: string
+      name: scan_id
+      in: path
+      required: true
+    patch:
+      summary: Update Imported Scan
+      operationId: patch-v1-scans-scan_id-import
+      tags:
+      - scans
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      description: Import more results to a given scan
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/scans/{scan_id}/export:
+    parameters:
+    - schema:
+        type: string
+      name: scan_id
+      in: path
+      required: true
+    - schema:
+        type: boolean
+      in: query
+      name: async
+    get:
+      summary: Export Scan
+      tags:
+      - scans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  export_id:
+                    type: string
+                required:
+                - export_id
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-scan_id-export
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - json
+          - csv
+          - pdf
+        in: query
+        name: type
+        description: json, csv, pdf (default json)
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      security:
+      - X-API-Key: []
+      description: Export scan results
+    post:
+      summary: Export Filtered Scan
+      tags:
+      - scans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  export_id:
+                    type: string
+                required:
+                - export_id
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: post-v1-scans-scan_id-export
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - json
+          - csv
+          - pdf
+        in: query
+        name: type
+        description: json, csv, pdf (default json)
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                vuln_status:
+                  type: string
+                severity:
+                  type: array
+                  items:
+                    type: string
+                host:
+                  type: array
+                  items:
+                    type: string
+                domain:
+                  type: array
+                  items:
+                    type: string
+                port:
+                  type: array
+                  items:
+                    type: integer
+                template:
+                  type: array
+                  items:
+                    type: string
+                search:
+                  type: string
+                category:
+                  type: array
+                  items:
+                    type: string
+                is_internal:
+                  type: boolean
+      security:
+      - X-API-Key: []
+      description: Export filtered scan results
+  /v1/scans/vuln/{vuln_id}/export:
+    parameters:
+    - schema:
+        type: string
+      name: vuln_id
+      in: path
+      required: true
+    get:
+      summary: Export Scan Vulnerability
+      tags:
+      - scans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-vuln-vuln_id-export
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - json
+          - csv
+        in: query
+        name: type
+        description: json, csv (default json)
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      security:
+      - X-API-Key: []
+      description: Export a specific scan vulnerability
+  /v1/scans/vulns:
+    patch:
+      summary: Update Vulnerability Status
+      operationId: patch-v1-scans-vulns
+      tags:
+      - scans
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/PatchScanVulnsRequest'
+      security:
+      - X-API-Key: []
+      description: Batch update vulnerability status
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    delete:
+      summary: Delete Scan Vulnerability
+      operationId: delete-v1-scans-vulns
+      tags:
+      - scans
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/DeleteVulnsRequest'
+      security:
+      - X-API-Key: []
+      description: Batch Delete scan vulnerability
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/scans/vulns/labels:
+    patch:
+      summary: Update Vulnerability Labels
+      operationId: patch-v1-scans-vulns-labels
+      tags:
+      - scans
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/PatchScanVulnsLabelsRequest'
+      security:
+      - X-API-Key: []
+      description: Batch update vulnerability labels
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/scans/{scan_id}/config:
+    parameters:
+    - schema:
+        type: string
+      name: scan_id
+      in: path
+      required: true
+    get:
+      summary: Get Scan Config
+      tags:
+      - scans
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanConfig'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-scans-id-config
+      security:
+      - X-API-Key: []
+      description: 'Get scan metadata config '
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    patch:
+      summary: Update Scan Config
+      operationId: patch-scans-id-config
+      tags:
+      - scans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScanConfigUpdateItem'
+      security:
+      - X-API-Key: []
+      description: Update scan metadata config
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - append
+          - replace
+          default: append
+        in: query
+        name: update_type
+        description: 'Update type: append or replace'
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/scans/history:
+    get:
+      summary: Get All Scans History
+      tags:
+      - scans
+      responses:
+        '200':
+          $ref: '#/components/responses/GetScansHistoryResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-history
+      parameters:
+      - schema:
+          type: integer
+        in: query
+        name: offset
+        description: number of rows to skip
+      - schema:
+          type: integer
+        in: query
+        name: limit
+        description: number of rows to get
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: start_date
+        description: start date from which you want to get history
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: end_date
+        description: end date till which you want to get history
+      - schema:
+          type: string
+          enum:
+          - current_month
+          - last_month
+          - last_3_months
+          - last_6_months
+          - last_12_months
+          - all_time
+        in: query
+        name: time_range
+        description: time range to get history
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      security:
+      - X-API-Key: []
+      description: Get user scan history details
+  /v1/scans/{scanId}/history:
+    parameters:
+    - schema:
+        type: string
+      name: scanId
+      in: path
+      required: true
+    get:
+      summary: Get Scan History
+      tags:
+      - scans
+      responses:
+        '200':
+          $ref: '#/components/responses/GetScansHistoryResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-scanId-history
+      parameters:
+      - schema:
+          type: integer
+        in: query
+        name: offset
+        description: number of rows to skip
+      - schema:
+          type: integer
+        in: query
+        name: limit
+        description: number of rows to get
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: start_date
+        description: start date from which you want to get history
+      - schema:
+          type: string
+          format: date
+        in: query
+        name: end_date
+        description: end date till which you want to get history
+      - schema:
+          type: string
+          enum:
+          - current_month
+          - last_month
+          - last_3_months
+          - last_6_months
+          - last_12_months
+          - all_time
+        in: query
+        name: time_range
+        description: time range to get history
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      security:
+      - X-API-Key: []
+      description: Get scan history detial by scanId
+  /v1/scans/{scan_id}/asset/export:
+    parameters:
+    - schema:
+        type: string
+      name: scan_id
+      in: path
+      required: true
+    get:
+      summary: Export list of unique assets for a scan
+      tags:
+      - scans
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-scan-id-assets-export
+      security:
+      - X-API-Key: []
+      description: Export the list of all unique assets for a scan.
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: search
+        description: Search with host or port
+      - schema:
+          type: string
+        in: query
+        name: format
+        description: supported format is csv, json, or raw (default json)
+components:
+  schemas:
+    EnumerationIds:
+      title: EnumerationIds
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+    SchedulerFrequency:
+      title: SchedulerFrequency
+      type: string
+      enum:
+      - hourly
+      - daily
+      - weekly
+      - monthly
+      - custom
+      description: Allowed frequencies for the scheduler
+    ScanSchedule:
+      title: ScanSchedule
+      type: object
+      required:
+      - scan_frequency
+      - scan_id
+      - schedule_last_run
+      - schedule_next_run
+      properties:
+        scan_frequency:
+          type: string
+        scan_id:
+          type: string
+        schedule_last_run:
+          type: string
+        schedule_next_run:
+          type: string
+        start_time:
+          type: string
+          format: time
+        hourly_frequency:
+          type: integer
+        custom_weekdays:
+          type: array
+          description: 'Array of integer denoting the weekdays on which the scan is supposed to run.
+
+            0-6 denoting Sunday-Saturday.'
+          items:
+            type: integer
+            minimum: 0
+            maximum: 6
+    EnumerationContent:
+      title: EnumerationContent
+      type: object
+      required:
+      - enumeration_id
+      - name
+      - created_at
+      - id
+      - is_new
+      properties:
+        enumeration_id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        id:
+          type: integer
+          format: int64
+        labels:
+          type: array
+          items:
+            type: string
+        cname:
+          type: array
+          items:
+            type: string
+        host:
+          type: string
+        port:
+          type: integer
+        ip:
+          type: array
+          items:
+            type: string
+        status_code:
+          type: integer
+        content_length:
+          type: integer
+        vulnerabilities:
+          type: integer
+          format: int64
+        title:
+          type: string
+        technologies:
+          type: array
+          items:
+            type: string
+        webserver:
+          type: string
+        method:
+          type: string
+        is_new:
+          type: boolean
+        type:
+          type: string
+        asset_hash:
+          type: string
+        technology_details:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/EnumerationContentTechnologyDetails'
+        screenshot_path:
+          type: string
+        favicon:
+          type: string
+        favicon_body:
+          type: string
+        cdn_name:
+          type: string
+        chain_status_codes:
+          type: array
+          items:
+            type: string
+        domain_name:
+          type: string
+        redirect_location:
+          type: string
+        asn:
+          as_number:
+            type: string
+          as_country:
+            type: string
+          as_name:
+            type: string
+          as_range:
+            type: array
+            items:
+              type: string
+          type: object
+          properties:
+            as_country:
+              type: string
+            as_name:
+              type: string
+            as_number:
+              type: string
+            as_range:
+              type: array
+              items:
+                type: string
+        tls_serial_number:
+          type: string
+        tls_subject_org:
+          type: string
+        tls_issuer_org:
+          type: string
+        tls_expired:
+          type: boolean
+        tls_not_before:
+          type: string
+          format: date-time
+        tls_self_signed:
+          type: boolean
+        tls_mismatched:
+          type: boolean
+        tls_revoked:
+          type: boolean
+        tls_untrusted:
+          type: boolean
+        tls_subject_cn:
+          type: string
+        tls_subject_an:
+          type: array
+          items:
+            type: string
+        body:
+          type: string
+        tls_not_after:
+          type: string
+          format: date-time
+        enumeration_name:
+          type: string
+        extended_metadata:
+          type: object
+        source_type:
+          type: string
+        source:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnumerationSourceValue'
+        is_internal:
+          type: boolean
+    ScansHistoryItems:
+      title: ScansHistoryItems
+      type: object
+      properties:
+        completed_request:
+          type: integer
+        name:
+          type: string
+        scan_id:
+          type: string
+        scan_time:
+          type: string
+        severity:
+          type: object
+        status:
+          type: string
+        time:
+          type: string
+        total_request:
+          type: integer
+        total_result:
+          type: integer
+        total_target:
+          type: integer
+        total_templates:
+          type: integer
+        error_details:
+          type: string
+    AssetFilters:
+      title: AssetFilters
+      type: object
+      additionalProperties: false
+      properties:
+        is_tech:
+          type: boolean
+          description: Return records that have technologies
+        is_favicon:
+          type: boolean
+          description: Return the records that have favicon
+        is_new:
+          type: boolean
+          description: Filter by new content
+        labels:
+          type: string
+          description: Filter by comma separated labels, e.g-> labels=p1,p2
+        host:
+          type: string
+          description: Filter by comma separated hosts, e.g-> host=p1,p2
+        port:
+          type: string
+          description: Filter by comma separated ports, e.g-> port=p1,p2
+        status_code:
+          type: string
+          description: Filter by comma separated status codes, e.g-> status_code=p1,p2
+        content_length:
+          type: string
+          description: Filter by comma separated content lengths, e.g-> content_length=p1,p2
+        title:
+          type: string
+          description: Filter by comma separated titles, e.g-> title=p1,p2
+        domain:
+          type: array
+          description: Filter by comma separated domain names, e.g-> domain=domain1.com,domain2.com
+          items:
+            type: string
+        cname:
+          type: string
+          description: Filter by comma separated cnames, e.g-> cname=p1,p2
+        technologies:
+          type: string
+          description: Filter by comma separated technologies, e.g-> technologies=p1,p2
+        ip:
+          type: string
+          description: Filter by comma separated ips, e.g-> ip=p1,p2
+        is_screenshot:
+          type: boolean
+          description: Return the records with screenshots
+        time:
+          $ref: '#/components/schemas/TimeRangeQueryParameter'
+          description: Filter by time range
+        start_date:
+          type: string
+          format: date
+          description: Filter by start date
+        end_date:
+          type: string
+          format: date
+          description: Filter by end date
+        custom_filter:
+          type: string
+          description: Filter by custom filter. Double encode the query string.
+        search:
+          type: string
+          description: Search on the content name
+        enumeration_ids:
+          type: array
+          items:
+            type: string
+          description: Filter by enumeration ids
+        only_dns:
+          type: boolean
+          description: Query only dns FQDN records
+        only_ip:
+          type: boolean
+          description: Query only dns IP records
+        not_seen_for_days:
+          type: integer
+          minimum: 1
+          description: Return assets that haven't been seen in the last N days. An asset is only included if a scan that covers it has run during that period without rediscovering it, so assets that simply haven't been rescanned recently are not matched.
+    TimeRangeQueryParameter:
+      title: TimeRangeQueryParameter
+      type: string
+      enum:
+      - last_day
+      - last_week
+      - last_month
+      - last_3_months
+      - last_6_months
+      - last_12_months
+      - all_time
+    EnumerationSourceValue:
+      type: object
+      required:
+      - source
+      - metadata
+      properties:
+        source:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    VulnerabilityEvent:
+      title: VulnerabilityEvent
+      type: object
+      properties:
+        curl-command:
+          type: string
+        extracted-results:
+          type: array
+          items:
+            type: string
+        extractor-name:
+          type: string
+        host:
+          type: string
+        info:
+          type: object
+          required:
+          - name
+          properties:
+            classification:
+              type: object
+              properties:
+                cpe:
+                  type: string
+                cve-id:
+                  type: array
+                  items:
+                    type: string
+                cvss-metrics:
+                  type: string
+                cvss-score:
+                  type: number
+                cwe-id:
+                  type: array
+                  items:
+                    type: string
+                epss-percentile:
+                  type: number
+                epss-score:
+                  type: number
+            metadata:
+              type: object
+            author:
+              type: array
+              items:
+                type: string
+            description:
+              type: string
+            impact:
+              type: string
+            name:
+              type: string
+            tags:
+              type: array
+              items:
+                type: string
+            reference:
+              type: array
+              items:
+                type: string
+            remediation:
+              type: string
+            severity:
+              type: string
+        ip:
+          type: string
+        matched-at:
+          type: string
+        matched-line:
+          type: array
+          items:
+            type: integer
+        matcher-name:
+          type: string
+        matcher-status:
+          type: boolean
+        path:
+          type: string
+        request:
+          type: string
+        response:
+          type: string
+        template-id:
+          type: string
+        template-path:
+          type: string
+        timestamp:
+          type: string
+        type:
+          type: string
+        error:
+          type: string
+        issue_trackers:
+          type: object
+          properties:
+            jira:
+              $ref: '#/components/schemas/VulnIssueTrackerItem'
+            github:
+              $ref: '#/components/schemas/VulnIssueTrackerItem'
+            gitlab:
+              $ref: '#/components/schemas/VulnIssueTrackerItem'
+            linear:
+              $ref: '#/components/schemas/VulnIssueTrackerItem'
+            custom:
+              $ref: '#/components/schemas/VulnIssueTrackerItem'
+        port:
+          type: string
+    PrivateTemplates:
+      title: PrivateTemplates
+      type: object
+      properties:
+        name:
+          type: string
+        contents:
+          type: string
+      required:
+      - name
+      - contents
+    EnumerationContentTechnologyDetails:
+      title: EnumerationContentTechnologyDetails
+      type: object
+      properties:
+        description:
+          type: string
+        website:
+          type: string
+        icon:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+    VulnerabilityResultsOld:
+      title: VulnerabilityResultsOld
+      type: object
+      required:
+      - scan_id
+      - target
+      - template_id
+      - vuln_id
+      - matcher_status
+      - created_at
+      - event
+      properties:
+        scan_id:
+          type: string
+        target:
+          type: string
+        template_encoded:
+          type: string
+        template_url:
+          type: string
+        template_path:
+          type: string
+        template_id:
+          type: string
+        vuln_id:
+          type: string
+        matcher_status:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        event:
+          $ref: '#/components/schemas/VulnerabilityEvent'
+        id:
+          type: string
+        vuln_status:
+          type: string
+        vuln_hash:
+          type: string
+        port:
+          type: integer
+        asset_metadata:
+          type: object
+          $ref: '#/components/schemas/EnumerationContent'
+        remediation:
+          type: string
+        impact:
+          type: string
+        description:
+          type: string
+        reference:
+          type: array
+          items:
+            type: string
+    VulnIssueTrackerItem:
+      title: VulnIssueTrackerItem
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+    ScanConfig:
+      title: ScanConfig
+      type: object
+      properties:
+        targets:
+          type: array
+          items:
+            type: string
+        assets_lists:
+          type: array
+          items:
+            type: string
+        public_templates:
+          type: array
+          items:
+            type: string
+        early_templates:
+          type: array
+          items:
+            type: string
+        template_urls:
+          type: array
+          items:
+            type: string
+        template_ids:
+          type: array
+          items:
+            type: string
+        scan_config_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanConfigItem'
+        report_config_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanConfigItem'
+        alerting_config_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScanConfigItem'
+        enumeration_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnumerationIDTypesDetail'
+        socks5_proxy:
+          type: string
+        agent_id:
+          type: string
+        agent_tags:
+          type: array
+          items:
+            type: string
+        agent_networks:
+          type: array
+          items:
+            type: string
+        agent_behavior:
+          type: string
+          enum:
+          - distribute
+          - mirror
+          default: distribute
+        scan_all_assets:
+          type: boolean
+        asset_filters:
+          $ref: '#/components/schemas/AssetFilters'
+    ScanStatusItem:
+      title: ScanStatusItem
+      type: object
+      required:
+      - scan_id
+      - status
+      - scan_time_elapsed
+      - progress
+      - failure_reason
+      - created_at
+      - updated_at
+      - total_target
+      - completed_at
+      - total_scan
+      - total_template
+      - name
+      - is_oss
+      - is_cloud
+      - total_result
+      properties:
+        scan_id:
+          type: string
+        status:
+          type: string
+        scan_time_elapsed:
+          type: string
+        progress:
+          type: integer
+        failure_reason:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        total_target:
+          type: integer
+        completed_at:
+          type: string
+        total_scan:
+          type: integer
+        total_template:
+          type: integer
+        name:
+          type: string
+        severity:
+          type: object
+        is_oss:
+          type: boolean
+        is_cloud:
+          type: boolean
+        asset_ids:
+          type: array
+          items:
+            type: string
+        is_rescan:
+          type: boolean
+        public_templates:
+          type: array
+          items:
+            type: string
+        report_config_ids:
+          type: array
+          items:
+            type: string
+        rescan_count:
+          type: integer
+        scan_config_ids:
+          type: array
+          items:
+            type: string
+        template_ids:
+          type: array
+          items:
+            type: string
+        template_urls:
+          type: array
+          items:
+            type: string
+        schedule:
+          $ref: '#/components/schemas/ScanSchedule'
+        total_result:
+          type: integer
+        is_automatic:
+          type: boolean
+        agent_id:
+          type: string
+        agent_tags:
+          type: array
+          items:
+            type: string
+        agent_networks:
+          type: array
+          items:
+            type: string
+        agent_behavior:
+          type: string
+          enum:
+          - distribute
+          - mirror
+          default: distribute
+        is_internal:
+          type: boolean
+    EnumerationIDTypesDetail:
+      title: EnumerationIDTypesDetail
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        total_assets:
+          type: integer
+        enumeration_type:
+          type: string
+        cloudlist_provider_name:
+          type: string
+        types:
+          type: array
+          items:
+            enum:
+            - hosts
+            - ports
+            - http
+            - endpoints
+      required:
+      - id
+      - types
+      - name
+      - enumeration_type
+    VulnStatusEnum:
+      title: VulnStatusEnum
+      enum:
+      - open
+      - false_positive
+      - fixed
+      - duplicate
+      - fix_in_progress
+      - accepted_risk
+      - triaged
+    ScanConfigUpdateItem:
+      title: ScanConfigUpdateItem
+      type: object
+      properties:
+        targets:
+          type: array
+          items:
+            type: string
+        assets_lists:
+          type: array
+          items:
+            type: string
+        templates:
+          type: array
+          items:
+            type: string
+        early_templates:
+          type: array
+          items:
+            type: string
+        scan_config_ids:
+          type: array
+          items:
+            type: string
+        report_config_ids:
+          type: array
+          items:
+            type: string
+        alerting_config_ids:
+          type: array
+          items:
+            type: string
+        enumeration_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnumerationIDTypes'
+        socks5_proxy:
+          type: string
+        agent_id:
+          type: string
+        agent_tags:
+          type: array
+          items:
+            type: string
+        agent_networks:
+          type: array
+          items:
+            type: string
+        agent_behavior:
+          type: string
+          enum:
+          - distribute
+          - mirror
+          default: distribute
+        scan_all_assets:
+          type: boolean
+        asset_filters:
+          $ref: '#/components/schemas/AssetFilters'
+    EnumerationIDTypes:
+      title: EnumerationIDTypes
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+    ScanConfigItem:
+      title: ScanConfigItem
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        provider_name:
+          type: string
+        config_type:
+          type: string
+      required:
+      - id
+      - name
+      - config_type
+  responses:
+    PostRescanVulnResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              results:
+                $ref: '#/components/schemas/VulnerabilityResultsOld'
+            required:
+            - message
+    GetScansStatusResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              current_page:
+                type: integer
+              result_count:
+                type: integer
+              total_results:
+                type: integer
+              total_pages:
+                type: integer
+              message:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScanStatusItem'
+            required:
+            - message
+            - current_page
+            - result_count
+            - total_results
+            - total_pages
+            - data
+    SetScanScheduleResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+            - message
+    GetScansHistoryResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - current_page
+            - result_count
+            - total_results
+            - total_pages
+            - message
+            - data
+            properties:
+              message:
+                type: string
+              current_page:
+                type: integer
+              result_count:
+                type: integer
+              total_results:
+                type: integer
+              total_pages:
+                type: integer
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScansHistoryItems'
+              total_completed_request:
+                type: integer
+              total_scan_run:
+                type: integer
+              total_unique_scan_run:
+                type: integer
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    DeleteScansResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              ok:
+                type: boolean
+            required:
+            - message
+    StaticScanIPsResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - ips
+            properties:
+              ips:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - ip
+                  properties:
+                    ip:
+                      type: string
+    GetScanDetailsResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ScanStatusItem'
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    TriggerUserScanResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              id:
+                type: string
+              message:
+                type: string
+              truncated-scan-targets:
+                type: integer
+        application/xml:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              id:
+                type: string
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              id:
+                type: string
+            required:
+            - message
+        text/html:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              id:
+                type: string
+            required:
+            - message
+    GetScanScheduleResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              schedules:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScanSchedule'
+            required:
+            - message
+            - schedules
+    DeleteScanScheduleResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+            - message
+    ImportScanResponse:
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            description: Scan is a single scan object
+            properties:
+              id:
+                type: string
+              message:
+                type: string
+            required:
+            - id
+            - message
+  requestBodies:
+    PatchScanVulnsRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - vuln_status
+            properties:
+              vuln_ids:
+                type: array
+                items:
+                  type: string
+              vuln_status:
+                $ref: '#/components/schemas/VulnStatusEnum'
+              type:
+                type: string
+              scan_id:
+                type: string
+              severity:
+                type: array
+                items:
+                  type: string
+              host:
+                type: array
+                items:
+                  type: string
+              template:
+                type: array
+                items:
+                  type: string
+              search:
+                type: string
+    TriggerUserScanRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              targets:
+                type: array
+                items:
+                  type: string
+              templates:
+                type: array
+                items:
+                  type: string
+              assets:
+                type: array
+                items:
+                  type: string
+              private_templates:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrivateTemplates'
+              name:
+                type: string
+              recommended:
+                type: boolean
+              all:
+                type: boolean
+              alerting_config_ids:
+                type: array
+                items:
+                  type: string
+              scan_config_ids:
+                type: array
+                items:
+                  type: string
+              reporting_config_ids:
+                type: array
+                items:
+                  type: string
+              early_templates:
+                type: array
+                items:
+                  type: string
+              exclude_targets:
+                type: array
+                items:
+                  type: string
+              enumeration_ids:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnumerationIds'
+              schedule_only:
+                type: boolean
+              disable_global_alert_config:
+                type: boolean
+              disable_global_report_config:
+                type: boolean
+              disable_global_scan_config:
+                type: boolean
+              socks5_proxy:
+                type: string
+              agent_id:
+                type: string
+              agent_tags:
+                type: array
+                items:
+                  type: string
+              agent_networks:
+                type: array
+                items:
+                  type: string
+              agent_behavior:
+                enum:
+                - distribute
+                - mirror
+                default: distribute
+              automatic_scan:
+                type: boolean
+              scan_all_assets:
+                type: boolean
+              exclusions:
+                type: array
+                items:
+                  type: string
+                description: Combined inclusion and exclusion patterns for scan scope. Exclusion patterns (e.g. `*.staging.company.com`) filter out matching targets. Inclusion patterns use a `+` prefix (e.g. `+prod-*.company.com`) to restrict scanning to only matching targets (allowlist mode). When inclusion patterns are present, targets must match at least one inclusion pattern and not match any exclusion pattern. Supports exact domains, wildcard patterns, IP addresses, and CIDR ranges.
+              asset_filters:
+                $ref: '#/components/schemas/AssetFilters'
+    DeleteVulnsRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ids:
+                type: array
+                items:
+                  type: string
+              type:
+                type: string
+              vuln_status:
+                type: array
+                items:
+                  type: string
+              scan_id:
+                type: string
+              severity:
+                type: array
+                items:
+                  type: string
+              host:
+                type: array
+                items:
+                  type: string
+              template:
+                type: array
+                items:
+                  type: string
+              search:
+                type: string
+    SetScanScheduleRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - scan_id
+            - scan_frequency
+            properties:
+              scan_id:
+                type: string
+              scan_frequency:
+                $ref: '#/components/schemas/SchedulerFrequency'
+              start_time:
+                type: string
+                format: time
+              hourly_frequency:
+                type: integer
+                minimum: 1
+                maximum: 24
+              custom_weekdays:
+                type: array
+                description: '0-6 denoting Sunday-Saturday.
+
+                  It accepts an array of weekday'
+                items:
+                  type: integer
+                  minimum: 0
+                  maximum: 6
+    PatchScanVulnsLabelsRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - ids
+            properties:
+              ids:
+                type: array
+                items:
+                  type: string
+              type:
+                type: string
+              labels:
+                type: array
+                items:
+                  type: string
+    UpdateScanRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+            required:
+            - name
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

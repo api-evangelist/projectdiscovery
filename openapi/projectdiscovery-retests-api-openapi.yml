@@ -1,0 +1,448 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset retests API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: retests
+paths:
+  /v1/retest/{vuln_id}:
+    parameters:
+    - schema:
+        type: string
+      name: vuln_id
+      in: path
+      required: true
+    get:
+      summary: Get Retest Vulnerability
+      tags:
+      - retests
+      responses:
+        '200':
+          $ref: '#/components/responses/GetSingleRetestResultResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-retest-vuln_id
+      security:
+      - X-API-Key: []
+      description: Get retest vulnerability (retests from editor)
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+components:
+  responses:
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    GetSingleRetestResultResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              results:
+                $ref: '#/components/schemas/VulnerabilityResults'
+            required:
+            - message
+            - results
+  schemas:
+    VulnerabilityResults:
+      type: object
+      required:
+      - matcher_status
+      - vuln_id
+      - target
+      - created_at
+      - scan_id
+      - event
+      - template_id
+      - result_type
+      - vuln_hash
+      properties:
+        matcher_status:
+          type: boolean
+        vuln_id:
+          type: string
+        target:
+          type: string
+        template_url:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        scan_id:
+          type: string
+        event:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityEvent'
+        template_id:
+          type: string
+        template_path:
+          type: string
+        template_encoded:
+          type: string
+        result_type:
+          type: string
+        vuln_status:
+          type: string
+        vuln_hash:
+          type: string
+        is_regression:
+          type: boolean
+        is_internal:
+          type: boolean
+        labels:
+          type: array
+          items:
+            type: string
+        port:
+          type: integer
+        asset_metadata:
+          type: object
+          $ref: '#/components/schemas/EnumerationContent'
+        remediation:
+          type: string
+        description:
+          type: string
+        impact:
+          type: string
+        reference:
+          type: array
+          items:
+            type: string
+    EnumerationContentTechnologyDetails:
+      title: EnumerationContentTechnologyDetails
+      type: object
+      properties:
+        description:
+          type: string
+        website:
+          type: string
+        icon:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+    VulnerabilityEvent:
+      title: VulnerabilityEvent
+      type: object
+      properties:
+        curl-command:
+          type: string
+        extracted-results:
+          type: array
+          items:
+            type: string
+        extractor-name:
+          type: string
+        host:
+          type: string
+        info:
+          type: object
+          required:
+          - name
+          properties:
+            classification:
+              type: object
+              properties:
+                cpe:
+                  type: string
+                cve-id:
+                  type: array
+                  items:
+                    type: string
+                cvss-metrics:
+                  type: string
+                cvss-score:
+                  type: number
+                cwe-id:
+                  type: array
+                  items:
+                    type: string
+                epss-percentile:
+                  type: number
+                epss-score:
+                  type: number
+            metadata:
+              type: object
+            author:
+              type: array
+              items:
+                type: string
+            description:
+              type: string
+            impact:
+              type: string
+            name:
+              type: string
+            tags:
+              type: array
+              items:
+                type: string
+            reference:
+              type: array
+              items:
+                type: string
+            remediation:
+              type: string
+            severity:
+              type: string
+        ip:
+          type: string
+        matched-at:
+          type: string
+        matched-line:
+          type: array
+          items:
+            type: integer
+        matcher-name:
+          type: string
+        matcher-status:
+          type: boolean
+        path:
+          type: string
+        request:
+          type: string
+        response:
+          type: string
+        template-id:
+          type: string
+        template-path:
+          type: string
+        timestamp:
+          type: string
+        type:
+          type: string
+        error:
+          type: string
+        issue_trackers:
+          type: object
+          properties:
+            jira:
+              $ref: '#/components/schemas/VulnIssueTrackerItem'
+            github:
+              $ref: '#/components/schemas/VulnIssueTrackerItem'
+            gitlab:
+              $ref: '#/components/schemas/VulnIssueTrackerItem'
+            linear:
+              $ref: '#/components/schemas/VulnIssueTrackerItem'
+            custom:
+              $ref: '#/components/schemas/VulnIssueTrackerItem'
+        port:
+          type: string
+    VulnIssueTrackerItem:
+      title: VulnIssueTrackerItem
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+    EnumerationSourceValue:
+      type: object
+      required:
+      - source
+      - metadata
+      properties:
+        source:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    EnumerationContent:
+      title: EnumerationContent
+      type: object
+      required:
+      - enumeration_id
+      - name
+      - created_at
+      - id
+      - is_new
+      properties:
+        enumeration_id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        id:
+          type: integer
+          format: int64
+        labels:
+          type: array
+          items:
+            type: string
+        cname:
+          type: array
+          items:
+            type: string
+        host:
+          type: string
+        port:
+          type: integer
+        ip:
+          type: array
+          items:
+            type: string
+        status_code:
+          type: integer
+        content_length:
+          type: integer
+        vulnerabilities:
+          type: integer
+          format: int64
+        title:
+          type: string
+        technologies:
+          type: array
+          items:
+            type: string
+        webserver:
+          type: string
+        method:
+          type: string
+        is_new:
+          type: boolean
+        type:
+          type: string
+        asset_hash:
+          type: string
+        technology_details:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/EnumerationContentTechnologyDetails'
+        screenshot_path:
+          type: string
+        favicon:
+          type: string
+        favicon_body:
+          type: string
+        cdn_name:
+          type: string
+        chain_status_codes:
+          type: array
+          items:
+            type: string
+        domain_name:
+          type: string
+        redirect_location:
+          type: string
+        asn:
+          as_number:
+            type: string
+          as_country:
+            type: string
+          as_name:
+            type: string
+          as_range:
+            type: array
+            items:
+              type: string
+          type: object
+          properties:
+            as_country:
+              type: string
+            as_name:
+              type: string
+            as_number:
+              type: string
+            as_range:
+              type: array
+              items:
+                type: string
+        tls_serial_number:
+          type: string
+        tls_subject_org:
+          type: string
+        tls_issuer_org:
+          type: string
+        tls_expired:
+          type: boolean
+        tls_not_before:
+          type: string
+          format: date-time
+        tls_self_signed:
+          type: boolean
+        tls_mismatched:
+          type: boolean
+        tls_revoked:
+          type: boolean
+        tls_untrusted:
+          type: boolean
+        tls_subject_cn:
+          type: string
+        tls_subject_an:
+          type: array
+          items:
+            type: string
+        body:
+          type: string
+        tls_not_after:
+          type: string
+          format: date-time
+        enumeration_name:
+          type: string
+        extended_metadata:
+          type: object
+        source_type:
+          type: string
+        source:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnumerationSourceValue'
+        is_internal:
+          type: boolean
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

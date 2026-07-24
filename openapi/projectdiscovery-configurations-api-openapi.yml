@@ -1,0 +1,761 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset configurations API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: configurations
+paths:
+  /v1/scans/config:
+    get:
+      summary: Get Configs List
+      tags:
+      - configurations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConfigResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-config
+      parameters:
+      - schema:
+          enum:
+          - scan
+          - reporting
+          - template
+          - alerting
+          - cloudlist
+          - subfinder
+          - remediation
+          - vuln_score
+          type: string
+        in: query
+        name: type
+        description: filter by the type of config
+      - schema:
+          type: string
+        in: query
+        name: search
+        description: search by config name
+      - schema:
+          type: integer
+        in: query
+        name: limit
+        description: The numbers of items to return
+      - schema:
+          type: integer
+        in: query
+        description: The number of items to skip before starting to collect the result set
+        name: offset
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      security:
+      - X-API-Key: []
+      description: Get user scan configurations list
+    post:
+      summary: Add Config
+      operationId: post-v1-scans-config
+      tags:
+      - configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/PostScanConfigResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                config:
+                  type: string
+                config_type:
+                  $ref: '#/components/schemas/ConfigTypeEnum'
+                name:
+                  type: string
+                global:
+                  type: boolean
+                oauth_config_id:
+                  type: string
+                  description: ID of existing OAuth config to update with the complete configuration
+              required:
+              - config
+              - name
+      security:
+      - X-API-Key: []
+      description: Add a new scan configuration
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/scans/config/{config_id}:
+    parameters:
+    - schema:
+        type: string
+      name: config_id
+      in: path
+      required: true
+    get:
+      summary: Get Config
+      tags:
+      - configurations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-config-config_id
+      security:
+      - X-API-Key: []
+      description: Get a scan configuration
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      - schema:
+          type: boolean
+        in: query
+        name: config_json
+        description: config is in json format
+    patch:
+      summary: Update Config
+      operationId: patch-v1-scans-config-config_id
+      tags:
+      - configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/PostScanConfigResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                config:
+                  type: string
+                global:
+                  type: boolean
+      security:
+      - X-API-Key: []
+      description: Update existing scan configuration
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      - schema:
+          type: boolean
+        in: query
+        description: Specify payload is in json
+        name: config_json
+    delete:
+      summary: Delete Config
+      operationId: delete-v1-scans-config-config_id
+      tags:
+      - configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      description: Delete scan configuration
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/scans/config/exclude:
+    parameters: []
+    get:
+      summary: Get excluded templates
+      tags:
+      - configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/ExcludedTemplateResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-scans-config-exclude
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      security:
+      - X-API-Key: []
+      description: Get excluded templates
+    post:
+      summary: Add excluded templates and targets
+      operationId: post-scans-config-exclude
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      tags:
+      - configurations
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      requestBody:
+        $ref: '#/components/requestBodies/ExcludeConfigRequest'
+      security:
+      - X-API-Key: []
+      description: Add excluded templates or targets
+    delete:
+      summary: Delete excluded templates or targets by ids
+      operationId: delete-scans-config-exclude
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      tags:
+      - configurations
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      requestBody:
+        $ref: '#/components/requestBodies/DeleteExcludedConfigRequest'
+      security:
+      - X-API-Key: []
+      description: Delete excluded templates or targets by ids
+  /v1/scans/config/severity:
+    get:
+      summary: Get custom severity mappings
+      tags:
+      - configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/GetSeverityConfigResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-scans-config-severity
+      parameters:
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+    post:
+      summary: Add custom severity mapping
+      tags:
+      - configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/PostSeverityConfigResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: post-v1-scans-config-severity
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      requestBody:
+        $ref: '#/components/requestBodies/AddCustomSeverityMappingRequest'
+    delete:
+      summary: Delete custom severity mapping
+      tags:
+      - configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: delete-v1-scans-config-severity
+      parameters:
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+      requestBody:
+        $ref: '#/components/requestBodies/DeleteCustomSeverityMappingRequest'
+  /v1/scans/config/{config_id}/severity:
+    parameters:
+    - schema:
+        type: integer
+        format: int64
+      name: config_id
+      in: path
+      required: true
+    patch:
+      summary: Modify custom severity mapping
+      tags:
+      - configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: patch-v1-scans-config-config_id-severity
+      parameters:
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+      requestBody:
+        $ref: '#/components/requestBodies/AddCustomSeverityMappingRequest'
+  /v1/scans/config/verify:
+    post:
+      summary: Verify Config
+      tags:
+      - configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/VerifyConfigResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: post-v1-scans-config-verify
+      requestBody:
+        $ref: '#/components/requestBodies/VerifyConfigRequest'
+      security:
+      - X-API-Key: []
+      description: Verify scan configuration
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+components:
+  responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    VerifyConfigResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - is_verified
+            - response
+            properties:
+              is_verified:
+                type: boolean
+              response:
+                type: string
+              event:
+                type: object
+    PostScanConfigResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              id:
+                type: string
+              message:
+                type: string
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    PostSeverityConfigResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - id
+            properties:
+              id:
+                type: integer
+                format: int64
+              message:
+                type: string
+    GetSeverityConfigResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - custom_severity_mappings
+            properties:
+              custom_severity_mappings:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomSeverityMapping'
+    ExcludedTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - data
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExcludedTemplate'
+  requestBodies:
+    DeleteExcludedConfigRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - ids
+            properties:
+              ids:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+    VerifyConfigRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - config
+            properties:
+              config:
+                type: string
+              config_type:
+                type: string
+              oauth_config_id:
+                type: string
+    DeleteCustomSeverityMappingRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - ids
+            properties:
+              ids:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+    AddCustomSeverityMappingRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - template_id
+            - custom_severity
+            properties:
+              template_id:
+                type: string
+              custom_severity:
+                type: string
+              vuln_id:
+                type: string
+    ExcludeConfigRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - values
+            - exclude_type
+            properties:
+              values:
+                type: array
+                items:
+                  type: string
+              scan_ids:
+                type: array
+                items:
+                  type: string
+                description: Optional scan IDs to scope these rules to specific scans. If not provided, rules apply globally.
+              enumeration_ids:
+                type: array
+                items:
+                  type: string
+                description: Optional enumeration IDs to scope these rules to specific enumerations. If not provided, rules apply globally.
+              exclude_type:
+                $ref: '#/components/schemas/ExcludeConfigRequestType'
+  schemas:
+    CustomSeverityMapping:
+      title: CustomSeverityMapping
+      type: object
+      required:
+      - id
+      - template_id
+      - original_severity
+      - custom_severity
+      - created_at
+      - updated_at
+      properties:
+        id:
+          type: integer
+          format: int64
+        template_id:
+          type: string
+        original_severity:
+          type: string
+        custom_severity:
+          type: string
+        vuln_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    ConfigTypeEnum:
+      title: ConfigTypeEnum
+      type: string
+      enum:
+      - scan
+      - reporting
+      - template
+      - alerting
+      - cloudlist
+      - subfinder
+    ExcludeConfigRequestType:
+      title: ExcludeConfigRequestType
+      type: string
+      enum:
+      - scan_target
+      - template
+      - enumeration_target
+    ExcludedTemplate:
+      title: Excluded Templates and targets
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        value:
+          type: string
+        exclude_type:
+          $ref: '#/components/schemas/ExcludeConfigRequestType'
+        scan_id:
+          type: string
+          description: Optional scan ID if this rule is scoped to a specific scan
+        enumeration_id:
+          type: string
+          description: Optional enumeration ID if this rule is scoped to a specific enumeration
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - value
+      - exclude_type
+      - created_at
+      - updated_at
+    ConfigResponse:
+      title: ConfigResponse
+      type: object
+      properties:
+        id:
+          type: string
+        config:
+          type: string
+        config_type:
+          $ref: '#/components/schemas/ConfigTypeEnum'
+        name:
+          type: string
+        read_only:
+          type: boolean
+        global:
+          type: boolean
+        provider_name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - config
+      - config_type
+      - name
+      - created_at
+      - updated_at
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

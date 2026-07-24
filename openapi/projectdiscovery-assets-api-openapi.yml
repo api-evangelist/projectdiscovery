@@ -1,0 +1,500 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset assets API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: assets
+paths:
+  /v1/asset/{asset_id}/changelogs:
+    parameters:
+    - schema:
+        type: integer
+        format: int64
+      name: asset_id
+      in: path
+      required: true
+    get:
+      summary: Get Asset Changelogs for a given asset_id
+      tags:
+      - assets
+      responses:
+        '200':
+          $ref: '#/components/responses/GetAssetChangelogsResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-asset-assetId-changelogs
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - last_day
+          - last_week
+          - last_month
+          - last_3_months
+          - last_6_months
+          - last_12_months
+          - all_time
+          default: all_time
+        in: query
+        name: time
+        description: time filter to select
+      - schema:
+          type: string
+        in: query
+        name: event_type
+        description: comma separated event_type e.g. event_type=vul_status,vul_status_change
+      - schema:
+          type: string
+        in: query
+        name: sort_asc
+        description: comma separated ascending sorting e.g sort_asc=created_at,severity
+      - schema:
+          type: string
+        in: query
+        name: sort_desc
+        description: comma separated descending sorting e.g sort_desc=created_at,severity
+      - schema:
+          type: integer
+        in: query
+        name: limit
+        description: number of results to get
+      - schema:
+          type: integer
+        in: query
+        name: offset
+        description: number of results to skip
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+      security:
+      - X-API-Key: []
+      description: Get asset changelogs
+  /v1/asset/labels:
+    patch:
+      summary: Update Asset Labels
+      tags:
+      - assets
+      responses:
+        '200':
+          $ref: '#/components/responses/AssetCountResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: patch-v1-asset-labels
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - append
+          - replace
+          - delete
+          default: append
+        in: query
+        name: update_type
+        description: Append or Replace update_type
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateAssetLabelsRequest'
+  /v1/asset/{asset_id}/labels:
+    parameters:
+    - schema:
+        type: integer
+        format: int64
+      name: asset_id
+      in: path
+      required: true
+    post:
+      summary: Add labels to an asset
+      tags:
+      - assets
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: post-v1-asset-id-labels
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      requestBody:
+        $ref: '#/components/requestBodies/AssetIdLabelsRequest'
+    patch:
+      summary: Modify labels of an asset
+      tags:
+      - assets
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: patch-v1-asset-id-labels
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - append
+          - replace
+          - delete
+          default: append
+        in: query
+        name: update_type
+        description: Append or Replace update_type
+      requestBody:
+        $ref: '#/components/requestBodies/AssetIdLabelsRequest'
+    delete:
+      summary: Delete labels of an asset
+      tags:
+      - assets
+      responses:
+        '200':
+          $ref: '#/components/responses/MessageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: delete-v1-asset-id-labels
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+components:
+  schemas:
+    AssetFilters:
+      title: AssetFilters
+      type: object
+      additionalProperties: false
+      properties:
+        is_tech:
+          type: boolean
+          description: Return records that have technologies
+        is_favicon:
+          type: boolean
+          description: Return the records that have favicon
+        is_new:
+          type: boolean
+          description: Filter by new content
+        labels:
+          type: string
+          description: Filter by comma separated labels, e.g-> labels=p1,p2
+        host:
+          type: string
+          description: Filter by comma separated hosts, e.g-> host=p1,p2
+        port:
+          type: string
+          description: Filter by comma separated ports, e.g-> port=p1,p2
+        status_code:
+          type: string
+          description: Filter by comma separated status codes, e.g-> status_code=p1,p2
+        content_length:
+          type: string
+          description: Filter by comma separated content lengths, e.g-> content_length=p1,p2
+        title:
+          type: string
+          description: Filter by comma separated titles, e.g-> title=p1,p2
+        domain:
+          type: array
+          description: Filter by comma separated domain names, e.g-> domain=domain1.com,domain2.com
+          items:
+            type: string
+        cname:
+          type: string
+          description: Filter by comma separated cnames, e.g-> cname=p1,p2
+        technologies:
+          type: string
+          description: Filter by comma separated technologies, e.g-> technologies=p1,p2
+        ip:
+          type: string
+          description: Filter by comma separated ips, e.g-> ip=p1,p2
+        is_screenshot:
+          type: boolean
+          description: Return the records with screenshots
+        time:
+          $ref: '#/components/schemas/TimeRangeQueryParameter'
+          description: Filter by time range
+        start_date:
+          type: string
+          format: date
+          description: Filter by start date
+        end_date:
+          type: string
+          format: date
+          description: Filter by end date
+        custom_filter:
+          type: string
+          description: Filter by custom filter. Double encode the query string.
+        search:
+          type: string
+          description: Search on the content name
+        enumeration_ids:
+          type: array
+          items:
+            type: string
+          description: Filter by enumeration ids
+        only_dns:
+          type: boolean
+          description: Query only dns FQDN records
+        only_ip:
+          type: boolean
+          description: Query only dns IP records
+        not_seen_for_days:
+          type: integer
+          minimum: 1
+          description: Return assets that haven't been seen in the last N days. An asset is only included if a scan that covers it has run during that period without rediscovering it, so assets that simply haven't been rescanned recently are not matched.
+    VulnerabilityChangelogsEvent:
+      title: VulnerabilityChangelogsEvent
+      type: object
+      properties:
+        name:
+          description: The name of the event
+          type: string
+        from:
+          description: The from value of the event
+        to:
+          description: The to value of the event
+    TimeRangeQueryParameter:
+      title: TimeRangeQueryParameter
+      type: string
+      enum:
+      - last_day
+      - last_week
+      - last_month
+      - last_3_months
+      - last_6_months
+      - last_12_months
+      - all_time
+    AssetChangelogs:
+      type: object
+      required:
+      - id
+      - enumeration_id
+      - name
+      - created_at
+      - updated_at
+      properties:
+        id:
+          type: integer
+          format: int64
+        enumeration_id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        status_code:
+          type: integer
+        technologies:
+          type: array
+          items:
+            type: string
+        webserver:
+          type: string
+        request:
+          type: string
+        response:
+          type: string
+        cname:
+          type: array
+          items:
+            type: string
+        labels:
+          type: array
+          items:
+            type: string
+        ip:
+          type: string
+        content_length:
+          type: integer
+        title:
+          type: string
+        host:
+          type: string
+        port:
+          type: integer
+        technology_details:
+          type: string
+          format: json
+        is_new:
+          type: boolean
+        body:
+          type: string
+        change_event:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityChangelogsEvent'
+  requestBodies:
+    AssetIdLabelsRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - labels
+            properties:
+              labels:
+                type: array
+                items:
+                  type: string
+    UpdateAssetLabelsRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - filters
+            - labels
+            properties:
+              filters:
+                $ref: '#/components/schemas/AssetFilters'
+              labels:
+                type: array
+                items:
+                  type: string
+  responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    AssetCountResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - asset_count
+            - async
+            properties:
+              message:
+                type: string
+              asset_count:
+                type: integer
+              async:
+                type: boolean
+                description: Whether the operation is running asynchronously
+    GetAssetChangelogsResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - current_page
+            - result_count
+            - total_results
+            - total_pages
+            - data
+            properties:
+              message:
+                type: string
+              current_page:
+                type: integer
+              result_count:
+                type: integer
+              total_results:
+                type: integer
+              total_pages:
+                type: integer
+              data:
+                type: array
+                items:
+                  type: object
+                  $ref: '#/components/schemas/AssetChangelogs'
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

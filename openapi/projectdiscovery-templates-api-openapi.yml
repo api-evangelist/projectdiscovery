@@ -1,0 +1,1017 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset templates API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: templates
+paths:
+  /v1/template/public:
+    get:
+      summary: Get Public Template List
+      tags:
+      - templates
+      responses:
+        '200':
+          $ref: '#/components/responses/GetPublicTemplateList'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-template-public
+      description: Get public-template list
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      - schema:
+          type: integer
+        in: query
+        name: offset
+        description: Pagination offset (no. of results to skip)
+      - schema:
+          type: integer
+        in: query
+        name: limit
+        description: Pagination limit (max no. of results in response)
+      - schema:
+          type: string
+        in: query
+        description: 'template data fields '
+        name: fields
+  /v1/template/early:
+    parameters: []
+    get:
+      summary: Get Early Template List
+      tags:
+      - templates
+      responses:
+        '200':
+          $ref: '#/components/responses/GetEarlyTempateList'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-early-templates
+      description: Get pdcp early template lists
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      - schema:
+          type: integer
+        in: query
+        name: offset
+      - schema:
+          type: integer
+        in: query
+        name: limit
+      - schema:
+          type: string
+        in: query
+        name: fields
+  /v1/template/early/{id}:
+    parameters:
+    - schema:
+        type: string
+      name: id
+      in: path
+      required: true
+    get:
+      summary: Get Early Template
+      tags:
+      - templates
+      responses:
+        '200':
+          description: Shared Response
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: object
+                required:
+                - message
+                properties:
+                  message:
+                    type: string
+                  template:
+                    $ref: '#/components/schemas/TemplateData'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-early-templates-id
+      description: Get early template text
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/template/public/{template_id}:
+    parameters:
+    - schema:
+        type: string
+      name: template_id
+      in: path
+      required: true
+      description: 'unique Id of template '
+    get:
+      summary: Get Public Template
+      tags:
+      - templates
+      responses:
+        '200':
+          $ref: '#/components/responses/GetTemplateDataResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-public-template-data
+      description: Get public template data
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: fields
+        description: 'template data fields '
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+  /v1/template:
+    parameters: []
+    get:
+      summary: Get Template List
+      tags:
+      - templates
+      responses:
+        '200':
+          $ref: '#/components/responses/GetUserTemplateListResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-templates
+      security:
+      - X-API-Key: []
+      description: Get user private(my) templates
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      - schema:
+          type: integer
+        in: query
+        name: offset
+      - schema:
+          type: integer
+        in: query
+        name: limit
+      - schema:
+          type: string
+        in: query
+        name: fields
+    post:
+      summary: Create Template
+      tags:
+      - templates
+      operationId: post-v1-template
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateTemplateResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - template
+              properties:
+                template:
+                  type: string
+                  description: 'Template in text format
+
+                    '
+                prompt:
+                  type: string
+      description: Create a private template
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      - schema:
+          type: string
+        in: query
+        name: filename
+        description: filename for template
+      - schema:
+          type: string
+        in: query
+        name: dir
+        description: directories for template
+    patch:
+      summary: Update Template
+      tags:
+      - templates
+      operationId: patch-v1-template
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateTemplateResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateTemplateRequest'
+      description: 'Update existing private template '
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/template/{template_id}:
+    parameters:
+    - schema:
+        type: string
+      name: template_id
+      in: path
+      required: true
+      description: 'unique Id of template '
+    get:
+      summary: Get Template
+      tags:
+      - templates
+      responses:
+        '200':
+          $ref: '#/components/responses/GetTemplateResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-template-t_id
+      security:
+      - X-API-Key: []
+      description: Get private template text using ID
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+    delete:
+      summary: Delete Template
+      tags:
+      - templates
+      operationId: delete-v1-template-template_id
+      responses:
+        '200':
+          $ref: '#/components/responses/DeleteTemplateResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      description: Delete private template using ID
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/template/ai:
+    post:
+      summary: Generate AI Template
+      tags:
+      - templates
+      operationId: post-v1-template-ai
+      responses:
+        '200':
+          $ref: '#/components/responses/GenerateTemplateResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/GenerateTemplateRequest'
+      security:
+      - X-API-Key: []
+      description: Generate a private template with AI Engine
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/template/share:
+    get:
+      summary: Get Shared Template List
+      tags:
+      - templates
+      responses:
+        '200':
+          $ref: '#/components/responses/GetShareStatusResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-template-share
+      security:
+      - X-API-Key: []
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      - schema:
+          type: string
+        in: query
+        name: fields
+      - schema:
+          type: integer
+        in: query
+        name: limit
+        description: Limit The numbers of items to return
+      - schema:
+          type: integer
+        in: query
+        name: offset
+        description: Offset The numbers of items to skip
+      - schema:
+          type: string
+        in: query
+        description: SortAsc Sort results in ascending order (CSV field names)
+        name: sort_asc
+      - schema:
+          type: string
+        in: query
+        name: sort_desc
+        description: SortDesc Sort results in descending order (CSV field names)
+      description: Shared template list
+    post:
+      summary: Share Template
+      tags:
+      - templates
+      operationId: post-v1-template-share
+      responses:
+        '200':
+          $ref: '#/components/responses/ShareTemplateResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      security:
+      - X-API-Key: []
+      requestBody:
+        $ref: '#/components/requestBodies/ShareTemplateRequest'
+      description: Share a private template (shared-with-link)
+      parameters:
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+  /v1/template/share/{template_id}:
+    parameters:
+    - schema:
+        type: string
+      name: template_id
+      in: path
+      required: true
+      description: unique template ID
+    get:
+      summary: Get Shared Template
+      tags:
+      - templates
+      responses:
+        '200':
+          $ref: '#/components/responses/GetSharedTemplateResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: get-v1-template-share-template_id
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: fields
+        description: get selected fields e.g. name,template_id,severity, etc
+      description: Get a shared template text
+      requestBody:
+        content: {}
+components:
+  requestBodies:
+    ShareTemplateRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - template_id
+            - share_type
+            properties:
+              template_id:
+                type: string
+              share_type:
+                enum:
+                - unlisted
+                - organization
+                - users
+              ttl:
+                type: string
+              organizations:
+                type: array
+                items:
+                  type: string
+              emails:
+                type: array
+                items:
+                  type: string
+    UpdateTemplateRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - template
+            - template_id
+            properties:
+              template:
+                type: string
+              template_id:
+                type: string
+              prompt:
+                type: string
+              filename:
+                type: string
+              dir:
+                type: string
+    GenerateTemplateRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - prompt
+            properties:
+              prompt:
+                type: string
+              retest:
+                type: boolean
+              disableAutoSave:
+                type: boolean
+                default: false
+              images:
+                type: array
+                items:
+                  type: string
+  responses:
+    GetPublicTemplateList:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - count
+            - total
+            - results
+            properties:
+              message:
+                type: string
+              count:
+                type: integer
+              total:
+                type: integer
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateData'
+    ShareTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - result
+            properties:
+              message:
+                type: string
+              result:
+                $ref: '#/components/schemas/SharedTemplateMetaData'
+    GetSharedTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - result
+            properties:
+              message:
+                type: string
+              result:
+                $ref: '#/components/schemas/SharedTemplateData'
+    GetTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              template:
+                $ref: '#/components/schemas/TemplateData'
+        application/xml:
+          schema:
+            type: object
+            properties: {}
+          examples: {}
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    GetTemplateDataResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              data:
+                $ref: '#/components/schemas/TemplateData'
+    GetUserTemplateListResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - results
+            properties:
+              message:
+                type: string
+              count:
+                type: integer
+              total:
+                type: integer
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateData'
+    UpdateTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - template_id
+            - template_name
+            properties:
+              message:
+                type: string
+              status:
+                type: boolean
+              template_id:
+                type: string
+              template_name:
+                type: string
+              template:
+                $ref: '#/components/schemas/TemplateData'
+    GetShareStatusResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              count:
+                type: integer
+              message:
+                type: string
+              total:
+                type: integer
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedTemplateData'
+    GetEarlyTempateList:
+      description: Early Template Response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              total:
+                type: integer
+              count:
+                type: integer
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateData'
+    CreateTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - template_id
+            - template_name
+            properties:
+              message:
+                type: string
+              template_id:
+                type: string
+              template_name:
+                type: string
+              template:
+                $ref: '#/components/schemas/TemplateData'
+    GenerateTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              template_id:
+                type: string
+              message:
+                type: string
+              completion:
+                type: string
+              name:
+                type: string
+              canRun:
+                type: boolean
+              comment:
+                type: string
+              is_valid:
+                type: boolean
+              retry_count:
+                type: integer
+              feedback:
+                type: string
+              targets:
+                type: array
+                items:
+                  type: string
+              retest:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                    matched:
+                      type: boolean
+                    vuln_id:
+                      type: string
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    DeleteTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: boolean
+            required:
+            - message
+  schemas:
+    SharedTemplateMetaData:
+      title: SharedTemplateMetaData
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+        organizations:
+          type: array
+          items:
+            type: string
+        share_type:
+          type: string
+        template_id:
+          type: string
+        users_email:
+          type: array
+          items:
+            type: string
+    Classification:
+      description: Classification of template including additional metadata like cve-id, cwe-id etc
+      type: object
+      properties:
+        cve-id:
+          type: array
+          items:
+            type: string
+          description: CVE IDs for the template
+        cwe-id:
+          type: array
+          items:
+            type: string
+          description: CWE IDs for the template
+        cvss-metrics:
+          type: string
+          description: CVSS Metrics for the template
+        cvss-score:
+          type: number
+          format: float
+          description: CVSS Score for the template
+        epss-score:
+          type: number
+          format: float
+          description: EPSS Score for the template
+        epss-percentile:
+          type: number
+          format: float
+          description: EPSS Percentile for the template
+        cpe:
+          type: string
+          description: CPE for the template
+    SharedTemplateData:
+      allOf:
+      - $ref: '#/components/schemas/TemplateData'
+      - type: object
+        properties:
+          ttl:
+            type: string
+            description: Time to live duration (1d ,1m etc)
+          share_type:
+            type: string
+            description: Type of share (unlisted, users, organization)
+          users_email:
+            type: array
+            description: List of email addresses or user IDs to share with (required if share_type is set to 'users')
+            items:
+              type: string
+          organizations:
+            type: array
+            items:
+              type: string
+    TemplateData:
+      description: Template Document or object
+      type: object
+      properties:
+        uri:
+          type: string
+          description: The URI of the template (could be a path or a ksuid)
+        id:
+          type: string
+          description: The ID of the template
+        name:
+          type: string
+          description: The name of the template
+        author:
+          type: array
+          description: The authors of the template
+          items:
+            type: string
+        tags:
+          type: array
+          description: The tags of the template
+          items:
+            type: string
+        severity:
+          type: string
+          description: The severity of the template
+        type:
+          type: string
+          description: The type of the template
+        dir:
+          type: string
+        ref:
+          type: string
+        vendor:
+          type: string
+          description: The vendor of the template
+        product:
+          type: string
+          description: The product of the template
+        classification:
+          $ref: '#/components/schemas/Classification'
+          description: Classification of template including additional metadata like cve-id, cwe-id etc
+        metadata:
+          type: object
+        digest:
+          type: string
+          description: The digest of the template
+        created_at:
+          type: string
+          format: date-time
+          description: The time when template was created
+        updated_at:
+          type: string
+          format: date-time
+          description: The time when template was updated
+        release_tag:
+          type: string
+          description: The release tag of the template (contains tag when the file was first released)
+        is_early:
+          type: boolean
+          description: True if template is in early access
+        raw:
+          type: string
+          description: The raw unparsed template
+        template_id:
+          type: string
+        description:
+          type: string
+        filename:
+          type: string
+        impact:
+          type: string
+        ai_meta:
+          $ref: '#/components/schemas/AIMeta'
+        references:
+          type: array
+          items:
+            type: string
+        template_type:
+          enum:
+          - public
+          - user
+          - shared
+        is_draft:
+          type: boolean
+        is_github:
+          type: boolean
+        is_new:
+          type: boolean
+        is_pdteam:
+          description: Is the template from pdteam
+          type: boolean
+        remediation:
+          type: string
+    AIMeta:
+      type: object
+      properties:
+        model_used:
+          description: The AI model used to generate the template
+          type: string
+        is_prompt_by_human:
+          description: Whether the prompt was written by a human
+          type: boolean
+        is_template_by_human:
+          description: Whether the template was written by a human
+          type: boolean
+        prompt:
+          description: The prompt used to generate the template
+          type: string
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false

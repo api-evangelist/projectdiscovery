@@ -1,0 +1,397 @@
+openapi: 3.1.0
+info:
+  title: PDCP Asset export API
+  version: '1.0'
+  summary: ProjectDiscovery Cloud Platform
+  description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
+servers:
+- url: https://api.projectdiscovery.io
+  description: Production
+- url: https://api.dev.projectdiscovery.io
+  description: Development
+- url: http://localhost:8085
+  description: Localhost
+security:
+- X-API-Key: []
+tags:
+- name: export
+paths:
+  /v1/scans/results/export:
+    parameters:
+    - schema:
+        type: boolean
+      in: query
+      name: async
+    post:
+      summary: Export filtered Scan results
+      tags:
+      - export
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  export_id:
+                    type: string
+                required:
+                - export_id
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: post-v1-scans-results-export
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - json
+          - csv
+          - pdf
+        in: query
+        name: type
+        description: json, csv, pdf (default json)
+      - schema:
+          type: string
+        in: header
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+        name: X-Team-Id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+                vuln_status:
+                  type: string
+                severity:
+                  type: array
+                  items:
+                    type: string
+                host:
+                  type: array
+                  items:
+                    type: string
+                domain:
+                  type: array
+                  items:
+                    type: string
+                port:
+                  type: array
+                  items:
+                    type: integer
+                template:
+                  type: array
+                  items:
+                    type: string
+                search:
+                  type: string
+                category:
+                  type: array
+                  items:
+                    type: string
+                is_internal:
+                  type: boolean
+                scan_ids:
+                  type: array
+                  items:
+                    type: string
+                time:
+                  $ref: '#/components/schemas/TimeRangeQueryParameter'
+                start_date:
+                  type: string
+                  format: date
+                end_date:
+                  type: string
+                  format: date
+      security:
+      - X-API-Key: []
+      description: Export filtered scan results
+  /v1/leaks/export:
+    post:
+      summary: Export leaked credentials
+      description: Export leaked credentials with filtering by type, domain, email, date range, and more. Passwords are unmasked after domain verification. See [Domain Verification](/cloud/credential-monitoring#domain-verification) for setup instructions.
+      tags:
+      - export
+      responses:
+        '200':
+          description: Export data returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        url:
+                          type: string
+                        username:
+                          type: string
+                        password:
+                          type: string
+                        device_ip:
+                          type: string
+                        hostname:
+                          type: string
+                        os:
+                          type: string
+                        malware_path:
+                          type: string
+                        country:
+                          type: string
+                        log_date:
+                          type: string
+                        hardware_id:
+                          type: string
+                        domain:
+                          type: string
+                        email_domain:
+                          type: string
+                        url_domain:
+                          type: string
+                        fetched_at:
+                          type: string
+                        status:
+                          type: string
+                        user_type:
+                          type: string
+                          description: Classification of leak type (personal, employee, customer, external_vendor_leaks, organization_leaks)
+                  total_leaks:
+                    type: number
+                  total_pages:
+                    type: number
+                  total_count:
+                    type: number
+                  summary:
+                    type: object
+                    properties:
+                      total_leaks:
+                        type: number
+                      personal_leaks:
+                        type: number
+                      employee_leaks:
+                        type: number
+                      customer_leaks:
+                        type: number
+                      external_vendor_leaks:
+                        type: number
+                        description: Employee leaks on external vendor systems (login URL domain != email domain)
+                      organization_leaks:
+                        type: number
+                        description: Employee leaks on organization systems (login URL domain == email domain)
+                  group_summary:
+                    type: array
+                    description: Group summary data when group_by parameter is used
+                    items:
+                      type: object
+                      additionalProperties: true
+                      description: Dynamic group summary with field name as key and count
+            text/csv:
+              schema:
+                type: string
+                description: CSV formatted export data
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '401':
+          $ref: '#/components/responses/MessageResponse'
+        '403':
+          $ref: '#/components/responses/MessageResponse'
+        '404':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+      operationId: post-v1-leaks-export
+      parameters:
+      - schema:
+          type: string
+          enum:
+          - json
+          - csv
+          default: json
+        in: query
+        name: format
+        description: Export format (json or csv)
+      - schema:
+          type: string
+        in: header
+        name: X-Team-Id
+        description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - all
+                  - personal
+                  - employee
+                  - customer
+                  - external_vendor_leaks
+                  - organization_leaks
+                  default: all
+                  description: Filter by specific leak type (single value only)
+                domain:
+                  type: string
+                  description: Filter leaks by specific domain (applies to employee/customer leaks)
+                email:
+                  type: string
+                  description: Filter leaks by specific email (can be personal, employee, or customer email from user's authorized results)
+                search:
+                  type: string
+                  description: Search query to filter results across all fields
+                limit:
+                  type: number
+                  description: Number of results per page for pagination
+                page_number:
+                  type: number
+                  description: Page number for pagination (starts from 1)
+                start_date:
+                  type: string
+                  format: date
+                  description: time filter start date
+                time_range:
+                  type: string
+                  enum:
+                  - all_time
+                  - current_month
+                  - last_month
+                  - last_3_months
+                  - last_6_months
+                  - last_12_months
+                  default: all_time
+                end_date:
+                  type: string
+                  format: date
+                  description: time filter end date
+                sort_by:
+                  type: string
+                  enum:
+                  - url
+                  - username
+                  - log_date
+                  - country
+                  - device_ip
+                  - host_username
+                  - hostname
+                  - os
+                  - hardware_id
+                  - malware_path
+                  description: supported sort fields
+                sort_order:
+                  type: string
+                  enum:
+                  - asc
+                  - desc
+                  description: supported sort order (asc or desc)
+                status:
+                  type: string
+                  enum:
+                  - fixed
+                  - open
+                  description: supported status (fixed or open)
+                group_by:
+                  type: string
+                  enum:
+                  - url
+                  - country
+                  - device_ip
+                  - hostname
+                  - email
+                  - hardware_id
+                  description: Group results by field - returns group summaries when used without field-specific filtering
+                url:
+                  type: string
+                  description: Filter by specific URL (used with group_by for drill-down)
+                country:
+                  type: string
+                  description: Filter by specific country (used with group_by for drill-down)
+                device_ip:
+                  type: string
+                  description: Filter by specific device IP (used with group_by for drill-down)
+                hostname:
+                  type: string
+                  description: Filter by specific hostname (used with group_by for drill-down)
+                hardware_id:
+                  type: string
+                  description: Filter by specific hardware ID (used with group_by for drill-down)
+components:
+  responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+  schemas:
+    TimeRangeQueryParameter:
+      title: TimeRangeQueryParameter
+      type: string
+      enum:
+      - last_day
+      - last_week
+      - last_month
+      - last_3_months
+      - last_6_months
+      - last_12_months
+      - all_time
+  securitySchemes:
+    X-API-Key:
+      name: X-API-Key
+      type: apiKey
+      in: header
+x-internal: false
