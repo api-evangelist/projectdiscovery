@@ -1,0 +1,110 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/projectdiscovery-openapi-original.yml
+note: 'Entity-relationship graph derived from PDCP OpenAPI resource paths and id-reference fields. schemas
+  in spec: 160.'
+entities:
+- name: Scan
+  api_path: /v1/scans
+  description: A nuclei scan run against targets with a chosen configuration.
+  key_fields:
+  - id
+  - status
+  - config_id
+- name: ScanResult / Vulnerability
+  api_path: /v1/scans/results
+  description: A finding produced by a scan; has changelogs, timeline, retest history.
+  key_fields:
+  - vuln_id
+  - scan_id
+  - template_id
+  - severity
+  - status
+- name: Enumeration
+  api_path: /v1/asset/enumerate
+  description: An asset-discovery run that enumerates domains/subdomains into assets.
+  key_fields:
+  - enumerate_id
+  - status
+- name: Asset
+  api_path: /v1/asset
+  description: A discovered asset (host/domain/service) with labels, changelogs, screenshots.
+  key_fields:
+  - asset_id
+  - labels
+  - enumerate_id
+- name: AssetGroup
+  api_path: /v1/asset/enumerate/group
+  description: A saved group of assets built from enumeration filters.
+  key_fields:
+  - group_id
+  - enumerate_id
+- name: AssetPolicy
+  api_path: /v1/assets policies
+  description: A rule that auto-acts on assets (alert/delete/label) matching conditions.
+  key_fields:
+  - policy_id
+  - policy_type
+  - conditions
+- name: Template
+  api_path: /v1/template
+  description: A nuclei detection template (public, private, early, or AI-generated).
+  key_fields:
+  - template_id
+  - visibility
+- name: Configuration
+  api_path: /v1/scans/{scan_id}/config
+  description: 'Scan configuration: severity mappings, excluded templates/targets.'
+  key_fields:
+  - config_id
+- name: Schedule
+  api_path: /v1/scans/schedule
+  description: A recurring re-scan / re-enumeration schedule.
+  key_fields:
+  - schedule_id
+  - target_id
+- name: Leak
+  api_path: /v1/leaks
+  description: Credential-leak record for a domain or email; statuses can be updated.
+  key_fields:
+  - leak_id
+  - domain
+  - status
+- name: ApiKey
+  api_path: /v1/user/apikey
+  description: The account's PDCP API key (create/get/rotate/delete).
+  key_fields:
+  - api_key
+relationships:
+- from: Scan
+  to: ScanResult / Vulnerability
+  type: has_many
+  via: scan_id
+- from: Scan
+  to: Configuration
+  type: has_one
+  via: config_id
+- from: Scan
+  to: Schedule
+  type: has_one
+  via: schedule_id
+- from: ScanResult / Vulnerability
+  to: Template
+  type: belongs_to
+  via: template_id
+- from: Enumeration
+  to: Asset
+  type: has_many
+  via: enumerate_id
+- from: AssetGroup
+  to: Enumeration
+  type: belongs_to
+  via: enumerate_id
+- from: Asset
+  to: AssetPolicy
+  type: has_many
+  via: conditions
+- from: Leak
+  to: Asset
+  type: belongs_to
+  via: domain

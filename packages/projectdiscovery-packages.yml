@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/projectdiscovery
+note: >-
+  ProjectDiscovery ships its client/tooling surface as first-party Go modules
+  under github.com/projectdiscovery, distributed via the Go module proxy
+  (pkg.go.dev). Nuclei is additionally usable as an embeddable Go SDK. There is
+  no first-party npm/PyPI/Maven client for the PDCP REST API.
+packages:
+- language: go
+  registry: pkg.go.dev
+  name: github.com/projectdiscovery/nuclei/v3
+  url: https://pkg.go.dev/github.com/projectdiscovery/nuclei/v3
+  install: go get github.com/projectdiscovery/nuclei/v3
+  official: true
+  note: Nuclei vulnerability scanner; also documented as an embeddable Go SDK.
+- language: go
+  registry: pkg.go.dev
+  name: github.com/projectdiscovery/subfinder/v2
+  url: https://pkg.go.dev/github.com/projectdiscovery/subfinder/v2
+  install: go get github.com/projectdiscovery/subfinder/v2
+  official: true
+- language: go
+  registry: pkg.go.dev
+  name: github.com/projectdiscovery/httpx
+  url: https://pkg.go.dev/github.com/projectdiscovery/httpx
+  install: go get github.com/projectdiscovery/httpx
+  official: true
+- language: go
+  registry: pkg.go.dev
+  name: github.com/projectdiscovery/katana
+  url: https://pkg.go.dev/github.com/projectdiscovery/katana
+  install: go get github.com/projectdiscovery/katana
+  official: true
+- language: go
+  registry: pkg.go.dev
+  name: github.com/projectdiscovery/naabu/v2
+  url: https://pkg.go.dev/github.com/projectdiscovery/naabu/v2
+  install: go get github.com/projectdiscovery/naabu/v2
+  official: true
+- language: go
+  registry: pkg.go.dev
+  name: github.com/projectdiscovery/dnsx
+  url: https://pkg.go.dev/github.com/projectdiscovery/dnsx
+  install: go get github.com/projectdiscovery/dnsx
+  official: true

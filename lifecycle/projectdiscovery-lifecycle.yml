@@ -1,0 +1,20 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.projectdiscovery.io/api-reference/introduction
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://docs.projectdiscovery.io/api-reference/introduction
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No public deprecation policy or RFC 8594 Sunset/Deprecation header contract found.
+status_page: https://status.projectdiscovery.io
+sla:
+  url: null
+  uptime_target: null
+deprecated_operations: []
+notes: >-
+  PDCP versions via the /v1 URI path. A public status page is operated at
+  status.projectdiscovery.io. No formal deprecation policy or SLA document was
+  located as of 2026-07-20.

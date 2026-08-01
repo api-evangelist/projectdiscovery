@@ -1,0 +1,386 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/projectdiscovery-openapi-original.yml
+note: No official ProjectDiscovery MCP server was found (checked github.com/projectdiscovery and MCP registries
+  as of 2026-07-20). This is a candidate tool list derived one-to-one from the PDCP OpenAPI operations
+  to seed an MCP server; not published by the provider.
+server:
+  name: projectdiscovery
+  transport: http
+tools:
+- name: get-v2-template-search
+  description: Search Templates
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v2-template-search
+- name: get-v1-scans
+  description: Get Scan List
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans
+- name: post-v1-scans
+  description: Create Scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans
+- name: delete-v1-scans
+  description: Delete Scan in bulk
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-scans
+- name: get-v1-scans-scan_id
+  description: Get Scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-scan_id
+- name: delete-v1-scans-scan_id
+  description: Delete Scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-scans-scan_id
+- name: patch-v1-scans-scan_id
+  description: Update Scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-scans-scan_id
+- name: post-v1-scans-import
+  description: Import OSS Scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans-import
+- name: post-v1-scans-scan_id-stop
+  description: Stop Scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans-scan_id-stop
+- name: post-v1-scans-scan_id-rescan
+  description: Rescan scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans-scan_id-rescan
+- name: get-v1-scans-vuln-:vulnId
+  description: Get Scan Vulnerability
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-vuln-:vulnId
+- name: get-v1-scans-vuln-vuln_id-changelogs
+  description: Get Vulnerability Changelogs
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-vuln-vuln_id-changelogs
+- name: get-v1-scans-vuln-changelogs
+  description: Get all Vulnerability Changelogs
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-vuln-changelogs
+- name: post-v1-scans-vuln_id-retest
+  description: Retest vulnerability
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans-vuln_id-retest
+- name: get-v1-scans-schedule
+  description: Get Scan Schedules
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-schedule
+- name: post-v1-scans-schedule
+  description: Set Scan Schedule
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans-schedule
+- name: delete-v1-scans-schedule
+  description: Delete Scan Schedule
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-scans-schedule
+- name: get-v1-retest-vuln_id
+  description: Get Retest Vulnerability
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-retest-vuln_id
+- name: get-v1-user-apikey
+  description: Get API Key
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-user-apikey
+- name: post-v1-user-apikey
+  description: Create API Key
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-user-apikey
+- name: delete-v1-user-apikey
+  description: Delete API Key
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-user-apikey
+- name: post-v1-user-apikey-rotate
+  description: Rotate API Key
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-user-apikey-rotate
+- name: get-v1-template-public
+  description: Get Public Template List
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-template-public
+- name: get-v1-early-templates
+  description: Get Early Template List
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-early-templates
+- name: get-v1-early-templates-id
+  description: Get Early Template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-early-templates-id
+- name: get-v1-public-template-data
+  description: Get Public Template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-public-template-data
+- name: get-v1-templates
+  description: Get Template List
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-templates
+- name: post-v1-template
+  description: Create Template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-template
+- name: patch-v1-template
+  description: Update Template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-template
+- name: get-v1-template-t_id
+  description: Get Template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-template-t_id
+- name: delete-v1-template-template_id
+  description: Delete Template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-template-template_id
+- name: post-v1-template-ai
+  description: Generate AI Template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-template-ai
+- name: get-v1-template-share
+  description: Get Shared Template List
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-template-share
+- name: post-v1-template-share
+  description: Share Template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-template-share
+- name: get-v1-template-share-template_id
+  description: Get Shared Template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-template-share-template_id
+- name: patch-v1-template-share-template_id
+  description: Update Shared Template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-template-share-template_id
+- name: delete-v1-template-share-template_id
+  description: Unshare/Delete template
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-template-share-template_id
+- name: get-v1-user-team
+  description: Get Team
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-user-team
+- name: post-v1-user-team
+  description: Create Workspace
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-user-team
+- name: patch-v1-user-team
+  description: Update Team
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-user-team
+- name: delete-v1-user-team
+  description: Delete Team
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-user-team
+- name: get-v1-user-team-member
+  description: Get Team Members
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-user-team-member
+- name: post-v1-user-team-member
+  description: Add Team Member
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-user-team-member
+- name: delete-v1-user-team-member
+  description: Delete Team Member
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-user-team-member
+- name: patch-v1-user-team-member
+  description: Update Team Member
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-user-team-member
+- name: get-v1-user-team-default-members
+  description: Get Default Team Members
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-user-team-default-members
+- name: post-v1-user-team-default-members
+  description: Set Default Team Members
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-user-team-default-members
+- name: delete-v1-user-team-default-members
+  description: Delete Default Team Members
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-user-team-default-members
+- name: get-v1-scans-scan_ips
+  description: Get Scan IPs
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-scan_ips
+- name: patch-v1-scans-scan_id-import
+  description: Update Imported Scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-scans-scan_id-import
+- name: get-v1-scans-scan_id-export
+  description: Export Scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-scan_id-export
+- name: post-v1-scans-scan_id-export
+  description: Export Filtered Scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans-scan_id-export
+- name: post-v1-scans-results-export
+  description: Export filtered Scan results
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans-results-export
+- name: get-v1-scans-vuln-vuln_id-export
+  description: Export Scan Vulnerability
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-vuln-vuln_id-export
+- name: patch-v1-scans-vulns
+  description: Update Vulnerability Status
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-scans-vulns
+- name: delete-v1-scans-vulns
+  description: Delete Scan Vulnerability
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-scans-vulns
+- name: patch-v1-scans-vulns-labels
+  description: Update Vulnerability Labels
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-scans-vulns-labels
+- name: get-v1-scans-config
+  description: Get Configs List
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-config
+- name: post-v1-scans-config
+  description: Add Config
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans-config
+- name: get-v1-scans-config-config_id
+  description: Get Config
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-config-config_id
+- name: patch-v1-scans-config-config_id
+  description: Update Config
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-scans-config-config_id
+- name: delete-v1-scans-config-config_id
+  description: Delete Config
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-scans-config-config_id
+- name: get-scans-id-config
+  description: Get Scan Config
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-scans-id-config
+- name: patch-scans-id-config
+  description: Update Scan Config
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-scans-id-config
+- name: get-v1-asset-enumerate
+  description: Get Enumeration List
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-enumerate
+- name: post-v1-asset-enumerate
+  description: Create Enumeration
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-asset-enumerate
+- name: delete-v1-asset-enumerates
+  description: Delete Assets in bulk
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-asset-enumerates
+- name: get-v1-asset-enumerate-enumerate_id
+  description: Get Enumeration
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-enumerate-enumerate_id
+- name: patch-v1-asset-enumerate-enumerate_id
+  description: Update Enumeration
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-asset-enumerate-enumerate_id
+- name: delete-v1-asset-enumerate-enumerate_id
+  description: Delete Enumeration
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-asset-enumerate-enumerate_id
+- name: post-v1-asset-enumerate-enumerate_id-rescan
+  description: Rescan Enumeration
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-asset-enumerate-enumerate_id-rescan
+- name: get-enumerate-id-export
+  description: Export Enumeration
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-enumerate-id-export
+- name: post-v1-asset-enumerate-group
+  description: Create an asset group
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-asset-enumerate-group
+- name: delete-v1-asset-enumerate-group
+  description: Delete an asset group
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-asset-enumerate-group
+- name: patch-v1-asset-enumerate-group
+  description: Update an asset group
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-asset-enumerate-group
+- name: get-v1-enumeration-schedule
+  description: Get Enumeration Schedules
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-enumeration-schedule
+- name: post-v1-enumeration-schedule
+  description: Set Enumeration Schedule
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-enumeration-schedule
+- name: delete-v1-enumeration-schedule
+  description: Delete Enumeration Schedule
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-enumeration-schedule
+- name: get-v1-audit-log
+  description: Get audit logs for team
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-audit-log
+- name: get-v1-team-audit-log-search
+  description: Smart search across audit logs
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-team-audit-log-search
+- name: get-v1-scans-history
+  description: Get All Scans History
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-history
+- name: get-v1-scans-scanId-history
+  description: Get Scan History
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-scanId-history
+- name: get-scans-id-scan-log-export
+  description: Export scan log of given scan id
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-scans-id-scan-log-export
+- name: get-vulns-history
+  description: Get scan log stats of given scan id
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-vulns-history
+- name: get-scans-config-exclude
+  description: Get excluded templates
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-scans-config-exclude
+- name: post-scans-config-exclude
+  description: Add excluded templates and targets
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-scans-config-exclude
+- name: delete-scans-config-exclude
+  description: Delete excluded templates or targets by ids
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-scans-config-exclude
+- name: get-v1-scans-scan-id-assets-export
+  description: Export list of unique assets for a scan
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-scan-id-assets-export
+- name: get-v1-asset-enumerate-enum-id-domains-export
+  description: Export the list of unique input domains of an enumeration.
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-enumerate-enum-id-domains-export
+- name: get-v1-asset-assetId-changelogs
+  description: Get Asset Changelogs for a given asset_id
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-assetId-changelogs
+- name: patch-v1-asset-labels
+  description: Update Asset Labels
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-asset-labels
+- name: post-v1-asset-id-labels
+  description: Add labels to an asset
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-asset-id-labels
+- name: patch-v1-asset-id-labels
+  description: Modify labels of an asset
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-asset-id-labels
+- name: delete-v1-asset-id-labels
+  description: Delete labels of an asset
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-asset-id-labels
+- name: get-v1-asset-enumerate-enumerate_id-config
+  description: Get enumeration config
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-enumerate-enumerate_id-config
+- name: patch-v1-asset-enumerate-enumerate_id-config
+  description: Update enumeration config
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-asset-enumerate-enumerate_id-config
+- name: get-enumerate-export
+  description: Export Enumeration of user
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-enumerate-export
+- name: associated-domains
+  description: Get Associated Domains
+  source_operation: openapi/projectdiscovery-openapi-original.yml#associated-domains
+- name: get-v1-scans-config-severity
+  description: Get custom severity mappings
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-scans-config-severity
+- name: post-v1-scans-config-severity
+  description: Add custom severity mapping
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans-config-severity
+- name: delete-v1-scans-config-severity
+  description: Delete custom severity mapping
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-scans-config-severity
+- name: patch-v1-scans-config-config_id-severity
+  description: Modify custom severity mapping
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-scans-config-config_id-severity
+- name: get-v1-leaks-stats-domain
+  description: Get leak statistics for a domain (Public)
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-leaks-stats-domain
+- name: get-v1-leaks-stats-email
+  description: Get leak statistics for an email (Public)
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-leaks-stats-email
+- name: post-v1-leaks-export
+  description: Export leaked credentials
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-leaks-export
+- name: get-v1-asset-enumerate-enumerate_id-history
+  description: Get asset enumeration history data
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-enumerate-enumerate_id-history
+- name: get-v2-vulnerability-search
+  description: Full Text Search
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v2-vulnerability-search
+- name: get-vulnerability-by-id
+  description: Get Vulnerability by ID
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-vulnerability-by-id
+- name: get-vulnerability-timeline
+  description: Get Vulnerability Timeline
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-vulnerability-timeline
+- name: get-v2-vulnerability-filters
+  description: Get All Filters for Vulnerabilities
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v2-vulnerability-filters
+- name: post-v1-leaks-status
+  description: Update leak status
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-leaks-status
+- name: post-v1-leaks-info
+  description: Get leak information by ID
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-leaks-info
+- name: get-v1-asset-enumerate-misconfiguration
+  description: List Misconfiguration Findings
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-enumerate-misconfiguration
+- name: get-v1-asset-policy
+  description: List asset policies
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-policy
+- name: post-v1-asset-policy
+  description: Create asset policy
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-asset-policy
+- name: get-v1-asset-policy-policy_id
+  description: Get asset policy
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-policy-policy_id
+- name: patch-v1-asset-policy-policy_id
+  description: Update asset policy
+  source_operation: openapi/projectdiscovery-openapi-original.yml#patch-v1-asset-policy-policy_id
+- name: delete-v1-asset-policy-policy_id
+  description: Delete asset policy
+  source_operation: openapi/projectdiscovery-openapi-original.yml#delete-v1-asset-policy-policy_id
+- name: get-v1-asset-policy-suggestion
+  description: Get asset policy suggestions
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-policy-suggestion
+- name: get-v1-asset-policy-policy_id-events
+  description: Get asset policy events
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-policy-policy_id-events
+- name: get-v1-leaks
+  description: Get all leaked credentials
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-leaks
+- name: post-v1-scans-config-verify
+  description: Verify Config
+  source_operation: openapi/projectdiscovery-openapi-original.yml#post-v1-scans-config-verify
+- name: get-v1-asset-enumerate-enumerate_id-contents
+  description: Get Enumeration Contents
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-enumerate-enumerate_id-contents
+- name: get-v1-results
+  description: Get All Results
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-results
+- name: get-v1-asset-enumerate-contents
+  description: Get All Enumeration Contents
+  source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-enumerate-contents

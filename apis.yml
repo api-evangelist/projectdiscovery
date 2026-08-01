@@ -1,8 +1,27 @@
 aid: projectdiscovery
 name: ProjectDiscovery
-description: 'ProjectDiscovery is a company surfaced as a portfolio company of accel and added to the
-  API Evangelist network as a stub for enrichment. Sector: cybersecurity. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  ProjectDiscovery builds the open-source security toolchain trusted across offensive security
+  and attack-surface management -- Nuclei, Subfinder, httpx, Katana, Naabu, dnsx and more -- and the
+  ProjectDiscovery Cloud Platform (PDCP) that operationalizes them for continuous exposure management.
+  Its REST API at api.projectdiscovery.io exposes asset discovery and enumeration, template-driven
+  vulnerability scanning, credential-leak monitoring, scan scheduling, configuration, and template
+  management, authenticated with a single X-API-Key header over HTTPS. Founded by the creators of
+  Nuclei and backed by Accel, ProjectDiscovery serves security teams automating attack-surface
+  discovery and vulnerability detection at scale.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://projectdiscovery.io/images/ProjectDiscovery_share.png
 url: https://raw.githubusercontent.com/api-evangelist/projectdiscovery/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,16 +31,327 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
 - Cybersecurity
-apis: []
+- Security
+- Vulnerability Scanning
+- Attack Surface Management
+- Vulnerability Management
+- Asset Discovery
+- DevSecOps
+- Nuclei
+- API
+apis:
+- aid: projectdiscovery:projectdiscovery-asset-api
+  name: ProjectDiscovery Asset API
+  description: The Asset API from ProjectDiscovery — 8 operation(s) for asset.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - Asset
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-asset-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-assets-api
+  name: ProjectDiscovery assets API
+  description: The assets API from ProjectDiscovery — 3 operation(s) for assets.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - assets
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-assets-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-chaos-api
+  name: ProjectDiscovery chaos API
+  description: The chaos API from ProjectDiscovery — 1 operation(s) for chaos.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - chaos
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-chaos-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-configurations-api
+  name: ProjectDiscovery configurations API
+  description: The configurations API from ProjectDiscovery — 6 operation(s) for configurations.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - configurations
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-configurations-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-enumerations-api
+  name: ProjectDiscovery enumerations API
+  description: The enumerations API from ProjectDiscovery — 11 operation(s) for enumerations.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - enumerations
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-enumerations-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-export-api
+  name: ProjectDiscovery export API
+  description: The export API from ProjectDiscovery — 2 operation(s) for export.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - export
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-export-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-history-api
+  name: ProjectDiscovery history API
+  description: The history API from ProjectDiscovery — 1 operation(s) for history.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - history
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-history-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-internal-api
+  name: ProjectDiscovery internal API
+  description: The internal API from ProjectDiscovery — 3 operation(s) for internal.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - internal
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-internal-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-leaks-api
+  name: ProjectDiscovery Leaks API
+  description: The Leaks API from ProjectDiscovery — 5 operation(s) for leaks.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - Leaks
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-leaks-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-results-api
+  name: ProjectDiscovery results API
+  description: The results API from ProjectDiscovery — 4 operation(s) for results.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - results
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-results-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-retests-api
+  name: ProjectDiscovery retests API
+  description: The retests API from ProjectDiscovery — 1 operation(s) for retests.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - retests
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-retests-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-scan-log-api
+  name: ProjectDiscovery scan_log API
+  description: The scan_log API from ProjectDiscovery — 1 operation(s) for scan_log.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - scan_log
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-scan-log-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-scans-api
+  name: ProjectDiscovery scans API
+  description: The scans API from ProjectDiscovery — 17 operation(s) for scans.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - scans
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-scans-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-team-api
+  name: ProjectDiscovery Team API
+  description: The Team API from ProjectDiscovery — 2 operation(s) for team.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - Team
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-team-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-template-api
+  name: ProjectDiscovery Template API
+  description: The Template API from ProjectDiscovery — 1 operation(s) for template.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - Template
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-template-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-template-v2-api
+  name: ProjectDiscovery template/v2 API
+  description: The template/v2 API from ProjectDiscovery — 1 operation(s) for template/v2.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - template/v2
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-template-v2-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-templates-api
+  name: ProjectDiscovery templates API
+  description: The templates API from ProjectDiscovery — 9 operation(s) for templates.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - templates
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-templates-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-users-api
+  name: ProjectDiscovery users API
+  description: The users API from ProjectDiscovery — 2 operation(s) for users.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-users-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-vuln-api
+  name: ProjectDiscovery vuln API
+  description: The vuln API from ProjectDiscovery — 1 operation(s) for vuln.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - vuln
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-vuln-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+- aid: projectdiscovery:projectdiscovery-vulnerability-api
+  name: ProjectDiscovery Vulnerability API
+  description: The Vulnerability API from ProjectDiscovery — 4 operation(s) for vulnerability.
+  humanURL: https://docs.projectdiscovery.io/api-reference/introduction
+  baseURL: https://api.projectdiscovery.io
+  tags:
+  - Vulnerability
+  properties:
+  - type: OpenAPI
+    url: openapi/projectdiscovery-vulnerability-api-openapi.yml
+  - type: APIReference
+    url: https://docs.projectdiscovery.io/api-reference/introduction
+common:
+- type: DeveloperPortal
+  url: https://docs.projectdiscovery.io
+- type: Documentation
+  url: https://docs.projectdiscovery.io
+- type: APIReference
+  url: https://docs.projectdiscovery.io/api-reference/introduction
+- type: GettingStarted
+  url: https://docs.projectdiscovery.io/cloud/introduction
+- type: Blog
+  url: https://projectdiscovery.io/blog
+- type: GitHubOrganization
+  url: https://github.com/projectdiscovery
+- type: Pricing
+  url: https://projectdiscovery.io/pricing
+- type: SignUp
+  url: https://cloud.projectdiscovery.io/sign-in
+- type: TermsOfService
+  url: https://projectdiscovery.io/terms
+- type: PrivacyPolicy
+  url: https://projectdiscovery.io/privacy
+- type: Support
+  url: https://projectdiscovery.io/contact
+- type: StatusPage
+  url: https://status.projectdiscovery.io
+- type: Authentication
+  url: authentication/projectdiscovery-authentication.yml
+- type: Packages
+  url: packages/projectdiscovery-packages.yml
+- type: SDKs
+  url: packages/projectdiscovery-packages.yml
+- type: CLI
+  url: cli/projectdiscovery-cli.yml
+- type: MCPServer
+  url: mcp/projectdiscovery-mcp.yml
+- type: LLMsTxt
+  url: llms/projectdiscovery-llms.txt
+- type: Conventions
+  url: conventions/projectdiscovery-conventions.yml
+- type: ErrorCatalog
+  url: errors/projectdiscovery-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/projectdiscovery-lifecycle.yml
+- type: DataModel
+  url: data-model/projectdiscovery-data-model.yml
+- type: Conformance
+  url: conformance/projectdiscovery-conformance.yml
+- type: Compliance
+  url: security/projectdiscovery-trust-center.yml
+- type: TrustCenter
+  url: security/projectdiscovery-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/projectdiscovery-vulnerability-disclosure.yml
+- type: Security
+  url: security/projectdiscovery-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/projectdiscovery-domain-security.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Website
+  url: https://projectdiscovery.io
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
-common:
-- type: Website
-  url: https://protect-eu.mimecast.com/s/z880CpYolS9jQgjHPbKvp?domain=projectdiscovery.io
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

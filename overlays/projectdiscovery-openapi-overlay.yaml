@@ -1,0 +1,22 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for ProjectDiscovery Cloud Platform (PDCP) API
+  version: 1.0.0
+extends: openapi/projectdiscovery-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-20'
+    x-apievangelist-auth: X-API-Key header (apiKey); HTTPS required
+    x-apievangelist-versioning: uri-path /v1
+    x-apievangelist-error-envelope: 'application/json {success, message}'
+    x-apievangelist-pagination: offset-limit (limit/offset/page)
+    x-apievangelist-trust-center: https://security.projectdiscovery.io/
+    x-apievangelist-status-page: https://status.projectdiscovery.io
+- target: $.info
+  update:
+    x-apievangelist-notes: >-
+      Enhancements captured by the API Evangelist enrichment pipeline. The
+      original PDCP OpenAPI is unmodified; these annotations record cross-cutting
+      conventions, security posture, and operational surfaces discovered during
+      enrichment. See conventions/, authentication/, lifecycle/, and security/.

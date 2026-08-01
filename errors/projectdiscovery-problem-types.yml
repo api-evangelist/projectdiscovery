@@ -1,0 +1,78 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/projectdiscovery-openapi-original.yml
+format: json
+envelope:
+  content_type: application/json
+  shape:
+    success: boolean
+    message: string
+  note: PDCP error responses return a JSON object with a boolean success flag and a human-readable message;
+    they are not RFC 9457 problem+json.
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad Request
+  remediation: Validate request body/query parameters against the schema before retrying.
+  example_operations:
+  - openapi/projectdiscovery-openapi-original.yml#get-v2-template-search
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans
+  - openapi/projectdiscovery-openapi-original.yml#post-v1-scans
+  - openapi/projectdiscovery-openapi-original.yml#delete-v1-scans
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans-scan_id
+  - openapi/projectdiscovery-openapi-original.yml#delete-v1-scans-scan_id
+- status: 401
+  title: Unauthorized
+  description: Unauthorized
+  remediation: Provide a valid X-API-Key header; create or rotate the key from the cloud dashboard.
+  example_operations:
+  - openapi/projectdiscovery-openapi-original.yml#get-v2-template-search
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans
+  - openapi/projectdiscovery-openapi-original.yml#post-v1-scans
+  - openapi/projectdiscovery-openapi-original.yml#delete-v1-scans
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans-scan_id
+  - openapi/projectdiscovery-openapi-original.yml#delete-v1-scans-scan_id
+- status: 403
+  title: Forbidden
+  description: Forbidden
+  remediation: The API key lacks permission for this resource or the plan/quota does not allow it.
+  example_operations:
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-early-templates
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-early-templates-id
+  - openapi/projectdiscovery-openapi-original.yml#post-v1-template-ai
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-user-team
+  - openapi/projectdiscovery-openapi-original.yml#patch-v1-user-team
+  - openapi/projectdiscovery-openapi-original.yml#delete-v1-user-team
+- status: 404
+  title: Not Found
+  description: Not Found
+  remediation: The referenced resource id (scan, enumeration, template, asset) does not exist.
+  example_operations:
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans-scan_id
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-user-apikey
+  - openapi/projectdiscovery-openapi-original.yml#post-v1-user-apikey
+  - openapi/projectdiscovery-openapi-original.yml#delete-v1-user-apikey
+  - openapi/projectdiscovery-openapi-original.yml#post-v1-user-apikey-rotate
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-early-templates-id
+- status: 499
+  title: Client Closed Request
+  description: Client Closed Request
+  remediation: The client closed the connection before the server responded; retry the request.
+  example_operations:
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans-scan_id
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans-vuln-vuln_id-changelogs
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans-vuln-changelogs
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-asset-enumerate-enumerate_id
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-results
+- status: 500
+  title: Internal Server Error
+  description: Internal Server Error
+  remediation: A server-side error occurred; retry with backoff and contact support if it persists.
+  example_operations:
+  - openapi/projectdiscovery-openapi-original.yml#get-v2-template-search
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans
+  - openapi/projectdiscovery-openapi-original.yml#post-v1-scans
+  - openapi/projectdiscovery-openapi-original.yml#delete-v1-scans
+  - openapi/projectdiscovery-openapi-original.yml#get-v1-scans-scan_id
+  - openapi/projectdiscovery-openapi-original.yml#delete-v1-scans-scan_id

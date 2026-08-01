@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: searched
+note: >-
+  Probed the standard /.well-known/ discovery surface on both the API host and
+  the marketing host on 2026-07-20. None are published (all 404). No raw files
+  saved. security.txt is absent even though a bug-bounty/disclosure program
+  exists (see security/projectdiscovery-vulnerability-disclosure.yml).
+hosts:
+- host: https://api.projectdiscovery.io
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://projectdiscovery.io
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}

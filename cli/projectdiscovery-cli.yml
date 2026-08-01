@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.projectdiscovery.io/opensource/pdtm/overview
+clis:
+- name: pdtm
+  description: >-
+    ProjectDiscovery Tool Manager - installs, updates, and organizes the
+    ProjectDiscovery open-source toolset from a single command.
+  docs: https://docs.projectdiscovery.io/opensource/pdtm/overview
+  repo: https://github.com/projectdiscovery/pdtm
+  install:
+  - go install -v github.com/projectdiscovery/pdtm/cmd/pdtm@latest
+  - brew install pdtm
+  commands:
+  - pdtm -install-all
+  - pdtm -update-all
+  - pdtm -install <tool>
+  - pdtm -remove <tool>
+- name: nuclei
+  description: >-
+    Fast, template-based vulnerability scanner. The flagship CLI, driven by the
+    community nuclei-templates library and integrated with the cloud platform
+    via the PDCP API key (nuclei -cloud-upload / -pdcp-auth).
+  docs: https://docs.projectdiscovery.io/opensource/nuclei/overview
+  repo: https://github.com/projectdiscovery/nuclei
+  install:
+  - go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+  - brew install nuclei
+  - pdtm -install nuclei
+other_tools:
+- subfinder (subdomain discovery)
+- httpx (HTTP toolkit)
+- naabu (port scanning)
+- katana (web crawler)
+- dnsx (DNS toolkit)
+- cloudlist (cloud asset listing)
+- interactsh (OOB interaction gathering)
+- uncover (search-engine host discovery)
+- notify (notification streaming)
+- tlsx (TLS grabber)
+- cdncheck (CDN detection)
+- asnmap (ASN mapping)
+notes: >-
+  ProjectDiscovery's CLIs are Go binaries. pdtm is the umbrella installer;
+  nuclei is the primary scanner and integrates directly with the PDCP cloud API
+  using the same X-API-Key credential documented in authentication/.

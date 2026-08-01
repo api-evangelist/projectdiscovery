@@ -1,0 +1,41 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.projectdiscovery.io/api-reference/introduction
+derived_from: openapi/projectdiscovery-openapi-original.yml
+authentication:
+  style: api-key
+  location: header
+  parameter: X-API-Key
+  transport: HTTPS required (plain HTTP calls fail)
+  see: authentication/projectdiscovery-authentication.yml
+base_url: https://api.projectdiscovery.io
+versioning:
+  scheme: uri-path
+  current: v1
+  note: All resources are namespaced under /v1/.
+pagination:
+  style: offset-limit
+  params:
+  - limit
+  - offset
+  - page
+idempotency:
+  supported: false
+  note: The PDCP API does not document an idempotency-key mechanism.
+error_envelope:
+  content_type: application/json
+  shape:
+    success: boolean
+    message: string
+  see: errors/projectdiscovery-problem-types.yml
+rate_limiting:
+  documented: false
+  note: No public rate-limit header contract found in the API reference; limits are governed by plan/quota.
+public_endpoints:
+- /v1/leaks/stats/domain
+- /v1/leaks/stats/email
+notes: >-
+  Cross-cutting request/response semantics for the ProjectDiscovery Cloud
+  Platform (PDCP) REST API. Auth is a single X-API-Key header; list endpoints
+  page with limit/offset/page; errors return a flat {success, message} JSON
+  envelope. No idempotency contract and no documented rate-limit signaling.

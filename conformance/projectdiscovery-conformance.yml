@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/projectdiscovery-openapi-original.yml
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: Provider publishes an OpenAPI 3.1.0 document (PDCP API) at github.com/projectdiscovery/docs.
+- id: rest
+  conforms: true
+  evidence: Resource-oriented URLs, JSON request/response bodies, standard HTTP verbs and status codes.
+- id: api-key-auth
+  conforms: true
+  evidence: securitySchemes declares an apiKey scheme (X-API-Key header).
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in the spec; auth is API-key only.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error responses use application/json with {success, message}, not application/problem+json.
+- id: pagination
+  conforms: true
+  evidence: List operations accept limit/offset/page query parameters.
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key header/parameter documented in the spec.
+- id: soc2-type2
+  conforms: true
+  evidence: SOC 2 Type 2 attested per security.projectdiscovery.io trust center.
+- id: eu-us-dpf
+  conforms: true
+  evidence: EU-US Data Privacy Framework (and UK Extension) listed on the trust center.

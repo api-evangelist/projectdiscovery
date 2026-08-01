@@ -1,0 +1,28 @@
+generated: '2026-07-20'
+method: searched
+probe: true
+source: https://security.projectdiscovery.io/
+url: https://security.projectdiscovery.io/
+platform: SafeBase (by Drata)
+certifications:
+- SOC 2 Type 2
+- EU-US Data Privacy Framework (DPF)
+- UK Extension to EU-US DPF
+security_practices:
+- Multi-Factor Authentication (MFA)
+- SSO support
+- Penetration test report available
+- Cyber insurance maintained
+subprocessors:
+- Clerk
+- OpenAI
+- Anthropic
+- Cloudflare
+- Google Cloud
+evidence:
+- source: https://security.projectdiscovery.io/
+  keywords:
+  - soc 2 type 2
+  - eu-us data privacy framework
+  - trust center
+  - responsible disclosure

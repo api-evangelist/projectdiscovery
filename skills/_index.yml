@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/projectdiscovery-openapi-original.yml
+skills:
+- file: projectdiscovery-run-scan-and-triage.md
+  name: Run a cloud scan and triage vulnerabilities
+  api: openapi/projectdiscovery-openapi-original.yml
+  operations:
+  - post-v1-scans
+  - get-v1-scans-scan_id
+  - get-v1-results
+  - 'get-v1-scans-vuln-:vulnId'
+  - patch-v1-scans-vulns
+  - post-v1-scans-vuln_id-retest
+- file: projectdiscovery-discover-assets.md
+  name: Discover an attack surface via asset enumeration
+  api: openapi/projectdiscovery-openapi-original.yml
+  operations:
+  - post-v1-asset-enumerate
+  - get-v1-asset-enumerate-enumerate_id
+  - get-v1-asset-enumerate-enumerate_id-contents
+  - get-enumerate-id-export
+  - associated-domains
+- file: projectdiscovery-check-credential-leaks.md
+  name: Check a domain or email for credential leaks
+  api: openapi/projectdiscovery-openapi-original.yml
+  operations:
+  - get-v1-leaks-stats-domain
+  - get-v1-leaks-stats-email
+  - post-v1-leaks-info
+  - post-v1-leaks-status
