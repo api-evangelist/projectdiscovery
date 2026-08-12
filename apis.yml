@@ -285,6 +285,8 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 common:
+- type: Overlay
+  url: overlays/projectdiscovery-openapi-overlay.yaml
 - type: DeveloperPortal
   url: https://docs.projectdiscovery.io
 - type: Documentation
