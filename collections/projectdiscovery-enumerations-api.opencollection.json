@@ -1,0 +1,1231 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PDCP Asset enumerations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "enumerations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Enumeration List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The numbers of items to return"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "search keyword in enumeration list"
+              },
+              {
+                "name": "enum_type",
+                "value": "",
+                "type": "query",
+                "description": "types of enumeration list (comma seperated)"
+              },
+              {
+                "name": "sort_asc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated ascending sorting e.g sort_asc=created_at,name"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated descending sorting e.g sort_desc=created_at,name"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "comma separated filter enumeration result by status"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "time range to get enumerations from"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter end date"
+              },
+              {
+                "name": "custom_filter",
+                "value": "",
+                "type": "query",
+                "description": "custom query to filter. double encode the query string."
+              },
+              {
+                "name": "is_internal",
+                "value": "",
+                "type": "query",
+                "description": "filter by internal enumerations"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get enumeration list"
+        },
+        {
+          "info": {
+            "name": "Create Enumeration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new enumeration"
+        },
+        {
+          "info": {
+            "name": "Delete Assets in bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete enumeration by enumerate ids"
+        },
+        {
+          "info": {
+            "name": "Get Enumeration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/:enumerate_id",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "enumerate_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get enumeration by enumerate_id"
+        },
+        {
+          "info": {
+            "name": "Update Enumeration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/:enumerate_id",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "enumerate_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update enumeration by enumerate_id"
+        },
+        {
+          "info": {
+            "name": "Delete Enumeration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/:enumerate_id",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "enumerate_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete enumeration by enumerate_id"
+        },
+        {
+          "info": {
+            "name": "Rescan Enumeration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/:enumerate_id/rescan",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "enumerate_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Re-run a existing enumeration"
+        },
+        {
+          "info": {
+            "name": "Export Enumeration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/:enum_id/export",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "enum_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "async",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "not_seen_for_days",
+                "value": "",
+                "type": "query",
+                "description": "Return assets that haven't been seen in the last N days. An asset is only included if a scan that covers it has run during that period without rediscovering it, so assets that simply haven't been rescanned recently are not matched."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search by string"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated labels, e.g-> labels=p1,p2"
+              },
+              {
+                "name": "is_new",
+                "value": "",
+                "type": "query",
+                "description": "Filter by new content"
+              },
+              {
+                "name": "host",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated hosts, e.g-> host=p1,p2"
+              },
+              {
+                "name": "domains",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated domains, e.g-> domains=p1,p2"
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated ports, e.g-> port=p1,p2"
+              },
+              {
+                "name": "status_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated status codes, e.g-> status_code=p1,p2"
+              },
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated titles, e.g-> title=p1,p2"
+              },
+              {
+                "name": "content_length",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated content lengths, e.g-> content_length=p1,p2"
+              },
+              {
+                "name": "cname",
+                "value": "",
+                "type": "query",
+                "description": "cname to filter"
+              },
+              {
+                "name": "technologies",
+                "value": "",
+                "type": "query",
+                "description": "technologies to filter"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "ips to filter"
+              },
+              {
+                "name": "custom_filter",
+                "value": "",
+                "type": "query",
+                "description": "custom query to filter. double encode the query string."
+              },
+              {
+                "name": "is_screenshot",
+                "value": "",
+                "type": "query",
+                "description": "Return records that have screenshots"
+              },
+              {
+                "name": "is_tech",
+                "value": "",
+                "type": "query",
+                "description": "Return records that have technologies"
+              },
+              {
+                "name": "is_favicon",
+                "value": "",
+                "type": "query",
+                "description": "Return the records that have favicon"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "time filter to select"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter end date"
+              },
+              {
+                "name": "favicon",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated favicons, e.g-> favicon=p1,p2"
+              },
+              {
+                "name": "only_dns",
+                "value": "",
+                "type": "query",
+                "description": "Query only dns FQDN records"
+              },
+              {
+                "name": "only_ip",
+                "value": "",
+                "type": "query",
+                "description": "Query only dns IP records"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Export the list of discovered assets for an enumeration."
+        },
+        {
+          "info": {
+            "name": "Create an asset group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/group",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create an asset group from existing enumeration data using filters"
+        },
+        {
+          "info": {
+            "name": "Update an asset group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/group/:group_id",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "update_type",
+                "value": "",
+                "type": "query",
+                "description": "Append vs Replace update_type. Default is append"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an asset group by customising the filters"
+        },
+        {
+          "info": {
+            "name": "Delete an asset group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/group/:group_id",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete an asset group by id"
+        },
+        {
+          "info": {
+            "name": "Get Enumeration Schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/enumeration/schedule",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get enumeration re-scan schedule"
+        },
+        {
+          "info": {
+            "name": "Set Enumeration Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.projectdiscovery.io/v1/enumeration/schedule",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Set enumeration re-scan frequency"
+        },
+        {
+          "info": {
+            "name": "Delete Enumeration Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.projectdiscovery.io/v1/enumeration/schedule",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "enumeration_id",
+                "value": "",
+                "type": "query",
+                "description": "enumeration_id of the schedule to be deleted"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a re-scan schedule"
+        },
+        {
+          "info": {
+            "name": "Get enumeration config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/:enumerate_id/config",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "enumerate_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get enumeration config"
+        },
+        {
+          "info": {
+            "name": "Export Enumeration of user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/export",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "async",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "not_seen_for_days",
+                "value": "",
+                "type": "query",
+                "description": "Return assets that haven't been seen in the last N days. An asset is only included if a scan that covers it has run during that period without rediscovering it, so assets that simply haven't been rescanned recently are not matched."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search on the content name"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated labels, e.g-> labels=p1,p2"
+              },
+              {
+                "name": "is_new",
+                "value": "",
+                "type": "query",
+                "description": "Filter by new content"
+              },
+              {
+                "name": "host",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated labels, e.g-> host=p1,p2"
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "query",
+                "description": "Filter by port separated labels, e.g-> port=p1,p2"
+              },
+              {
+                "name": "status_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status code separated labels, e.g-> status_code=p1,p2"
+              },
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "Filter by title separated labels, e.g-> title=p1,p2"
+              },
+              {
+                "name": "content_length",
+                "value": "",
+                "type": "query",
+                "description": "Filter by content length separated labels, e.g-> content_length=p1,p2"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Filter by domain names separated labels, e.g-> domain=domain1.com,domain2.com"
+              },
+              {
+                "name": "cname",
+                "value": "",
+                "type": "query",
+                "description": "cname to filter"
+              },
+              {
+                "name": "technologies",
+                "value": "",
+                "type": "query",
+                "description": "technologies to filter"
+              },
+              {
+                "name": "sort_asc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated ascending sorting e.g sort_asc=created_at,name"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "time filter to select"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter end date"
+              },
+              {
+                "name": "custom_filter",
+                "value": "",
+                "type": "query",
+                "description": "custom query to filter. double encode the query string."
+              },
+              {
+                "name": "is_screenshot",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "ips to filter"
+              },
+              {
+                "name": "favicon",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated favicons, e.g-> favicon=p1,p2"
+              },
+              {
+                "name": "only_dns",
+                "value": "",
+                "type": "query",
+                "description": "Query only dns FQDN records"
+              },
+              {
+                "name": "only_ip",
+                "value": "",
+                "type": "query",
+                "description": "Query only dns IP records"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Export the list of discovered assets for all enumerations."
+        },
+        {
+          "info": {
+            "name": "Get Enumeration Contents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/:enumerate_id/contents",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "enumerate_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The numbers of items to return"
+              },
+              {
+                "name": "is_tech",
+                "value": "",
+                "type": "query",
+                "description": "Return records that have technologies"
+              },
+              {
+                "name": "is_favicon",
+                "value": "",
+                "type": "query",
+                "description": "Return the records that have favicon"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search on the content name"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated labels, e.g-> labels=p1,p2"
+              },
+              {
+                "name": "is_new",
+                "value": "",
+                "type": "query",
+                "description": "Filter by new content"
+              },
+              {
+                "name": "host",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated hosts, e.g-> host=p1,p2"
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated ports, e.g-> port=p1,p2"
+              },
+              {
+                "name": "status_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated status codes, e.g-> status_code=p1,p2"
+              },
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated titles, e.g-> title=p1,p2"
+              },
+              {
+                "name": "content_length",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated content lengths, e.g-> content_length=p1,p2"
+              },
+              {
+                "name": "cname",
+                "value": "",
+                "type": "query",
+                "description": "cname to filter"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated domain names, e.g-> domain=domain1.com,domain2.com"
+              },
+              {
+                "name": "technologies",
+                "value": "",
+                "type": "query",
+                "description": "technologies to filter"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "ips to filter"
+              },
+              {
+                "name": "sort_asc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated ascending sorting e.g sort_asc=created_at,name"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated descending sorting e.g sort_desc=created_at,name"
+              },
+              {
+                "name": "is_screenshot",
+                "value": "",
+                "type": "query",
+                "description": "asset with screenshots"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "time filter to select"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter start date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter end date"
+              },
+              {
+                "name": "custom_filter",
+                "value": "",
+                "type": "query",
+                "description": "custom query to filter. double encode the query string."
+              },
+              {
+                "name": "favicon",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated favicons, e.g-> favicon=p1,p2"
+              },
+              {
+                "name": "only_dns",
+                "value": "",
+                "type": "query",
+                "description": "Query only dns FQDN records"
+              },
+              {
+                "name": "only_ip",
+                "value": "",
+                "type": "query",
+                "description": "Query only dns IP records"
+              },
+              {
+                "name": "is_internal",
+                "value": "",
+                "type": "query",
+                "description": "filter by is_internal (internal vs external hosts)"
+              },
+              {
+                "name": "not_seen_for_days",
+                "value": "",
+                "type": "query",
+                "description": "Return assets that haven't been seen in the last N days. An asset is only included if a scan that covers it has run during that period without rediscovering it, so assets that simply haven't been rescanned recently are not matched."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get enumeration content by enumerate_id"
+        },
+        {
+          "info": {
+            "name": "Get All Enumeration Contents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/contents",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "time filter to select"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The numbers of items to return"
+              },
+              {
+                "name": "is_tech",
+                "value": "",
+                "type": "query",
+                "description": "Return records that have technologies"
+              },
+              {
+                "name": "is_favicon",
+                "value": "",
+                "type": "query",
+                "description": "Return the records that have favicon"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search on the content name"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated labels, e.g-> labels=p1,p2"
+              },
+              {
+                "name": "is_new",
+                "value": "",
+                "type": "query",
+                "description": "Filter by new content"
+              },
+              {
+                "name": "host",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated labels, e.g-> host=p1,p2"
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "query",
+                "description": "Filter by port separated labels, e.g-> port=p1,p2"
+              },
+              {
+                "name": "status_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status code separated labels, e.g-> status_code=p1,p2"
+              },
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "Filter by title separated labels, e.g-> title=p1,p2"
+              },
+              {
+                "name": "content_length",
+                "value": "",
+                "type": "query",
+                "description": "Filter by content length separated labels, e.g-> content_length=p1,p2"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Filter by domain names separated labels, e.g-> domain=domain1.com,domain2.com"
+              },
+              {
+                "name": "cname",
+                "value": "",
+                "type": "query",
+                "description": "cname to filter"
+              },
+              {
+                "name": "technologies",
+                "value": "",
+                "type": "query",
+                "description": "technologies to filter"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "ips to filter"
+              },
+              {
+                "name": "sort_asc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated ascending sorting e.g sort_asc=created_at,name"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated descending sorting e.g sort_desc=created_at,name"
+              },
+              {
+                "name": "custom_filter",
+                "value": "",
+                "type": "query",
+                "description": "custom query to filter. double encode the query string."
+              },
+              {
+                "name": "is_screenshot",
+                "value": "",
+                "type": "query",
+                "description": "asset with screenshots"
+              },
+              {
+                "name": "favicon",
+                "value": "",
+                "type": "query",
+                "description": "Filter by comma separated favicons, e.g-> favicon=p1,p2"
+              },
+              {
+                "name": "only_dns",
+                "value": "",
+                "type": "query",
+                "description": "Query only dns FQDN records"
+              },
+              {
+                "name": "only_ip",
+                "value": "",
+                "type": "query",
+                "description": "Query only dns IP records"
+              },
+              {
+                "name": "is_internal",
+                "value": "",
+                "type": "query",
+                "description": "filter by is_internal (internal vs external hosts)"
+              },
+              {
+                "name": "not_seen_for_days",
+                "value": "",
+                "type": "query",
+                "description": "Return assets that haven't been seen in the last N days. An asset is only included if a scan that covers it has run during that period without rediscovering it, so assets that simply haven't been rescanned recently are not matched."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get All enumeration content"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

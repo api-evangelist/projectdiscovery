@@ -1,0 +1,1059 @@
+{
+  "item": [
+    {
+      "id": "6d31e245-a4df-465e-9bc7-0d8eedc9ff32",
+      "name": "export",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "049c76ee-1664-42be-bc44-ef996af16222",
+          "name": "Export filtered Scan results",
+          "request": {
+            "name": "Export filtered Scan results",
+            "description": {
+              "content": "Export filtered scan results",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "scans",
+                "results",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "json, csv, pdf (default json)"
+                },
+                {
+                  "disabled": false,
+                  "key": "async",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                "key": "X-Team-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vuln_status\": \"<string>\",\n  \"severity\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"host\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"port\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"template\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"search\": \"<string>\",\n  \"category\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"is_internal\": \"<boolean>\",\n  \"scan_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"time\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7bb8bc4d-c5d2-45b3-9d32-9b1e3fbac203",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "async",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vuln_status\": \"<string>\",\n  \"severity\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"host\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"port\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"template\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"search\": \"<string>\",\n  \"category\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"is_internal\": \"<boolean>\",\n  \"scan_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"time\": \"all_time\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e58e84b7-9cb3-4c5c-a770-9d5b4113510e",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "async",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vuln_status\": \"<string>\",\n  \"severity\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"host\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"port\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"template\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"search\": \"<string>\",\n  \"category\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"is_internal\": \"<boolean>\",\n  \"scan_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"time\": \"all_time\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"export_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97051a64-7d16-4111-8299-91502427ab48",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "async",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vuln_status\": \"<string>\",\n  \"severity\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"host\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"port\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"template\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"search\": \"<string>\",\n  \"category\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"is_internal\": \"<boolean>\",\n  \"scan_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"time\": \"all_time\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 6588\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79d00d9a-63b0-4d50-ae89-b397b325818a",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "async",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vuln_status\": \"<string>\",\n  \"severity\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"host\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"port\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"template\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"search\": \"<string>\",\n  \"category\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"is_internal\": \"<boolean>\",\n  \"scan_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"time\": \"all_time\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 6588\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29d14811-0071-4170-9c90-41b829c138e3",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "async",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vuln_status\": \"<string>\",\n  \"severity\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"host\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"port\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"template\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"search\": \"<string>\",\n  \"category\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"is_internal\": \"<boolean>\",\n  \"scan_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"time\": \"all_time\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 6588\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e34e3b69-7351-4b60-b327-f76033611438",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "async",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vuln_status\": \"<string>\",\n  \"severity\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"host\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"port\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"template\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"search\": \"<string>\",\n  \"category\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"is_internal\": \"<boolean>\",\n  \"scan_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"time\": \"all_time\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 6588\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6084987d-90e1-43fd-a710-353d43a839d6",
+          "name": "Export leaked credentials",
+          "request": {
+            "name": "Export leaked credentials",
+            "description": {
+              "content": "Export leaked credentials with filtering by type, domain, email, date range, and more. Passwords are unmasked after domain verification. See [Domain Verification](/cloud/credential-monitoring#domain-verification) for setup instructions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "leaks",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Export format (json or csv)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                "key": "X-Team-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"all\",\n  \"domain\": \"<string>\",\n  \"email\": \"<string>\",\n  \"search\": \"<string>\",\n  \"limit\": \"<number>\",\n  \"page_number\": \"<number>\",\n  \"start_date\": \"<date>\",\n  \"time_range\": \"all_time\",\n  \"end_date\": \"<date>\",\n  \"sort_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"status\": \"<string>\",\n  \"group_by\": \"<string>\",\n  \"url\": \"<string>\",\n  \"country\": \"<string>\",\n  \"device_ip\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"hardware_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ae41aeb-c808-4d3a-a4e9-18b18303e145",
+              "name": "Export data returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leaks",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"all\",\n  \"domain\": \"<string>\",\n  \"email\": \"<string>\",\n  \"search\": \"<string>\",\n  \"limit\": \"<number>\",\n  \"page_number\": \"<number>\",\n  \"start_date\": \"<date>\",\n  \"time_range\": \"all_time\",\n  \"end_date\": \"<date>\",\n  \"sort_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"status\": \"<string>\",\n  \"group_by\": \"<string>\",\n  \"url\": \"<string>\",\n  \"country\": \"<string>\",\n  \"device_ip\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"hardware_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"username\": \"string\",\n      \"password\": \"string\",\n      \"device_ip\": \"string\",\n      \"hostname\": \"string\",\n      \"os\": \"string\",\n      \"malware_path\": \"string\",\n      \"country\": \"string\",\n      \"log_date\": \"string\",\n      \"hardware_id\": \"string\",\n      \"domain\": \"string\",\n      \"email_domain\": \"string\",\n      \"url_domain\": \"string\",\n      \"fetched_at\": \"string\",\n      \"status\": \"string\",\n      \"user_type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"url\": \"string\",\n      \"username\": \"string\",\n      \"password\": \"string\",\n      \"device_ip\": \"string\",\n      \"hostname\": \"string\",\n      \"os\": \"string\",\n      \"malware_path\": \"string\",\n      \"country\": \"string\",\n      \"log_date\": \"string\",\n      \"hardware_id\": \"string\",\n      \"domain\": \"string\",\n      \"email_domain\": \"string\",\n      \"url_domain\": \"string\",\n      \"fetched_at\": \"string\",\n      \"status\": \"string\",\n      \"user_type\": \"string\"\n    }\n  ],\n  \"total_leaks\": 415.0719792962032,\n  \"total_pages\": 8862.626619508594,\n  \"total_count\": 5790.772060960543,\n  \"summary\": {\n    \"total_leaks\": 1854.6090762145807,\n    \"personal_leaks\": 7568.055735358234,\n    \"employee_leaks\": 7647.342645687274,\n    \"customer_leaks\": 6922.436193402856,\n    \"external_vendor_leaks\": 4620.473923925124,\n    \"organization_leaks\": 9227.176046796018\n  },\n  \"group_summary\": [\n    {\n      \"key_0\": 7714.609264117027,\n      \"key_1\": true,\n      \"key_2\": true\n    },\n    {\n      \"key_0\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdc566e7-bf84-43ec-97bc-824977717de4",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leaks",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"all\",\n  \"domain\": \"<string>\",\n  \"email\": \"<string>\",\n  \"search\": \"<string>\",\n  \"limit\": \"<number>\",\n  \"page_number\": \"<number>\",\n  \"start_date\": \"<date>\",\n  \"time_range\": \"all_time\",\n  \"end_date\": \"<date>\",\n  \"sort_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"status\": \"<string>\",\n  \"group_by\": \"<string>\",\n  \"url\": \"<string>\",\n  \"country\": \"<string>\",\n  \"device_ip\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"hardware_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73c0cd39-4775-4374-91f2-ff1b364d8895",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leaks",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"all\",\n  \"domain\": \"<string>\",\n  \"email\": \"<string>\",\n  \"search\": \"<string>\",\n  \"limit\": \"<number>\",\n  \"page_number\": \"<number>\",\n  \"start_date\": \"<date>\",\n  \"time_range\": \"all_time\",\n  \"end_date\": \"<date>\",\n  \"sort_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"status\": \"<string>\",\n  \"group_by\": \"<string>\",\n  \"url\": \"<string>\",\n  \"country\": \"<string>\",\n  \"device_ip\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"hardware_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6b8f492-ed0d-4c37-8c5c-1d2f4ab582ca",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leaks",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"all\",\n  \"domain\": \"<string>\",\n  \"email\": \"<string>\",\n  \"search\": \"<string>\",\n  \"limit\": \"<number>\",\n  \"page_number\": \"<number>\",\n  \"start_date\": \"<date>\",\n  \"time_range\": \"all_time\",\n  \"end_date\": \"<date>\",\n  \"sort_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"status\": \"<string>\",\n  \"group_by\": \"<string>\",\n  \"url\": \"<string>\",\n  \"country\": \"<string>\",\n  \"device_ip\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"hardware_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10033b24-3eab-4d20-9047-a849eada3fb0",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leaks",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"all\",\n  \"domain\": \"<string>\",\n  \"email\": \"<string>\",\n  \"search\": \"<string>\",\n  \"limit\": \"<number>\",\n  \"page_number\": \"<number>\",\n  \"start_date\": \"<date>\",\n  \"time_range\": \"all_time\",\n  \"end_date\": \"<date>\",\n  \"sort_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"status\": \"<string>\",\n  \"group_by\": \"<string>\",\n  \"url\": \"<string>\",\n  \"country\": \"<string>\",\n  \"device_ip\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"hardware_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37e64cc2-7a43-4c32-9d66-6b836f1291e9",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leaks",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"all\",\n  \"domain\": \"<string>\",\n  \"email\": \"<string>\",\n  \"search\": \"<string>\",\n  \"limit\": \"<number>\",\n  \"page_number\": \"<number>\",\n  \"start_date\": \"<date>\",\n  \"time_range\": \"all_time\",\n  \"end_date\": \"<date>\",\n  \"sort_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"status\": \"<string>\",\n  \"group_by\": \"<string>\",\n  \"url\": \"<string>\",\n  \"country\": \"<string>\",\n  \"device_ip\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"hardware_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c50bc31e-6c9e-458d-a3b8-3ca8eecdeb12",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "leaks",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"all\",\n  \"domain\": \"<string>\",\n  \"email\": \"<string>\",\n  \"search\": \"<string>\",\n  \"limit\": \"<number>\",\n  \"page_number\": \"<number>\",\n  \"start_date\": \"<date>\",\n  \"time_range\": \"all_time\",\n  \"end_date\": \"<date>\",\n  \"sort_by\": \"<string>\",\n  \"sort_order\": \"<string>\",\n  \"status\": \"<string>\",\n  \"group_by\": \"<string>\",\n  \"url\": \"<string>\",\n  \"country\": \"<string>\",\n  \"device_ip\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"hardware_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 6588\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.projectdiscovery.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6869ead3-0277-4300-aafe-83be45761e9b",
+    "name": "PDCP Asset export API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PDCP Asset scan_log API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "scan_log",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export scan log of given scan id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/scans/:scan_id/scan_log/export",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "scan_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rescan_count",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "host",
+                "value": "",
+                "type": "query",
+                "description": "target to search in log"
+              },
+              {
+                "name": "template",
+                "value": "",
+                "type": "query",
+                "description": "template to search in log"
+              },
+              {
+                "name": "matched",
+                "value": "",
+                "type": "query",
+                "description": "status to search in log"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "time to filter the logs"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "string to search in error, target and template"
+              },
+              {
+                "name": "error",
+                "value": "",
+                "type": "query",
+                "description": "error to search in log"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "format of the log file"
+              },
+              {
+                "name": "async",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "alert_email",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Export scan log of given scan id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

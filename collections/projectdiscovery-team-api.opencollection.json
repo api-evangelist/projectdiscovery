@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PDCP Asset Team API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Team",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get audit logs for team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/team/audit_log",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "filter by specific user"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "filter by specific action name"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "number of rows to skip"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "number of rows to get"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "start date from which you want to get logs"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "end date till which you want to get logs"
+              },
+              {
+                "name": "time_range",
+                "value": "",
+                "type": "query",
+                "description": "time range to get logs"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "filter by request source (api, platform, unknown)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get audit logs for team"
+        },
+        {
+          "info": {
+            "name": "Smart search across audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/team/audit_log/search",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query. Automatically detects search intent:\n- Status code (404, 200, 500) → Searches status_code field\n- Source (api, platform, unknown) → Searches source field\n- IP address (192.168.x.x) → Searches ip field\n- Email (user@example.com) → Searches email field\n- HTTP method (GET, POST, PUT) → Searches method field\n- Path (/v1/scans, enumerate) → Searches path_name and path fields\n- General text → Searches across path, path_name, request, response\n"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "number of rows to skip"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "number of rows to get (max 100)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Smart search across audit logs"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

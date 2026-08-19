@@ -1,0 +1,223 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PDCP Asset Leaks API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leaks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all leaked credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/leaks",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific leak type (single value only)"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Filter leaks by specific domain (applies to employee/customer leaks)"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter leaks by specific email (can be personal, employee, or customer email from user's authorized results)"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search query to filter results across all fields"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page for pagination"
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (starts from 1)"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter start date"
+              },
+              {
+                "name": "time_range",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter end date"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "supported sort fields"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "supported sort order (asc or desc)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "supported status (fixed or open)"
+              },
+              {
+                "name": "group_by",
+                "value": "",
+                "type": "query",
+                "description": "Group results by field - returns group summaries when used without field-specific filtering"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific URL (used with group_by for drill-down)"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific country (used with group_by for drill-down)"
+              },
+              {
+                "name": "device_ip",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific device IP (used with group_by for drill-down)"
+              },
+              {
+                "name": "hostname",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific hostname (used with group_by for drill-down)"
+              },
+              {
+                "name": "hardware_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific hardware ID (used with group_by for drill-down)"
+              }
+            ]
+          },
+          "docs": "Returns all leaks (personal, employee, customer) with optional type filtering. Replaces the need for separate endpoint calls."
+        },
+        {
+          "info": {
+            "name": "Get leak statistics for a domain (Public)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/leaks/stats/domain",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unmask_email",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Public endpoint - no authentication required. Returns leak statistics for any domain including employee/customer leak counts, geographic distribution, and top compromised services."
+        },
+        {
+          "info": {
+            "name": "Get leak statistics for an email (Public)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/leaks/stats/email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email to get stats for"
+              },
+              {
+                "name": "unmask_email",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Public endpoint - no authentication required. Returns leak statistics for any email address including leak classification, compromised services, and risk timeline."
+        },
+        {
+          "info": {
+            "name": "Update leak status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.projectdiscovery.io/v1/leaks/status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark leaks as fixed or reopen them. Requires authentication and domain verification for employee/customer leaks. See [Domain Verification](/cloud/credential-monitoring#domain-verification) for setup instructions."
+        },
+        {
+          "info": {
+            "name": "Get leak information by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.projectdiscovery.io/v1/leaks/info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve detailed leak information by leak ID. Passwords are unmasked after domain verification. See [Domain Verification](/cloud/credential-monitoring#domain-verification) for setup instructions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,324 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PDCP Asset results API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "results",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Scan Vulnerability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/scans/vuln/:vuln_id",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "vuln_id",
+                "value": "",
+                "type": "path",
+                "description": "vulnerability ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get scan result vulnerability by ID "
+        },
+        {
+          "info": {
+            "name": "Get Vulnerability Changelogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/scans/vuln/:vuln_id/changelogs",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "vuln_id",
+                "value": "",
+                "type": "path",
+                "description": "vulnerability ID"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "time filter to select"
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "comma separated event_type e.g. event_type=vul_status,vul_status_change"
+              },
+              {
+                "name": "sort_asc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated ascending sorting e.g sort_asc=created_at,severity"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated descending sorting e.g sort_desc=created_at,severity"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "number of results to get"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "number of results to skip"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "get changelogs of specific vulnerability by id"
+        },
+        {
+          "info": {
+            "name": "Get all Vulnerability Changelogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/scans/vuln/changelogs",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "time filter to select"
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "comma separated event_type e.g. event_type=vul_status,vul_status_change"
+              },
+              {
+                "name": "sort_asc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated ascending sorting e.g sort_asc=created_at,severity"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated descending sorting e.g sort_desc=created_at,severity"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "number of results to get"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "number of results to skip"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "get changelogs of all vulnerabilities"
+        },
+        {
+          "info": {
+            "name": "Get All Results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/scans/results",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "number of results to skip"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "number of results to get"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "string separated by comma e.g. info,high"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "search term"
+              },
+              {
+                "name": "host",
+                "value": "",
+                "type": "query",
+                "description": "comma separated host e.g. hosts=https://example.com,https://x.com"
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "comma separated domain names e.g-> domain=domain1.com,domain2.com"
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "query",
+                "description": "comma separated ports e.g. ports=80,443"
+              },
+              {
+                "name": "templates",
+                "value": "",
+                "type": "query",
+                "description": "comma separated templates e.g. templates=tech-detect,azure-takeover"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "filter by time ( last_day, last_week, last_month )"
+              },
+              {
+                "name": "vuln_status",
+                "value": "",
+                "type": "query",
+                "description": "comma separated vuln_status e.g vuln_status=open,fixed"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "comma separated tags e.g tags=xss,cve"
+              },
+              {
+                "name": "sort_asc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated ascending sorting e.g sort_asc=created_at,severity"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query",
+                "description": "comma separated descending sorting e.g sort_desc=created_at,severity"
+              },
+              {
+                "name": "is_ticket",
+                "value": "",
+                "type": "query",
+                "description": "Return the records that have issue trackers"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query",
+                "description": "filter by comma separated labels e.g labels=p1,p2"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "filter by comma separated categories e.g category=cve,xss"
+              },
+              {
+                "name": "is_regression",
+                "value": "",
+                "type": "query",
+                "description": "filter by is_regression"
+              },
+              {
+                "name": "is_internal",
+                "value": "",
+                "type": "query",
+                "description": "filter by is_internal (internal vs external hosts)"
+              },
+              {
+                "name": "asset_metadata",
+                "value": "",
+                "type": "query",
+                "description": "Asset details for the vulnerability"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get scans results of a user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -384,3 +384,9 @@ tools:
 - name: get-v1-asset-enumerate-contents
   description: Get All Enumeration Contents
   source_operation: openapi/projectdiscovery-openapi-original.yml#get-v1-asset-enumerate-contents
+deployment:
+  mode: none
+  verified: derived
+  tools: 125
+  checked: '2026-08-12'
+  source: catalog MCP census

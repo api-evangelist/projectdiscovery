@@ -1,0 +1,361 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PDCP Asset API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Asset",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update enumeration config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/:enumerate_id/config",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "enumerate_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "update_type",
+                "value": "",
+                "type": "query",
+                "description": "default mode is append"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update enumeration config"
+        },
+        {
+          "info": {
+            "name": "Get asset enumeration history data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/:enumerate_id/history",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "enumerate_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The numbers of items to return"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter start date"
+              },
+              {
+                "name": "time_range",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "time filter end date"
+              }
+            ]
+          },
+          "docs": "Get asset enumeration history data"
+        },
+        {
+          "info": {
+            "name": "List Misconfiguration Findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/misconfiguration",
+            "headers": [
+              {
+                "name": "X-Team-Id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The numbers of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip before starting to collect the result set"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Case-insensitive substring search on the host field"
+              },
+              {
+                "name": "finding_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by finding type"
+              }
+            ]
+          },
+          "docs": "Retrieve infrastructure misconfiguration findings discovered during asset enumeration. Currently detects AWS dangling DNS (Elastic IPs that no longer exist) and Cloudflare origin IP exposure."
+        },
+        {
+          "info": {
+            "name": "List asset policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/policy",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              }
+            ]
+          },
+          "docs": "List all asset policies configured for your account. Returns each policy with its conditions, action type, and execution metadata."
+        },
+        {
+          "info": {
+            "name": "Create asset policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.projectdiscovery.io/v1/asset/policy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new asset policy that automatically takes action on assets matching defined conditions. Supported actions: alert (send notifications), delete (remove assets), set_label (add labels), and remove_label (remove labels)."
+        },
+        {
+          "info": {
+            "name": "Get asset policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/policy/:policy_id",
+            "params": [
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset policy"
+              }
+            ]
+          },
+          "docs": "Get a single asset policy by ID, including its conditions, action configuration, and execution metadata."
+        },
+        {
+          "info": {
+            "name": "Update asset policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.projectdiscovery.io/v1/asset/policy/:policy_id",
+            "params": [
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset policy"
+              },
+              {
+                "name": "update_type",
+                "value": "",
+                "type": "query",
+                "description": "Update strategy. `append` (default) merges new values with existing ones. `replace` overwrites the entire policy — all required fields for the policy type must be provided."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing asset policy. Use `append` mode to merge new values with existing ones (e.g., add alerting configs or labels without removing current ones). Use `replace` mode to completely overwrite the policy configuration."
+        },
+        {
+          "info": {
+            "name": "Delete asset policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.projectdiscovery.io/v1/asset/policy/:policy_id",
+            "params": [
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset policy"
+              }
+            ]
+          },
+          "docs": "Permanently delete an asset policy. This stops all future automatic actions for this policy."
+        },
+        {
+          "info": {
+            "name": "Get asset policy suggestions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/policy/suggestion",
+            "params": [
+              {
+                "name": "enumeration_id",
+                "value": "",
+                "type": "query",
+                "description": "Optional enumeration ID to scope suggestions"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum suggestions per category"
+              },
+              {
+                "name": "threshold",
+                "value": "",
+                "type": "query",
+                "description": "Minimum percentage threshold for anomaly detection"
+              }
+            ]
+          },
+          "docs": "Get suggested asset policies based on user data patterns. Analyzes asset data to suggest policies for bad data detection and important asset highlighting."
+        },
+        {
+          "info": {
+            "name": "Get asset policy events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/policy/:policy_id/events",
+            "params": [
+              {
+                "name": "policy_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asset policy"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum results per page (default: 50, max: 100)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Get the execution history for a specific asset policy, including apply actions, alert deliveries, and errors."
+        },
+        {
+          "info": {
+            "name": "Export the list of unique input domains of an enumeration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.projectdiscovery.io/v1/asset/enumerate/:enumerate_id/domains/export",
+            "params": [
+              {
+                "name": "enumerate_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search with domain name"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "supported format is csv, raw, or json (default json)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Export the list of unique input domains of an enumeration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

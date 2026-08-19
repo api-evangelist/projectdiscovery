@@ -1,0 +1,2540 @@
+{
+  "item": [
+    {
+      "id": "1c23ce5c-8f00-4593-9a93-1825c8a13b3f",
+      "name": "results",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "addb4a95-3577-431c-85f7-d7f716b6351f",
+          "name": "Get Scan Vulnerability",
+          "request": {
+            "name": "Get Scan Vulnerability",
+            "description": {
+              "content": "Get scan result vulnerability by ID ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "scans",
+                "vuln",
+                ":vuln_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vuln_id",
+                  "description": "(Required) vulnerability ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                "key": "X-Team-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9705f76a-18e7-471d-baed-4ff0a34874f0",
+              "name": "/scans/vuln/:vuln_id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"scan_id\": \"string\",\n  \"target\": \"string\",\n  \"template_id\": \"string\",\n  \"vuln_id\": \"string\",\n  \"matcher_status\": false,\n  \"created_at\": \"string\",\n  \"event\": {\n    \"curl-command\": \"string\",\n    \"extracted-results\": [\n      \"string\",\n      \"string\"\n    ],\n    \"extractor-name\": \"string\",\n    \"host\": \"string\",\n    \"info\": {\n      \"name\": \"string\",\n      \"classification\": {\n        \"cpe\": \"string\",\n        \"cve-id\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cvss-metrics\": \"string\",\n        \"cvss-score\": 6248.870893807535,\n        \"cwe-id\": [\n          \"string\",\n          \"string\"\n        ],\n        \"epss-percentile\": 280.7448752500552,\n        \"epss-score\": 1696.6591953187205\n      },\n      \"metadata\": {},\n      \"author\": [\n        \"string\",\n        \"string\"\n      ],\n      \"description\": \"string\",\n      \"impact\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reference\": [\n        \"string\",\n        \"string\"\n      ],\n      \"remediation\": \"string\",\n      \"severity\": \"string\"\n    },\n    \"ip\": \"string\",\n    \"matched-at\": \"string\",\n    \"matched-line\": [\n      6673,\n      6719\n    ],\n    \"matcher-name\": \"string\",\n    \"matcher-status\": false,\n    \"path\": \"string\",\n    \"request\": \"string\",\n    \"response\": \"string\",\n    \"template-id\": \"string\",\n    \"template-path\": \"string\",\n    \"timestamp\": \"string\",\n    \"type\": \"string\",\n    \"error\": \"string\",\n    \"issue_trackers\": {\n      \"jira\": {\n        \"id\": \"string\",\n        \"url\": \"string\"\n      },\n      \"github\": {\n        \"id\": \"string\",\n        \"url\": \"string\"\n      },\n      \"gitlab\": {\n        \"id\": \"string\",\n        \"url\": \"string\"\n      },\n      \"linear\": {\n        \"id\": \"string\",\n        \"url\": \"string\"\n      },\n      \"custom\": {\n        \"id\": \"string\",\n        \"url\": \"string\"\n      }\n    },\n    \"port\": \"string\"\n  },\n  \"template_encoded\": \"string\",\n  \"template_url\": \"string\",\n  \"template_path\": \"string\",\n  \"updated_at\": \"string\",\n  \"id\": \"string\",\n  \"vuln_status\": \"string\",\n  \"vuln_hash\": \"string\",\n  \"port\": 2834,\n  \"asset_metadata\": {\n    \"enumeration_id\": \"string\",\n    \"name\": \"string\",\n    \"created_at\": \"string\",\n    \"id\": 1487,\n    \"is_new\": false,\n    \"updated_at\": \"string\",\n    \"labels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"cname\": [\n      \"string\",\n      \"string\"\n    ],\n    \"host\": \"string\",\n    \"port\": 3588,\n    \"ip\": [\n      \"string\",\n      \"string\"\n    ],\n    \"status_code\": 2398,\n    \"content_length\": 2580,\n    \"vulnerabilities\": 2787,\n    \"title\": \"string\",\n    \"technologies\": [\n      \"string\",\n      \"string\"\n    ],\n    \"webserver\": \"string\",\n    \"method\": \"string\",\n    \"type\": \"string\",\n    \"asset_hash\": \"string\",\n    \"technology_details\": {\n      \"key_0\": {\n        \"description\": \"string\",\n        \"website\": \"string\",\n        \"icon\": \"string\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"key_1\": {\n        \"description\": \"string\",\n        \"website\": \"string\",\n        \"icon\": \"string\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"key_2\": {\n        \"description\": \"string\",\n        \"website\": \"string\",\n        \"icon\": \"string\",\n        \"categories\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"screenshot_path\": \"string\",\n    \"favicon\": \"string\",\n    \"favicon_body\": \"string\",\n    \"cdn_name\": \"string\",\n    \"chain_status_codes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"domain_name\": \"string\",\n    \"redirect_location\": \"string\",\n    \"asn\": {\n      \"as_country\": \"string\",\n      \"as_name\": \"string\",\n      \"as_number\": \"string\",\n      \"as_range\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"tls_serial_number\": \"string\",\n    \"tls_subject_org\": \"string\",\n    \"tls_issuer_org\": \"string\",\n    \"tls_expired\": false,\n    \"tls_not_before\": \"1973-04-26T22:36:07.583Z\",\n    \"tls_self_signed\": true,\n    \"tls_mismatched\": true,\n    \"tls_revoked\": true,\n    \"tls_untrusted\": true,\n    \"tls_subject_cn\": \"string\",\n    \"tls_subject_an\": [\n      \"string\",\n      \"string\"\n    ],\n    \"body\": \"string\",\n    \"tls_not_after\": \"2018-07-01T00:14:24.636Z\",\n    \"enumeration_name\": \"string\",\n    \"extended_metadata\": {},\n    \"source_type\": \"string\",\n    \"source\": [\n      {\n        \"source\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\",\n          \"key_4\": \"string\"\n        }\n      },\n      {\n        \"source\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      }\n    ],\n    \"is_internal\": false\n  },\n  \"remediation\": \"string\",\n  \"impact\": \"string\",\n  \"description\": \"string\",\n  \"reference\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9b8b7f6-5e05-4243-802e-ac759940ea5a",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd3d0ea9-3c68-453d-8672-5a24122addd2",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73be3029-10d4-4c7d-b436-9365f84222ad",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af15d101-ca83-45e4-939d-7d0aa2e5969f",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d53efb8-52fe-4ab3-8d21-0ac7e824ecf8",
+          "name": "Get Vulnerability Changelogs",
+          "request": {
+            "name": "Get Vulnerability Changelogs",
+            "description": {
+              "content": "get changelogs of specific vulnerability by id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "scans",
+                "vuln",
+                ":vuln_id",
+                "changelogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time",
+                  "value": "all_time",
+                  "description": "time filter to select"
+                },
+                {
+                  "disabled": false,
+                  "key": "event_type",
+                  "value": "<string>",
+                  "description": "comma separated event_type e.g. event_type=vul_status,vul_status_change"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_asc",
+                  "value": "<string>",
+                  "description": "comma separated ascending sorting e.g sort_asc=created_at,severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_desc",
+                  "value": "<string>",
+                  "description": "comma separated descending sorting e.g sort_desc=created_at,severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of results to get"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "number of results to skip"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "vuln_id",
+                  "description": "(Required) vulnerability ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                "key": "X-Team-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "208c510a-a948-42f8-9141-4a7047481174",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"matcher_status\": false,\n      \"vuln_id\": \"string\",\n      \"target\": \"string\",\n      \"created_at\": \"string\",\n      \"scan_id\": \"string\",\n      \"event\": {\n        \"curl-command\": \"string\",\n        \"extracted-results\": [\n          \"string\",\n          \"string\"\n        ],\n        \"extractor-name\": \"string\",\n        \"host\": \"string\",\n        \"info\": {\n          \"name\": \"string\",\n          \"classification\": {\n            \"cpe\": \"string\",\n            \"cve-id\": [\n              \"string\",\n              \"string\"\n            ],\n            \"cvss-metrics\": \"string\",\n            \"cvss-score\": 634.0573770374968,\n            \"cwe-id\": [\n              \"string\",\n              \"string\"\n            ],\n            \"epss-percentile\": 9499.513158081674,\n            \"epss-score\": 7187.061795417487\n          },\n          \"metadata\": {},\n          \"author\": [\n            \"string\",\n            \"string\"\n          ],\n          \"description\": \"string\",\n          \"impact\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reference\": [\n            \"string\",\n            \"string\"\n          ],\n          \"remediation\": \"string\",\n          \"severity\": \"string\"\n        },\n        \"ip\": \"string\",\n        \"matched-at\": \"string\",\n        \"matched-line\": [\n          3457,\n          3103\n        ],\n        \"matcher-name\": \"string\",\n        \"matcher-status\": false,\n        \"path\": \"string\",\n        \"request\": \"string\",\n        \"response\": \"string\",\n        \"template-id\": \"string\",\n        \"template-path\": \"string\",\n        \"timestamp\": \"string\",\n        \"type\": \"string\",\n        \"error\": \"string\",\n        \"issue_trackers\": {\n          \"jira\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"github\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"gitlab\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"linear\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"custom\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          }\n        },\n        \"port\": \"string\"\n      },\n      \"template_id\": \"string\",\n      \"result_type\": \"string\",\n      \"vuln_hash\": \"string\",\n      \"template_url\": \"string\",\n      \"updated_at\": \"string\",\n      \"change_event\": [\n        {\n          \"name\": \"string\",\n          \"from\": {},\n          \"to\": {}\n        },\n        {\n          \"name\": \"string\",\n          \"from\": {},\n          \"to\": {}\n        }\n      ],\n      \"template_path\": \"string\",\n      \"template_encoded\": \"string\",\n      \"vuln_status\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"matcher_status\": false,\n      \"vuln_id\": \"string\",\n      \"target\": \"string\",\n      \"created_at\": \"string\",\n      \"scan_id\": \"string\",\n      \"event\": {\n        \"curl-command\": \"string\",\n        \"extracted-results\": [\n          \"string\",\n          \"string\"\n        ],\n        \"extractor-name\": \"string\",\n        \"host\": \"string\",\n        \"info\": {\n          \"name\": \"string\",\n          \"classification\": {\n            \"cpe\": \"string\",\n            \"cve-id\": [\n              \"string\",\n              \"string\"\n            ],\n            \"cvss-metrics\": \"string\",\n            \"cvss-score\": 4433.929750862864,\n            \"cwe-id\": [\n              \"string\",\n              \"string\"\n            ],\n            \"epss-percentile\": 7932.322823865356,\n            \"epss-score\": 3472.0098830511092\n          },\n          \"metadata\": {},\n          \"author\": [\n            \"string\",\n            \"string\"\n          ],\n          \"description\": \"string\",\n          \"impact\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reference\": [\n            \"string\",\n            \"string\"\n          ],\n          \"remediation\": \"string\",\n          \"severity\": \"string\"\n        },\n        \"ip\": \"string\",\n        \"matched-at\": \"string\",\n        \"matched-line\": [\n          1009,\n          3302\n        ],\n        \"matcher-name\": \"string\",\n        \"matcher-status\": false,\n        \"path\": \"string\",\n        \"request\": \"string\",\n        \"response\": \"string\",\n        \"template-id\": \"string\",\n        \"template-path\": \"string\",\n        \"timestamp\": \"string\",\n        \"type\": \"string\",\n        \"error\": \"string\",\n        \"issue_trackers\": {\n          \"jira\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"github\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"gitlab\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"linear\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"custom\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          }\n        },\n        \"port\": \"string\"\n      },\n      \"template_id\": \"string\",\n      \"result_type\": \"string\",\n      \"vuln_hash\": \"string\",\n      \"template_url\": \"string\",\n      \"updated_at\": \"string\",\n      \"change_event\": [\n        {\n          \"name\": \"string\",\n          \"from\": {},\n          \"to\": {}\n        },\n        {\n          \"name\": \"string\",\n          \"from\": {},\n          \"to\": {}\n        }\n      ],\n      \"template_path\": \"string\",\n      \"template_encoded\": \"string\",\n      \"vuln_status\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae99551a-6e68-4a03-a0db-793a00e567a1",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fef05c0-1ccd-473f-8173-002175fed353",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b3aa1b4-1a15-48da-a3db-f6098a125f12",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Client Closed Request",
+              "code": 499,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36ea8e10-9331-4f3e-af1b-c81285ec3678",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3362b60b-f022-4e16-b813-c0dea452f06c",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    ":vuln_id",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "vuln_id",
+                      "description": "(Required) vulnerability ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "baac1e97-155f-4e64-a665-55104eb7e0fa",
+          "name": "Get all Vulnerability Changelogs",
+          "request": {
+            "name": "Get all Vulnerability Changelogs",
+            "description": {
+              "content": "get changelogs of all vulnerabilities",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "scans",
+                "vuln",
+                "changelogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time",
+                  "value": "all_time",
+                  "description": "time filter to select"
+                },
+                {
+                  "disabled": false,
+                  "key": "event_type",
+                  "value": "<string>",
+                  "description": "comma separated event_type e.g. event_type=vul_status,vul_status_change"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_asc",
+                  "value": "<string>",
+                  "description": "comma separated ascending sorting e.g sort_asc=created_at,severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_desc",
+                  "value": "<string>",
+                  "description": "comma separated descending sorting e.g sort_desc=created_at,severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of results to get"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "number of results to skip"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                "key": "X-Team-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d133c2ea-a526-4fd2-ae13-285cc1d408c7",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"matcher_status\": false,\n      \"vuln_id\": \"string\",\n      \"target\": \"string\",\n      \"created_at\": \"string\",\n      \"scan_id\": \"string\",\n      \"event\": {\n        \"curl-command\": \"string\",\n        \"extracted-results\": [\n          \"string\",\n          \"string\"\n        ],\n        \"extractor-name\": \"string\",\n        \"host\": \"string\",\n        \"info\": {\n          \"name\": \"string\",\n          \"classification\": {\n            \"cpe\": \"string\",\n            \"cve-id\": [\n              \"string\",\n              \"string\"\n            ],\n            \"cvss-metrics\": \"string\",\n            \"cvss-score\": 2296.238051808014,\n            \"cwe-id\": [\n              \"string\",\n              \"string\"\n            ],\n            \"epss-percentile\": 2666.7544400012343,\n            \"epss-score\": 5436.82245924912\n          },\n          \"metadata\": {},\n          \"author\": [\n            \"string\",\n            \"string\"\n          ],\n          \"description\": \"string\",\n          \"impact\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reference\": [\n            \"string\",\n            \"string\"\n          ],\n          \"remediation\": \"string\",\n          \"severity\": \"string\"\n        },\n        \"ip\": \"string\",\n        \"matched-at\": \"string\",\n        \"matched-line\": [\n          9011,\n          7075\n        ],\n        \"matcher-name\": \"string\",\n        \"matcher-status\": false,\n        \"path\": \"string\",\n        \"request\": \"string\",\n        \"response\": \"string\",\n        \"template-id\": \"string\",\n        \"template-path\": \"string\",\n        \"timestamp\": \"string\",\n        \"type\": \"string\",\n        \"error\": \"string\",\n        \"issue_trackers\": {\n          \"jira\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"github\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"gitlab\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"linear\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"custom\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          }\n        },\n        \"port\": \"string\"\n      },\n      \"template_id\": \"string\",\n      \"result_type\": \"string\",\n      \"vuln_hash\": \"string\",\n      \"template_url\": \"string\",\n      \"updated_at\": \"string\",\n      \"change_event\": [\n        {\n          \"name\": \"string\",\n          \"from\": {},\n          \"to\": {}\n        },\n        {\n          \"name\": \"string\",\n          \"from\": {},\n          \"to\": {}\n        }\n      ],\n      \"template_path\": \"string\",\n      \"template_encoded\": \"string\",\n      \"vuln_status\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"matcher_status\": false,\n      \"vuln_id\": \"string\",\n      \"target\": \"string\",\n      \"created_at\": \"string\",\n      \"scan_id\": \"string\",\n      \"event\": {\n        \"curl-command\": \"string\",\n        \"extracted-results\": [\n          \"string\",\n          \"string\"\n        ],\n        \"extractor-name\": \"string\",\n        \"host\": \"string\",\n        \"info\": {\n          \"name\": \"string\",\n          \"classification\": {\n            \"cpe\": \"string\",\n            \"cve-id\": [\n              \"string\",\n              \"string\"\n            ],\n            \"cvss-metrics\": \"string\",\n            \"cvss-score\": 2607.6957283633296,\n            \"cwe-id\": [\n              \"string\",\n              \"string\"\n            ],\n            \"epss-percentile\": 767.8594090202517,\n            \"epss-score\": 9122.764901656066\n          },\n          \"metadata\": {},\n          \"author\": [\n            \"string\",\n            \"string\"\n          ],\n          \"description\": \"string\",\n          \"impact\": \"string\",\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reference\": [\n            \"string\",\n            \"string\"\n          ],\n          \"remediation\": \"string\",\n          \"severity\": \"string\"\n        },\n        \"ip\": \"string\",\n        \"matched-at\": \"string\",\n        \"matched-line\": [\n          5258,\n          8043\n        ],\n        \"matcher-name\": \"string\",\n        \"matcher-status\": false,\n        \"path\": \"string\",\n        \"request\": \"string\",\n        \"response\": \"string\",\n        \"template-id\": \"string\",\n        \"template-path\": \"string\",\n        \"timestamp\": \"string\",\n        \"type\": \"string\",\n        \"error\": \"string\",\n        \"issue_trackers\": {\n          \"jira\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"github\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"gitlab\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"linear\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          },\n          \"custom\": {\n            \"id\": \"string\",\n            \"url\": \"string\"\n          }\n        },\n        \"port\": \"string\"\n      },\n      \"template_id\": \"string\",\n      \"result_type\": \"string\",\n      \"vuln_hash\": \"string\",\n      \"template_url\": \"string\",\n      \"updated_at\": \"string\",\n      \"change_event\": [\n        {\n          \"name\": \"string\",\n          \"from\": {},\n          \"to\": {}\n        },\n        {\n          \"name\": \"string\",\n          \"from\": {},\n          \"to\": {}\n        }\n      ],\n      \"template_path\": \"string\",\n      \"template_encoded\": \"string\",\n      \"vuln_status\": \"string\",\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4b99f68-66d8-4767-92d0-cc375f827ad1",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5948bc37-f1fa-4a7b-a918-74307f53633e",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26893d09-0ff6-4274-8fd0-3dc4505566d7",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Client Closed Request",
+              "code": 499,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acf63921-7cff-435d-92bb-d1bf94169d19",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bf058b0-46bc-4397-a1a1-6ef86118b0bd",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "vuln",
+                    "changelogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "all_time"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60089775-dcfc-4a4b-a1b1-fa00858bf5ad",
+          "name": "Get All Results",
+          "request": {
+            "name": "Get All Results",
+            "description": {
+              "content": "Get scans results of a user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "scans",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "number of results to get"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "unknown,low,medium,high,critical",
+                  "description": "string separated by comma e.g. info,high"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "search term"
+                },
+                {
+                  "disabled": false,
+                  "key": "host",
+                  "value": "<string>",
+                  "description": "comma separated host e.g. hosts=https://example.com,https://x.com"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>",
+                  "description": "comma separated domain names e.g-> domain=domain1.com,domain2.com"
+                },
+                {
+                  "disabled": false,
+                  "key": "port",
+                  "value": "<string>",
+                  "description": "comma separated ports e.g. ports=80,443"
+                },
+                {
+                  "disabled": false,
+                  "key": "templates",
+                  "value": "<string>",
+                  "description": "comma separated templates e.g. templates=tech-detect,azure-takeover"
+                },
+                {
+                  "disabled": false,
+                  "key": "time",
+                  "value": "<string>",
+                  "description": "filter by time ( last_day, last_week, last_month )"
+                },
+                {
+                  "disabled": false,
+                  "key": "vuln_status",
+                  "value": "<string>",
+                  "description": "comma separated vuln_status e.g vuln_status=open,fixed"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "comma separated tags e.g tags=xss,cve"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_asc",
+                  "value": "<string>",
+                  "description": "comma separated ascending sorting e.g sort_asc=created_at,severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_desc",
+                  "value": "<string>",
+                  "description": "comma separated descending sorting e.g sort_desc=created_at,severity"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_ticket",
+                  "value": "<boolean>",
+                  "description": "Return the records that have issue trackers"
+                },
+                {
+                  "disabled": false,
+                  "key": "labels",
+                  "value": "<string>",
+                  "description": "filter by comma separated labels e.g labels=p1,p2"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "filter by comma separated categories e.g category=cve,xss"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_regression",
+                  "value": "<boolean>",
+                  "description": "filter by is_regression"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_internal",
+                  "value": "<boolean>",
+                  "description": "filter by is_internal (internal vs external hosts)"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset_metadata",
+                  "value": "<boolean>",
+                  "description": "Asset details for the vulnerability"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                "key": "X-Team-Id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "214e37cf-cc4b-45e5-97b8-0305a7daa02b",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "unknown,low,medium,high,critical"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "host",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "port",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vuln_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_ticket",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_regression",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_internal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "asset_metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"current_page\": 6330,\n  \"result_count\": 7836,\n  \"total_results\": 7150,\n  \"total_pages\": 6955,\n  \"message\": \"string\",\n  \"data\": [\n    {\n      \"matcher_status\": true,\n      \"vuln_id\": \"string\",\n      \"target\": \"string\",\n      \"created_at\": \"string\",\n      \"scan_id\": \"string\",\n      \"event\": [\n        {\n          \"curl-command\": \"string\",\n          \"extracted-results\": [\n            \"string\",\n            \"string\"\n          ],\n          \"extractor-name\": \"string\",\n          \"host\": \"string\",\n          \"info\": {\n            \"name\": \"string\",\n            \"classification\": {\n              \"cpe\": \"string\",\n              \"cve-id\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"cvss-metrics\": \"string\",\n              \"cvss-score\": 1026.6725571164359,\n              \"cwe-id\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"epss-percentile\": 4579.878946451367,\n              \"epss-score\": 5802.371369195466\n            },\n            \"metadata\": {},\n            \"author\": [\n              \"string\",\n              \"string\"\n            ],\n            \"description\": \"string\",\n            \"impact\": \"string\",\n            \"tags\": [\n              \"string\",\n              \"string\"\n            ],\n            \"reference\": [\n              \"string\",\n              \"string\"\n            ],\n            \"remediation\": \"string\",\n            \"severity\": \"string\"\n          },\n          \"ip\": \"string\",\n          \"matched-at\": \"string\",\n          \"matched-line\": [\n            6778,\n            7854\n          ],\n          \"matcher-name\": \"string\",\n          \"matcher-status\": true,\n          \"path\": \"string\",\n          \"request\": \"string\",\n          \"response\": \"string\",\n          \"template-id\": \"string\",\n          \"template-path\": \"string\",\n          \"timestamp\": \"string\",\n          \"type\": \"string\",\n          \"error\": \"string\",\n          \"issue_trackers\": {\n            \"jira\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"github\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"gitlab\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"linear\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"custom\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"port\": \"string\"\n        },\n        {\n          \"curl-command\": \"string\",\n          \"extracted-results\": [\n            \"string\",\n            \"string\"\n          ],\n          \"extractor-name\": \"string\",\n          \"host\": \"string\",\n          \"info\": {\n            \"name\": \"string\",\n            \"classification\": {\n              \"cpe\": \"string\",\n              \"cve-id\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"cvss-metrics\": \"string\",\n              \"cvss-score\": 8412.343068122627,\n              \"cwe-id\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"epss-percentile\": 6004.336345372099,\n              \"epss-score\": 6001.2402253488635\n            },\n            \"metadata\": {},\n            \"author\": [\n              \"string\",\n              \"string\"\n            ],\n            \"description\": \"string\",\n            \"impact\": \"string\",\n            \"tags\": [\n              \"string\",\n              \"string\"\n            ],\n            \"reference\": [\n              \"string\",\n              \"string\"\n            ],\n            \"remediation\": \"string\",\n            \"severity\": \"string\"\n          },\n          \"ip\": \"string\",\n          \"matched-at\": \"string\",\n          \"matched-line\": [\n            3587,\n            5234\n          ],\n          \"matcher-name\": \"string\",\n          \"matcher-status\": false,\n          \"path\": \"string\",\n          \"request\": \"string\",\n          \"response\": \"string\",\n          \"template-id\": \"string\",\n          \"template-path\": \"string\",\n          \"timestamp\": \"string\",\n          \"type\": \"string\",\n          \"error\": \"string\",\n          \"issue_trackers\": {\n            \"jira\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"github\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"gitlab\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"linear\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"custom\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"port\": \"string\"\n        }\n      ],\n      \"template_id\": \"string\",\n      \"result_type\": \"string\",\n      \"vuln_hash\": \"string\",\n      \"template_url\": \"string\",\n      \"updated_at\": \"string\",\n      \"template_path\": \"string\",\n      \"template_encoded\": \"string\",\n      \"vuln_status\": \"string\",\n      \"is_regression\": true,\n      \"is_internal\": true,\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"port\": 6325,\n      \"asset_metadata\": {\n        \"enumeration_id\": \"string\",\n        \"name\": \"string\",\n        \"created_at\": \"string\",\n        \"id\": 2309,\n        \"is_new\": false,\n        \"updated_at\": \"string\",\n        \"labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cname\": [\n          \"string\",\n          \"string\"\n        ],\n        \"host\": \"string\",\n        \"port\": 6778,\n        \"ip\": [\n          \"string\",\n          \"string\"\n        ],\n        \"status_code\": 7000,\n        \"content_length\": 1311,\n        \"vulnerabilities\": 7933,\n        \"title\": \"string\",\n        \"technologies\": [\n          \"string\",\n          \"string\"\n        ],\n        \"webserver\": \"string\",\n        \"method\": \"string\",\n        \"type\": \"string\",\n        \"asset_hash\": \"string\",\n        \"technology_details\": {\n          \"key_0\": {\n            \"description\": \"string\",\n            \"website\": \"string\",\n            \"icon\": \"string\",\n            \"categories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"key_1\": {\n            \"description\": \"string\",\n            \"website\": \"string\",\n            \"icon\": \"string\",\n            \"categories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"screenshot_path\": \"string\",\n        \"favicon\": \"string\",\n        \"favicon_body\": \"string\",\n        \"cdn_name\": \"string\",\n        \"chain_status_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"domain_name\": \"string\",\n        \"redirect_location\": \"string\",\n        \"asn\": {\n          \"as_country\": \"string\",\n          \"as_name\": \"string\",\n          \"as_number\": \"string\",\n          \"as_range\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"tls_serial_number\": \"string\",\n        \"tls_subject_org\": \"string\",\n        \"tls_issuer_org\": \"string\",\n        \"tls_expired\": false,\n        \"tls_not_before\": \"1992-04-04T17:16:59.196Z\",\n        \"tls_self_signed\": false,\n        \"tls_mismatched\": true,\n        \"tls_revoked\": true,\n        \"tls_untrusted\": false,\n        \"tls_subject_cn\": \"string\",\n        \"tls_subject_an\": [\n          \"string\",\n          \"string\"\n        ],\n        \"body\": \"string\",\n        \"tls_not_after\": \"2011-11-22T01:56:33.629Z\",\n        \"enumeration_name\": \"string\",\n        \"extended_metadata\": {},\n        \"source_type\": \"string\",\n        \"source\": [\n          {\n            \"source\": \"string\",\n            \"metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"source\": \"string\",\n            \"metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"is_internal\": false\n      },\n      \"remediation\": \"string\",\n      \"description\": \"string\",\n      \"impact\": \"string\",\n      \"reference\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"matcher_status\": true,\n      \"vuln_id\": \"string\",\n      \"target\": \"string\",\n      \"created_at\": \"string\",\n      \"scan_id\": \"string\",\n      \"event\": [\n        {\n          \"curl-command\": \"string\",\n          \"extracted-results\": [\n            \"string\",\n            \"string\"\n          ],\n          \"extractor-name\": \"string\",\n          \"host\": \"string\",\n          \"info\": {\n            \"name\": \"string\",\n            \"classification\": {\n              \"cpe\": \"string\",\n              \"cve-id\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"cvss-metrics\": \"string\",\n              \"cvss-score\": 5257.972851738962,\n              \"cwe-id\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"epss-percentile\": 94.00686305599426,\n              \"epss-score\": 3969.243712518569\n            },\n            \"metadata\": {},\n            \"author\": [\n              \"string\",\n              \"string\"\n            ],\n            \"description\": \"string\",\n            \"impact\": \"string\",\n            \"tags\": [\n              \"string\",\n              \"string\"\n            ],\n            \"reference\": [\n              \"string\",\n              \"string\"\n            ],\n            \"remediation\": \"string\",\n            \"severity\": \"string\"\n          },\n          \"ip\": \"string\",\n          \"matched-at\": \"string\",\n          \"matched-line\": [\n            7591,\n            71\n          ],\n          \"matcher-name\": \"string\",\n          \"matcher-status\": false,\n          \"path\": \"string\",\n          \"request\": \"string\",\n          \"response\": \"string\",\n          \"template-id\": \"string\",\n          \"template-path\": \"string\",\n          \"timestamp\": \"string\",\n          \"type\": \"string\",\n          \"error\": \"string\",\n          \"issue_trackers\": {\n            \"jira\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"github\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"gitlab\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"linear\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"custom\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"port\": \"string\"\n        },\n        {\n          \"curl-command\": \"string\",\n          \"extracted-results\": [\n            \"string\",\n            \"string\"\n          ],\n          \"extractor-name\": \"string\",\n          \"host\": \"string\",\n          \"info\": {\n            \"name\": \"string\",\n            \"classification\": {\n              \"cpe\": \"string\",\n              \"cve-id\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"cvss-metrics\": \"string\",\n              \"cvss-score\": 8516.318220413934,\n              \"cwe-id\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"epss-percentile\": 2806.0494175034687,\n              \"epss-score\": 9473.517200226677\n            },\n            \"metadata\": {},\n            \"author\": [\n              \"string\",\n              \"string\"\n            ],\n            \"description\": \"string\",\n            \"impact\": \"string\",\n            \"tags\": [\n              \"string\",\n              \"string\"\n            ],\n            \"reference\": [\n              \"string\",\n              \"string\"\n            ],\n            \"remediation\": \"string\",\n            \"severity\": \"string\"\n          },\n          \"ip\": \"string\",\n          \"matched-at\": \"string\",\n          \"matched-line\": [\n            2473,\n            8795\n          ],\n          \"matcher-name\": \"string\",\n          \"matcher-status\": false,\n          \"path\": \"string\",\n          \"request\": \"string\",\n          \"response\": \"string\",\n          \"template-id\": \"string\",\n          \"template-path\": \"string\",\n          \"timestamp\": \"string\",\n          \"type\": \"string\",\n          \"error\": \"string\",\n          \"issue_trackers\": {\n            \"jira\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"github\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"gitlab\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"linear\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"custom\": {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"port\": \"string\"\n        }\n      ],\n      \"template_id\": \"string\",\n      \"result_type\": \"string\",\n      \"vuln_hash\": \"string\",\n      \"template_url\": \"string\",\n      \"updated_at\": \"string\",\n      \"template_path\": \"string\",\n      \"template_encoded\": \"string\",\n      \"vuln_status\": \"string\",\n      \"is_regression\": true,\n      \"is_internal\": true,\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"port\": 6844,\n      \"asset_metadata\": {\n        \"enumeration_id\": \"string\",\n        \"name\": \"string\",\n        \"created_at\": \"string\",\n        \"id\": 826,\n        \"is_new\": true,\n        \"updated_at\": \"string\",\n        \"labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cname\": [\n          \"string\",\n          \"string\"\n        ],\n        \"host\": \"string\",\n        \"port\": 7045,\n        \"ip\": [\n          \"string\",\n          \"string\"\n        ],\n        \"status_code\": 1925,\n        \"content_length\": 6936,\n        \"vulnerabilities\": 1548,\n        \"title\": \"string\",\n        \"technologies\": [\n          \"string\",\n          \"string\"\n        ],\n        \"webserver\": \"string\",\n        \"method\": \"string\",\n        \"type\": \"string\",\n        \"asset_hash\": \"string\",\n        \"technology_details\": {\n          \"key_0\": {\n            \"description\": \"string\",\n            \"website\": \"string\",\n            \"icon\": \"string\",\n            \"categories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        },\n        \"screenshot_path\": \"string\",\n        \"favicon\": \"string\",\n        \"favicon_body\": \"string\",\n        \"cdn_name\": \"string\",\n        \"chain_status_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"domain_name\": \"string\",\n        \"redirect_location\": \"string\",\n        \"asn\": {\n          \"as_country\": \"string\",\n          \"as_name\": \"string\",\n          \"as_number\": \"string\",\n          \"as_range\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"tls_serial_number\": \"string\",\n        \"tls_subject_org\": \"string\",\n        \"tls_issuer_org\": \"string\",\n        \"tls_expired\": false,\n        \"tls_not_before\": \"1972-03-10T17:59:58.934Z\",\n        \"tls_self_signed\": false,\n        \"tls_mismatched\": true,\n        \"tls_revoked\": true,\n        \"tls_untrusted\": true,\n        \"tls_subject_cn\": \"string\",\n        \"tls_subject_an\": [\n          \"string\",\n          \"string\"\n        ],\n        \"body\": \"string\",\n        \"tls_not_after\": \"1955-08-12T06:43:50.744Z\",\n        \"enumeration_name\": \"string\",\n        \"extended_metadata\": {},\n        \"source_type\": \"string\",\n        \"source\": [\n          {\n            \"source\": \"string\",\n            \"metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"source\": \"string\",\n            \"metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"is_internal\": true\n      },\n      \"remediation\": \"string\",\n      \"description\": \"string\",\n      \"impact\": \"string\",\n      \"reference\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"stats\": {\n    \"total\": 3006\n  },\n  \"filters\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45171fcc-1de1-4238-87b7-4b4aa3cf6bc3",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "unknown,low,medium,high,critical"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "host",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "port",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vuln_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_ticket",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_regression",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_internal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "asset_metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2edac3c5-e50e-4767-9963-9c985db68cfd",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "unknown,low,medium,high,critical"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "host",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "port",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vuln_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_ticket",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_regression",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_internal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "asset_metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11c2ecd2-695f-40ee-984f-5a72f2c97105",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "unknown,low,medium,high,critical"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "host",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "port",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vuln_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_ticket",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_regression",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_internal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "asset_metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Client Closed Request",
+              "code": 499,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c84a878f-9e10-46c4-ad66-9e452d175c3a",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "unknown,low,medium,high,critical"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "host",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "port",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vuln_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_ticket",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_regression",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_internal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "asset_metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "def7177d-f141-4386-85c1-9b139d535c36",
+              "name": "Example response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "scans",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "unknown,low,medium,high,critical"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "host",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "port",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templates",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "vuln_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_asc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_desc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_ticket",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_regression",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_internal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "asset_metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team",
+                    "key": "X-Team-Id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"kind\": \"string\",\n  \"code\": \"string\",\n  \"error\": \"string\",\n  \"error_id\": \"string\",\n  \"param\": \"string\",\n  \"status\": 1030\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.projectdiscovery.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0af97d3b-107c-4bdc-b0f8-94c4fef508de",
+    "name": "PDCP Asset results API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan",
+      "type": "text/plain"
+    }
+  }
+}
