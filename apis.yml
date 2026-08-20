@@ -42,6 +42,16 @@ tags:
 - Asset Discovery
 - DevSecOps
 - Nuclei
+tags_raw:
+- Company
+- Cybersecurity
+- Security
+- Vulnerability Scanning
+- Attack Surface Management
+- Vulnerability Management
+- Asset Discovery
+- DevSecOps
+- Nuclei
 - API
 apis:
 - aid: projectdiscovery:projectdiscovery-asset-api
@@ -62,6 +72,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - Assets
+  tags_raw:
   - assets
   properties:
   - type: OpenAPI
@@ -86,6 +98,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - Configurations
+  tags_raw:
   - configurations
   properties:
   - type: OpenAPI
@@ -110,6 +124,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - Export
+  tags_raw:
   - export
   properties:
   - type: OpenAPI
@@ -122,6 +138,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - History
+  tags_raw:
   - history
   properties:
   - type: OpenAPI
@@ -134,6 +152,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - Internal
+  tags_raw:
   - internal
   properties:
   - type: OpenAPI
@@ -158,6 +178,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - Results
+  tags_raw:
   - results
   properties:
   - type: OpenAPI
@@ -181,7 +203,8 @@ apis:
   description: The scan_log API from ProjectDiscovery — 1 operation(s) for scan_log.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
-  tags:
+  tags: []
+  tags_raw:
   - scan_log
   properties:
   - type: OpenAPI
@@ -194,6 +217,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - Scans
+  tags_raw:
   - scans
   properties:
   - type: OpenAPI
@@ -242,6 +267,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - Templates
+  tags_raw:
   - templates
   properties:
   - type: OpenAPI
@@ -254,6 +281,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
