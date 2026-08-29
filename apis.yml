@@ -9,6 +9,18 @@ description: >-
   management, authenticated with a single X-API-Key header over HTTPS. Founded by the creators of
   Nuclei and backed by Accel, ProjectDiscovery serves security teams automating attack-surface
   discovery and vulnerability detection at scale.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
