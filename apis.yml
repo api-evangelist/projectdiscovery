@@ -110,7 +110,7 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
-  - configurations
+  - Configurations
   tags_raw:
   - configurations
   properties:
@@ -229,7 +229,7 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
-  - scans
+  - Scans
   tags_raw:
   - scans
   properties:
