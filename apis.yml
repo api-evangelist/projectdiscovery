@@ -256,6 +256,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - Templates
+  tags_raw:
   - Template
   properties:
   - type: OpenAPI
