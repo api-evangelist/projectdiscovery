@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PDCP Asset templates API
+  title: PDCP Templates API
   version: '1.0'
   summary: ProjectDiscovery Cloud Platform
   description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
@@ -14,13 +14,13 @@ servers:
 security:
 - X-API-Key: []
 tags:
-- name: templates
+- name: Templates
 paths:
   /v1/template/public:
     get:
       summary: Get Public Template List
       tags:
-      - templates
+      - Templates
       responses:
         '200':
           $ref: '#/components/responses/GetPublicTemplateList'
@@ -58,7 +58,7 @@ paths:
     get:
       summary: Get Early Template List
       tags:
-      - templates
+      - Templates
       responses:
         '200':
           $ref: '#/components/responses/GetEarlyTempateList'
@@ -102,7 +102,7 @@ paths:
     get:
       summary: Get Early Template
       tags:
-      - templates
+      - Templates
       responses:
         '200':
           description: Shared Response
@@ -151,7 +151,7 @@ paths:
     get:
       summary: Get Public Template
       tags:
-      - templates
+      - Templates
       responses:
         '200':
           $ref: '#/components/responses/GetTemplateDataResponse'
@@ -179,7 +179,7 @@ paths:
     get:
       summary: Get Template List
       tags:
-      - templates
+      - Templates
       responses:
         '200':
           $ref: '#/components/responses/GetUserTemplateListResponse'
@@ -214,7 +214,7 @@ paths:
     post:
       summary: Create Template
       tags:
-      - templates
+      - Templates
       operationId: post-v1-template
       responses:
         '200':
@@ -264,7 +264,7 @@ paths:
     patch:
       summary: Update Template
       tags:
-      - templates
+      - Templates
       operationId: patch-v1-template
       responses:
         '200':
@@ -281,7 +281,7 @@ paths:
       - X-API-Key: []
       requestBody:
         $ref: '#/components/requestBodies/UpdateTemplateRequest'
-      description: 'Update existing private template '
+      description: Update existing private template
       parameters:
       - schema:
           type: string
@@ -299,7 +299,7 @@ paths:
     get:
       summary: Get Template
       tags:
-      - templates
+      - Templates
       responses:
         '200':
           $ref: '#/components/responses/GetTemplateResponse'
@@ -326,7 +326,7 @@ paths:
     delete:
       summary: Delete Template
       tags:
-      - templates
+      - Templates
       operationId: delete-v1-template-template_id
       responses:
         '200':
@@ -352,7 +352,7 @@ paths:
     post:
       summary: Generate AI Template
       tags:
-      - templates
+      - Templates
       operationId: post-v1-template-ai
       responses:
         '200':
@@ -382,7 +382,7 @@ paths:
     get:
       summary: Get Shared Template List
       tags:
-      - templates
+      - Templates
       responses:
         '200':
           $ref: '#/components/responses/GetShareStatusResponse'
@@ -433,7 +433,7 @@ paths:
     post:
       summary: Share Template
       tags:
-      - templates
+      - Templates
       operationId: post-v1-template-share
       responses:
         '200':
@@ -470,7 +470,7 @@ paths:
     get:
       summary: Get Shared Template
       tags:
-      - templates
+      - Templates
       responses:
         '200':
           $ref: '#/components/responses/GetSharedTemplateResponse'
@@ -495,359 +495,22 @@ paths:
       requestBody:
         content: {}
 components:
-  requestBodies:
-    ShareTemplateRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - template_id
-            - share_type
-            properties:
-              template_id:
-                type: string
-              share_type:
-                enum:
-                - unlisted
-                - organization
-                - users
-              ttl:
-                type: string
-              organizations:
-                type: array
-                items:
-                  type: string
-              emails:
-                type: array
-                items:
-                  type: string
-    UpdateTemplateRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - template
-            - template_id
-            properties:
-              template:
-                type: string
-              template_id:
-                type: string
-              prompt:
-                type: string
-              filename:
-                type: string
-              dir:
-                type: string
-    GenerateTemplateRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - prompt
-            properties:
-              prompt:
-                type: string
-              retest:
-                type: boolean
-              disableAutoSave:
-                type: boolean
-                default: false
-              images:
-                type: array
-                items:
-                  type: string
-  responses:
-    GetPublicTemplateList:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - count
-            - total
-            - results
-            properties:
-              message:
-                type: string
-              count:
-                type: integer
-              total:
-                type: integer
-              results:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TemplateData'
-    ShareTemplateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - result
-            properties:
-              message:
-                type: string
-              result:
-                $ref: '#/components/schemas/SharedTemplateMetaData'
-    GetSharedTemplateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - result
-            properties:
-              message:
-                type: string
-              result:
-                $ref: '#/components/schemas/SharedTemplateData'
-    GetTemplateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-              template:
-                $ref: '#/components/schemas/TemplateData'
-        application/xml:
-          schema:
-            type: object
-            properties: {}
-          examples: {}
-    MessageResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-    GetTemplateDataResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-              data:
-                $ref: '#/components/schemas/TemplateData'
-    GetUserTemplateListResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - results
-            properties:
-              message:
-                type: string
-              count:
-                type: integer
-              total:
-                type: integer
-              results:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TemplateData'
-    UpdateTemplateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - template_id
-            - template_name
-            properties:
-              message:
-                type: string
-              status:
-                type: boolean
-              template_id:
-                type: string
-              template_name:
-                type: string
-              template:
-                $ref: '#/components/schemas/TemplateData'
-    GetShareStatusResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              count:
-                type: integer
-              message:
-                type: string
-              total:
-                type: integer
-              results:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SharedTemplateData'
-    GetEarlyTempateList:
-      description: Early Template Response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-              total:
-                type: integer
-              count:
-                type: integer
-              results:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TemplateData'
-    CreateTemplateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - template_id
-            - template_name
-            properties:
-              message:
-                type: string
-              template_id:
-                type: string
-              template_name:
-                type: string
-              template:
-                $ref: '#/components/schemas/TemplateData'
-    GenerateTemplateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              template_id:
-                type: string
-              message:
-                type: string
-              completion:
-                type: string
-              name:
-                type: string
-              canRun:
-                type: boolean
-              comment:
-                type: string
-              is_valid:
-                type: boolean
-              retry_count:
-                type: integer
-              feedback:
-                type: string
-              targets:
-                type: array
-                items:
-                  type: string
-              retest:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    target:
-                      type: string
-                    matched:
-                      type: boolean
-                    vuln_id:
-                      type: string
-    ErrorResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-              kind:
-                type: string
-              code:
-                type: string
-              error:
-                type: string
-              error_id:
-                type: string
-              param:
-                type: string
-              status:
-                type: integer
-    DeleteTemplateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-              status:
-                type: boolean
-            required:
-            - message
   schemas:
-    SharedTemplateMetaData:
-      title: SharedTemplateMetaData
+    AIMeta:
       type: object
       properties:
-        expires_at:
+        model_used:
+          description: The AI model used to generate the template
           type: string
-          format: date-time
-        organizations:
-          type: array
-          items:
-            type: string
-        share_type:
+        is_prompt_by_human:
+          description: Whether the prompt was written by a human
+          type: boolean
+        is_template_by_human:
+          description: Whether the template was written by a human
+          type: boolean
+        prompt:
+          description: The prompt used to generate the template
           type: string
-        template_id:
-          type: string
-        users_email:
-          type: array
-          items:
-            type: string
     Classification:
       description: Classification of template including additional metadata like cve-id, cwe-id etc
       type: object
@@ -880,26 +543,6 @@ components:
         cpe:
           type: string
           description: CPE for the template
-    SharedTemplateData:
-      allOf:
-      - $ref: '#/components/schemas/TemplateData'
-      - type: object
-        properties:
-          ttl:
-            type: string
-            description: Time to live duration (1d ,1m etc)
-          share_type:
-            type: string
-            description: Type of share (unlisted, users, organization)
-          users_email:
-            type: array
-            description: List of email addresses or user IDs to share with (required if share_type is set to 'users')
-            items:
-              type: string
-          organizations:
-            type: array
-            items:
-              type: string
     TemplateData:
       description: Template Document or object
       type: object
@@ -994,21 +637,378 @@ components:
           type: boolean
         remediation:
           type: string
-    AIMeta:
+    SharedTemplateData:
+      allOf:
+      - $ref: '#/components/schemas/TemplateData'
+      - type: object
+        properties:
+          ttl:
+            type: string
+            description: Time to live duration (1d ,1m etc)
+          share_type:
+            type: string
+            description: Type of share (unlisted, users, organization)
+          users_email:
+            type: array
+            description: List of email addresses or user IDs to share with (required if share_type is set to 'users')
+            items:
+              type: string
+          organizations:
+            type: array
+            items:
+              type: string
+    SharedTemplateMetaData:
+      title: SharedTemplateMetaData
       type: object
       properties:
-        model_used:
-          description: The AI model used to generate the template
+        expires_at:
           type: string
-        is_prompt_by_human:
-          description: Whether the prompt was written by a human
-          type: boolean
-        is_template_by_human:
-          description: Whether the template was written by a human
-          type: boolean
-        prompt:
-          description: The prompt used to generate the template
+          format: date-time
+        organizations:
+          type: array
+          items:
+            type: string
+        share_type:
           type: string
+        template_id:
+          type: string
+        users_email:
+          type: array
+          items:
+            type: string
+  requestBodies:
+    ShareTemplateRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - template_id
+            - share_type
+            properties:
+              template_id:
+                type: string
+              share_type:
+                enum:
+                - unlisted
+                - organization
+                - users
+              ttl:
+                type: string
+              organizations:
+                type: array
+                items:
+                  type: string
+              emails:
+                type: array
+                items:
+                  type: string
+    UpdateTemplateRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - template
+            - template_id
+            properties:
+              template:
+                type: string
+              template_id:
+                type: string
+              prompt:
+                type: string
+              filename:
+                type: string
+              dir:
+                type: string
+    GenerateTemplateRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - prompt
+            properties:
+              prompt:
+                type: string
+              retest:
+                type: boolean
+              disableAutoSave:
+                type: boolean
+                default: false
+              images:
+                type: array
+                items:
+                  type: string
+  responses:
+    GetShareStatusResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              count:
+                type: integer
+              message:
+                type: string
+              total:
+                type: integer
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedTemplateData'
+    ShareTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - result
+            properties:
+              message:
+                type: string
+              result:
+                $ref: '#/components/schemas/SharedTemplateMetaData'
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    GetTemplateDataResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              data:
+                $ref: '#/components/schemas/TemplateData'
+    DeleteTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              status:
+                type: boolean
+            required:
+            - message
+    GenerateTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              template_id:
+                type: string
+              message:
+                type: string
+              completion:
+                type: string
+              name:
+                type: string
+              canRun:
+                type: boolean
+              comment:
+                type: string
+              is_valid:
+                type: boolean
+              retry_count:
+                type: integer
+              feedback:
+                type: string
+              targets:
+                type: array
+                items:
+                  type: string
+              retest:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    target:
+                      type: string
+                    matched:
+                      type: boolean
+                    vuln_id:
+                      type: string
+    GetTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              template:
+                $ref: '#/components/schemas/TemplateData'
+        application/xml:
+          schema:
+            type: object
+            properties: {}
+          examples: {}
+    GetEarlyTempateList:
+      description: Early Template Response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              total:
+                type: integer
+              count:
+                type: integer
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateData'
+    UpdateTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - template_id
+            - template_name
+            properties:
+              message:
+                type: string
+              status:
+                type: boolean
+              template_id:
+                type: string
+              template_name:
+                type: string
+              template:
+                $ref: '#/components/schemas/TemplateData'
+    CreateTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - template_id
+            - template_name
+            properties:
+              message:
+                type: string
+              template_id:
+                type: string
+              template_name:
+                type: string
+              template:
+                $ref: '#/components/schemas/TemplateData'
+    GetUserTemplateListResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - results
+            properties:
+              message:
+                type: string
+              count:
+                type: integer
+              total:
+                type: integer
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateData'
+    GetPublicTemplateList:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - count
+            - total
+            - results
+            properties:
+              message:
+                type: string
+              count:
+                type: integer
+              total:
+                type: integer
+              results:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateData'
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    GetSharedTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - result
+            properties:
+              message:
+                type: string
+              result:
+                $ref: '#/components/schemas/SharedTemplateData'
   securitySchemes:
     X-API-Key:
       name: X-API-Key

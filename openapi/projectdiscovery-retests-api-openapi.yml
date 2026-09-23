@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PDCP Asset retests API
+  title: PDCP Retests API
   version: '1.0'
   summary: ProjectDiscovery Cloud Platform
   description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
@@ -49,45 +49,19 @@ paths:
         description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
         name: X-Team-Id
 components:
-  responses:
-    ErrorResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-              kind:
-                type: string
-              code:
-                type: string
-              error:
-                type: string
-              error_id:
-                type: string
-              param:
-                type: string
-              status:
-                type: integer
-    GetSingleRetestResultResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-              results:
-                $ref: '#/components/schemas/VulnerabilityResults'
-            required:
-            - message
-            - results
   schemas:
+    EnumerationSourceValue:
+      type: object
+      required:
+      - source
+      - metadata
+      properties:
+        source:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
     VulnerabilityResults:
       type: object
       required:
@@ -154,20 +128,14 @@ components:
           type: array
           items:
             type: string
-    EnumerationContentTechnologyDetails:
-      title: EnumerationContentTechnologyDetails
+    VulnIssueTrackerItem:
+      title: VulnIssueTrackerItem
       type: object
       properties:
-        description:
+        id:
           type: string
-        website:
+        url:
           type: string
-        icon:
-          type: string
-        categories:
-          type: array
-          items:
-            type: string
     VulnerabilityEvent:
       title: VulnerabilityEvent
       type: object
@@ -275,25 +243,19 @@ components:
               $ref: '#/components/schemas/VulnIssueTrackerItem'
         port:
           type: string
-    VulnIssueTrackerItem:
-      title: VulnIssueTrackerItem
+    EnumerationContentTechnologyDetails:
+      title: EnumerationContentTechnologyDetails
       type: object
       properties:
-        id:
+        description:
           type: string
-        url:
+        website:
           type: string
-    EnumerationSourceValue:
-      type: object
-      required:
-      - source
-      - metadata
-      properties:
-        source:
+        icon:
           type: string
-        metadata:
-          type: object
-          additionalProperties:
+        categories:
+          type: array
+          items:
             type: string
     EnumerationContent:
       title: EnumerationContent
@@ -440,6 +402,44 @@ components:
             $ref: '#/components/schemas/EnumerationSourceValue'
         is_internal:
           type: boolean
+  responses:
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    GetSingleRetestResultResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              results:
+                $ref: '#/components/schemas/VulnerabilityResults'
+            required:
+            - message
+            - results
   securitySchemes:
     X-API-Key:
       name: X-API-Key

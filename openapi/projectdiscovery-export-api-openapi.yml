@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PDCP Asset export API
+  title: PDCP Export API
   version: '1.0'
   summary: ProjectDiscovery Cloud Platform
   description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
@@ -14,7 +14,7 @@ servers:
 security:
 - X-API-Key: []
 tags:
-- name: export
+- name: Export
 paths:
   /v1/scans/results/export:
     parameters:
@@ -25,7 +25,7 @@ paths:
     post:
       summary: Export filtered Scan results
       tags:
-      - export
+      - Export
       responses:
         '200':
           description: OK
@@ -126,9 +126,9 @@ paths:
   /v1/leaks/export:
     post:
       summary: Export leaked credentials
-      description: Export leaked credentials with filtering by type, domain, email, date range, and more. Passwords are unmasked after domain verification. See [Domain Verification](/cloud/credential-monitoring#domain-verification) for setup instructions.
+      description: Export leaked credentials with filtering by type, domain, email, date range, and more. Passwords are unmasked after domain verification. See Domain Verification for setup instructions.
       tags:
-      - export
+      - Export
       responses:
         '200':
           description: Export data returned successfully

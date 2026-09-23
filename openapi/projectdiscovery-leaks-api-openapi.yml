@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PDCP Asset Leaks API
+  title: PDCP Leaks API
   version: '1.0'
   summary: ProjectDiscovery Cloud Platform
   description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
@@ -441,7 +441,7 @@ paths:
   /v1/leaks/status:
     post:
       summary: Update leak status
-      description: Mark leaks as fixed or reopen them. Requires authentication and domain verification for employee/customer leaks. See [Domain Verification](/cloud/credential-monitoring#domain-verification) for setup instructions.
+      description: Mark leaks as fixed or reopen them. Requires authentication and domain verification for employee/customer leaks. See Domain Verification for setup instructions.
       tags:
       - Leaks
       responses:
@@ -498,7 +498,7 @@ paths:
   /v1/leaks/info:
     post:
       summary: Get leak information by ID
-      description: Retrieve detailed leak information by leak ID. Passwords are unmasked after domain verification. See [Domain Verification](/cloud/credential-monitoring#domain-verification) for setup instructions.
+      description: Retrieve detailed leak information by leak ID. Passwords are unmasked after domain verification. See Domain Verification for setup instructions.
       tags:
       - Leaks
       operationId: post-v1-leaks-info
@@ -641,11 +641,11 @@ components:
               status:
                 type: integer
   schemas:
-    DevicesCount:
-      title: DevicesCount
+    UsersCount:
+      title: UsersCount
       type: object
       properties:
-        devices:
+        user:
           type: number
     LeaksEntityStatus:
       title: LeaksEntityStatus
@@ -653,6 +653,38 @@ components:
       - fixed
       - open
       - NA
+    CustomersCount:
+      title: CustomersCount
+      type: object
+      properties:
+        customers:
+          type: number
+    EmployeesCount:
+      title: EmployeesCount
+      type: object
+      properties:
+        employees:
+          type: number
+    CombolistExposureCount:
+      title: CombolistExposureCount
+      type: object
+      properties:
+        combolist_exposure:
+          type: number
+    DevicesCount:
+      title: DevicesCount
+      type: object
+      properties:
+        devices:
+          type: number
+    LeakCountryStats:
+      title: LeakCountryStats
+      type: object
+      properties:
+        Country:
+          type: string
+        CredentialsCount:
+          type: number
     LeaksUsersSampleData:
       title: LeaksUsersSampleData
       type: object
@@ -667,18 +699,6 @@ components:
           type: string
         log_date:
           type: string
-    CombolistExposureCount:
-      title: CombolistExposureCount
-      type: object
-      properties:
-        combolist_exposure:
-          type: number
-    CustomersCount:
-      title: CustomersCount
-      type: object
-      properties:
-        customers:
-          type: number
     UsedUrlsCount:
       title: UsedUrlsCount
       type: object
@@ -696,26 +716,6 @@ components:
         Month:
           type: number
         Year:
-          type: number
-    EmployeesCount:
-      title: EmployeesCount
-      type: object
-      properties:
-        employees:
-          type: number
-    LeakCountryStats:
-      title: LeakCountryStats
-      type: object
-      properties:
-        Country:
-          type: string
-        CredentialsCount:
-          type: number
-    UsersCount:
-      title: UsersCount
-      type: object
-      properties:
-        user:
           type: number
   securitySchemes:
     X-API-Key:

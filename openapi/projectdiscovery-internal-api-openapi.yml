@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PDCP Asset internal API
+  title: PDCP Internal API
   version: '1.0'
   summary: ProjectDiscovery Cloud Platform
   description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
@@ -14,14 +14,14 @@ servers:
 security:
 - X-API-Key: []
 tags:
-- name: internal
+- name: Internal
 paths:
   /v1/user/team:
     get:
       summary: Get Team
       operationId: get-v1-user-team
       tags:
-      - internal
+      - Internal
       responses:
         '200':
           $ref: '#/components/responses/GetTeamResponse'
@@ -45,7 +45,7 @@ paths:
     post:
       summary: Create Workspace
       tags:
-      - internal
+      - Internal
       responses:
         '200':
           description: OK
@@ -74,7 +74,7 @@ paths:
         $ref: '#/components/requestBodies/CreateTeamRequest'
       security:
       - X-API-Key: []
-      description: 'Create a new team '
+      description: Create a new team
       parameters:
       - schema:
           type: string
@@ -85,7 +85,7 @@ paths:
       summary: Update Team
       operationId: patch-v1-user-team
       tags:
-      - internal
+      - Internal
       responses:
         '200':
           $ref: '#/components/responses/UpdateTeamResponse'
@@ -113,7 +113,7 @@ paths:
     delete:
       summary: Delete Team
       tags:
-      - internal
+      - Internal
       requestBody:
         content:
           application/json:
@@ -149,7 +149,7 @@ paths:
     get:
       summary: Get Team Members
       tags:
-      - internal
+      - Internal
       responses:
         '200':
           $ref: '#/components/responses/GetTeamMembersResponse'
@@ -175,7 +175,7 @@ paths:
       summary: Add Team Member
       operationId: post-v1-user-team-member
       tags:
-      - internal
+      - Internal
       responses:
         '200':
           $ref: '#/components/responses/MessageResponse'
@@ -204,7 +204,7 @@ paths:
       summary: Delete Team Member
       operationId: delete-v1-user-team-member
       tags:
-      - internal
+      - Internal
       responses:
         '200':
           $ref: '#/components/responses/MessageResponse'
@@ -233,7 +233,7 @@ paths:
       summary: Update Team Member
       operationId: patch-v1-user-team-member
       tags:
-      - internal
+      - Internal
       responses:
         '200':
           $ref: '#/components/responses/MessageResponse'
@@ -263,7 +263,7 @@ paths:
       summary: Get Default Team Members
       operationId: get-v1-user-team-default-members
       tags:
-      - internal
+      - Internal
       responses:
         '200':
           $ref: '#/components/responses/GetDefaultTeamMembersResponse'
@@ -289,7 +289,7 @@ paths:
       summary: Set Default Team Members
       operationId: post-v1-user-team-default-members
       tags:
-      - internal
+      - Internal
       responses:
         '200':
           $ref: '#/components/responses/MessageResponse'
@@ -319,7 +319,7 @@ paths:
       summary: Delete Default Team Members
       operationId: delete-v1-user-team-default-members
       tags:
-      - internal
+      - Internal
       responses:
         '200':
           $ref: '#/components/responses/MessageResponse'
@@ -346,115 +346,59 @@ paths:
         name: X-Team-Id
         required: true
 components:
-  responses:
-    MessageResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-    GetDefaultTeamMembersResponse:
-      description: Default team members response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-              members:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    email:
-                      type: string
-                    role:
-                      type: string
-                  required:
-                  - email
-                  - role
-            required:
-            - message
-            - members
-    ErrorResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-              kind:
-                type: string
-              code:
-                type: string
-              error:
-                type: string
-              error_id:
-                type: string
-              param:
-                type: string
-              status:
-                type: integer
-    GetTeamResponse:
-      description: Get the workspace details
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              workspaces:
-                type: array
-                items:
-                  $ref: '#/components/schemas/WorkspaceItem'
-              message:
-                type: string
-              name:
-                type: string
-            required:
-            - message
-    GetTeamMembersResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-              max_team_members:
-                type: integer
-              members:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TeamMemberItem'
-            required:
-            - message
-            - members
-            - max_team_members
-    UpdateTeamResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-              message:
-                type: string
-            required:
-            - message
   requestBodies:
+    PatchTeamMemberRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              role:
+                type: string
+                description: Team member role. Valid values are ADMIN, MEMBER, VIEWER, GUEST.
+            required:
+            - email
+    CreateTeamRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+            required:
+            - name
+    DeleteTeamMemberRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+            required:
+            - email
+    DeleteDefaultTeamMemberRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: Email of specific member to remove. Omit to remove all
+    AddTeamMemberRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+            required:
+            - email
     SetDefaultTeamMembersRequest:
       content:
         application/json:
@@ -480,58 +424,6 @@ components:
                   - role
             required:
             - members
-    DeleteDefaultTeamMemberRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              email:
-                type: string
-                description: Email of specific member to remove. Omit to remove all
-    PatchTeamMemberRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              email:
-                type: string
-              role:
-                type: string
-                description: Team member role. Valid values are ADMIN, MEMBER, VIEWER, GUEST.
-            required:
-            - email
-    DeleteTeamMemberRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              email:
-                type: string
-            required:
-            - email
-    CreateTeamRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-            required:
-            - name
-    AddTeamMemberRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              email:
-                type: string
-            required:
-            - email
   schemas:
     TeamMemberItem:
       title: TeamMemberItem
@@ -576,6 +468,114 @@ components:
       - created_at
       - member_count
       - owner_email
+  responses:
+    UpdateTeamResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              message:
+                type: string
+            required:
+            - message
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    GetDefaultTeamMembersResponse:
+      description: Default team members response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              members:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    role:
+                      type: string
+                  required:
+                  - email
+                  - role
+            required:
+            - message
+            - members
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    GetTeamResponse:
+      description: Get the workspace details
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              workspaces:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkspaceItem'
+              message:
+                type: string
+              name:
+                type: string
+            required:
+            - message
+    GetTeamMembersResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              max_team_members:
+                type: integer
+              members:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamMemberItem'
+            required:
+            - message
+            - members
+            - max_team_members
   securitySchemes:
     X-API-Key:
       name: X-API-Key

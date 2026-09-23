@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: PDCP Asset configurations API
+  title: PDCP Configurations API
   version: '1.0'
   summary: ProjectDiscovery Cloud Platform
   description: For more details, checkout https://docs.projectdiscovery.io/api-reference/editor/scan
@@ -14,13 +14,13 @@ servers:
 security:
 - X-API-Key: []
 tags:
-- name: configurations
+- name: Configurations
 paths:
   /v1/scans/config:
     get:
       summary: Get Configs List
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           description: OK
@@ -83,7 +83,7 @@ paths:
       summary: Add Config
       operationId: post-v1-scans-config
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           $ref: '#/components/responses/PostScanConfigResponse'
@@ -136,7 +136,7 @@ paths:
     get:
       summary: Get Config
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           description: OK
@@ -173,7 +173,7 @@ paths:
       summary: Update Config
       operationId: patch-v1-scans-config-config_id
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           $ref: '#/components/responses/PostScanConfigResponse'
@@ -217,7 +217,7 @@ paths:
       summary: Delete Config
       operationId: delete-v1-scans-config-config_id
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           $ref: '#/components/responses/MessageResponse'
@@ -245,7 +245,7 @@ paths:
     get:
       summary: Get excluded templates
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           $ref: '#/components/responses/ExcludedTemplateResponse'
@@ -266,7 +266,6 @@ paths:
         name: X-Team-Id
       security:
       - X-API-Key: []
-      description: Get excluded templates
     post:
       summary: Add excluded templates and targets
       operationId: post-scans-config-exclude
@@ -282,7 +281,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       tags:
-      - configurations
+      - Configurations
       parameters:
       - schema:
           type: string
@@ -309,7 +308,7 @@ paths:
         default:
           $ref: '#/components/responses/ErrorResponse'
       tags:
-      - configurations
+      - Configurations
       parameters:
       - schema:
           type: string
@@ -320,12 +319,11 @@ paths:
         $ref: '#/components/requestBodies/DeleteExcludedConfigRequest'
       security:
       - X-API-Key: []
-      description: Delete excluded templates or targets by ids
   /v1/scans/config/severity:
     get:
       summary: Get custom severity mappings
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           $ref: '#/components/responses/GetSeverityConfigResponse'
@@ -349,7 +347,7 @@ paths:
     post:
       summary: Add custom severity mapping
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           $ref: '#/components/responses/PostSeverityConfigResponse'
@@ -375,7 +373,7 @@ paths:
     delete:
       summary: Delete custom severity mapping
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           $ref: '#/components/responses/MessageResponse'
@@ -409,7 +407,7 @@ paths:
     patch:
       summary: Modify custom severity mapping
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           $ref: '#/components/responses/MessageResponse'
@@ -436,7 +434,7 @@ paths:
     post:
       summary: Verify Config
       tags:
-      - configurations
+      - Configurations
       responses:
         '200':
           $ref: '#/components/responses/VerifyConfigResponse'
@@ -462,17 +460,6 @@ paths:
         name: X-Team-Id
 components:
   responses:
-    MessageResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
     VerifyConfigResponse:
       description: Example response
       content:
@@ -489,19 +476,6 @@ components:
                 type: string
               event:
                 type: object
-    PostScanConfigResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              id:
-                type: string
-              message:
-                type: string
     ErrorResponse:
       description: Example response
       content:
@@ -540,19 +514,6 @@ components:
                 format: int64
               message:
                 type: string
-    GetSeverityConfigResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - custom_severity_mappings
-            properties:
-              custom_severity_mappings:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CustomSeverityMapping'
     ExcludedTemplateResponse:
       description: Example response
       content:
@@ -566,8 +527,151 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/ExcludedTemplate'
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    GetSeverityConfigResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - custom_severity_mappings
+            properties:
+              custom_severity_mappings:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomSeverityMapping'
+    PostScanConfigResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              id:
+                type: string
+              message:
+                type: string
+  schemas:
+    ConfigTypeEnum:
+      title: ConfigTypeEnum
+      type: string
+      enum:
+      - scan
+      - reporting
+      - template
+      - alerting
+      - cloudlist
+      - subfinder
+    CustomSeverityMapping:
+      title: CustomSeverityMapping
+      type: object
+      required:
+      - id
+      - template_id
+      - original_severity
+      - custom_severity
+      - created_at
+      - updated_at
+      properties:
+        id:
+          type: integer
+          format: int64
+        template_id:
+          type: string
+        original_severity:
+          type: string
+        custom_severity:
+          type: string
+        vuln_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    ExcludedTemplate:
+      title: Excluded Templates and targets
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        value:
+          type: string
+        exclude_type:
+          $ref: '#/components/schemas/ExcludeConfigRequestType'
+        scan_id:
+          type: string
+          description: Optional scan ID if this rule is scoped to a specific scan
+        enumeration_id:
+          type: string
+          description: Optional enumeration ID if this rule is scoped to a specific enumeration
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - value
+      - exclude_type
+      - created_at
+      - updated_at
+    ExcludeConfigRequestType:
+      title: ExcludeConfigRequestType
+      type: string
+      enum:
+      - scan_target
+      - template
+      - enumeration_target
+    ConfigResponse:
+      title: ConfigResponse
+      type: object
+      properties:
+        id:
+          type: string
+        config:
+          type: string
+        config_type:
+          $ref: '#/components/schemas/ConfigTypeEnum'
+        name:
+          type: string
+        read_only:
+          type: boolean
+        global:
+          type: boolean
+        provider_name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - config
+      - config_type
+      - name
+      - created_at
+      - updated_at
   requestBodies:
-    DeleteExcludedConfigRequest:
+    DeleteCustomSeverityMappingRequest:
       content:
         application/json:
           schema:
@@ -594,7 +698,7 @@ components:
                 type: string
               oauth_config_id:
                 type: string
-    DeleteCustomSeverityMappingRequest:
+    DeleteExcludedConfigRequest:
       content:
         application/json:
           schema:
@@ -647,112 +751,6 @@ components:
                 description: Optional enumeration IDs to scope these rules to specific enumerations. If not provided, rules apply globally.
               exclude_type:
                 $ref: '#/components/schemas/ExcludeConfigRequestType'
-  schemas:
-    CustomSeverityMapping:
-      title: CustomSeverityMapping
-      type: object
-      required:
-      - id
-      - template_id
-      - original_severity
-      - custom_severity
-      - created_at
-      - updated_at
-      properties:
-        id:
-          type: integer
-          format: int64
-        template_id:
-          type: string
-        original_severity:
-          type: string
-        custom_severity:
-          type: string
-        vuln_id:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-    ConfigTypeEnum:
-      title: ConfigTypeEnum
-      type: string
-      enum:
-      - scan
-      - reporting
-      - template
-      - alerting
-      - cloudlist
-      - subfinder
-    ExcludeConfigRequestType:
-      title: ExcludeConfigRequestType
-      type: string
-      enum:
-      - scan_target
-      - template
-      - enumeration_target
-    ExcludedTemplate:
-      title: Excluded Templates and targets
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        value:
-          type: string
-        exclude_type:
-          $ref: '#/components/schemas/ExcludeConfigRequestType'
-        scan_id:
-          type: string
-          description: Optional scan ID if this rule is scoped to a specific scan
-        enumeration_id:
-          type: string
-          description: Optional enumeration ID if this rule is scoped to a specific enumeration
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - id
-      - value
-      - exclude_type
-      - created_at
-      - updated_at
-    ConfigResponse:
-      title: ConfigResponse
-      type: object
-      properties:
-        id:
-          type: string
-        config:
-          type: string
-        config_type:
-          $ref: '#/components/schemas/ConfigTypeEnum'
-        name:
-          type: string
-        read_only:
-          type: boolean
-        global:
-          type: boolean
-        provider_name:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - id
-      - config
-      - config_type
-      - name
-      - created_at
-      - updated_at
   securitySchemes:
     X-API-Key:
       name: X-API-Key
