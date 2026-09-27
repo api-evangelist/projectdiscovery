@@ -81,31 +81,6 @@ paths:
       operationId: delete-v1-template-share-template_id
 components:
   responses:
-    UpdateSharedTemplateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - result
-            properties:
-              message:
-                type: string
-              result:
-                $ref: '#/components/schemas/SharedTemplateMetaData'
-    MessageResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
     ErrorResponse:
       description: Example response
       content:
@@ -129,6 +104,31 @@ components:
                 type: string
               status:
                 type: integer
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    UpdateSharedTemplateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - result
+            properties:
+              message:
+                type: string
+              result:
+                $ref: '#/components/schemas/SharedTemplateMetaData'
   schemas:
     SharedTemplateMetaData:
       title: SharedTemplateMetaData

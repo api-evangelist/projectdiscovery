@@ -80,7 +80,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-assets-api
-  name: ProjectDiscovery assets API
+  name: ProjectDiscovery Assets API
   description: The assets API from ProjectDiscovery — 3 operation(s) for assets.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -94,7 +94,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-chaos-api
-  name: ProjectDiscovery chaos API
+  name: ProjectDiscovery Chaos API
   description: The chaos API from ProjectDiscovery — 1 operation(s) for chaos.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -106,7 +106,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-configurations-api
-  name: ProjectDiscovery configurations API
+  name: ProjectDiscovery Configurations API
   description: The configurations API from ProjectDiscovery — 6 operation(s) for configurations.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -120,7 +120,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-enumerations-api
-  name: ProjectDiscovery enumerations API
+  name: ProjectDiscovery Enumerations API
   description: The enumerations API from ProjectDiscovery — 11 operation(s) for enumerations.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -132,7 +132,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-export-api
-  name: ProjectDiscovery export API
+  name: ProjectDiscovery Export API
   description: The export API from ProjectDiscovery — 2 operation(s) for export.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -146,7 +146,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-history-api
-  name: ProjectDiscovery history API
+  name: ProjectDiscovery History API
   description: The history API from ProjectDiscovery — 1 operation(s) for history.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -160,7 +160,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-internal-api
-  name: ProjectDiscovery internal API
+  name: ProjectDiscovery Internal API
   description: The internal API from ProjectDiscovery — 3 operation(s) for internal.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -186,7 +186,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-results-api
-  name: ProjectDiscovery results API
+  name: ProjectDiscovery Results API
   description: The results API from ProjectDiscovery — 4 operation(s) for results.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -200,7 +200,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-retests-api
-  name: ProjectDiscovery retests API
+  name: ProjectDiscovery Retests API
   description: The retests API from ProjectDiscovery — 1 operation(s) for retests.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -212,7 +212,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-scan-log-api
-  name: ProjectDiscovery scan_log API
+  name: ProjectDiscovery Scan Log API
   description: The scan_log API from ProjectDiscovery — 1 operation(s) for scan_log.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -225,7 +225,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-scans-api
-  name: ProjectDiscovery scans API
+  name: ProjectDiscovery Scans API
   description: The scans API from ProjectDiscovery — 17 operation(s) for scans.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -265,7 +265,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-template-v2-api
-  name: ProjectDiscovery template/v2 API
+  name: ProjectDiscovery Template/v2 API
   description: The template/v2 API from ProjectDiscovery — 1 operation(s) for template/v2.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -277,7 +277,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-templates-api
-  name: ProjectDiscovery templates API
+  name: ProjectDiscovery Templates API
   description: The templates API from ProjectDiscovery — 9 operation(s) for templates.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -291,7 +291,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-users-api
-  name: ProjectDiscovery users API
+  name: ProjectDiscovery Users API
   description: The users API from ProjectDiscovery — 2 operation(s) for users.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -305,7 +305,7 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 - aid: projectdiscovery:projectdiscovery-vuln-api
-  name: ProjectDiscovery vuln API
+  name: ProjectDiscovery Vuln API
   description: The vuln API from ProjectDiscovery — 1 operation(s) for vuln.
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
@@ -322,6 +322,8 @@ apis:
   humanURL: https://docs.projectdiscovery.io/api-reference/introduction
   baseURL: https://api.projectdiscovery.io
   tags:
+  - Vulnerabilities
+  tags_raw:
   - Vulnerability
   properties:
   - type: OpenAPI

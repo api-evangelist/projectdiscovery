@@ -127,14 +127,6 @@ paths:
         in: query
         name: severity
 components:
-  schemas:
-    LogExportFormat:
-      title: LogExportFormat
-      type: string
-      enum:
-      - raw
-      - json
-      - csv
   responses:
     ErrorResponse:
       description: Example response
@@ -159,6 +151,14 @@ components:
                 type: string
               status:
                 type: integer
+  schemas:
+    LogExportFormat:
+      title: LogExportFormat
+      type: string
+      enum:
+      - raw
+      - json
+      - csv
   securitySchemes:
     X-API-Key:
       name: X-API-Key

@@ -641,11 +641,21 @@ components:
               status:
                 type: integer
   schemas:
-    UsersCount:
-      title: UsersCount
+    CombolistExposureCount:
+      title: CombolistExposureCount
       type: object
       properties:
-        user:
+        combolist_exposure:
+          type: number
+    LeaksTimeline:
+      title: LeaksTimeline
+      type: object
+      properties:
+        CredentialsCount:
+          type: number
+        Month:
+          type: number
+        Year:
           type: number
     LeaksEntityStatus:
       title: LeaksEntityStatus
@@ -653,37 +663,31 @@ components:
       - fixed
       - open
       - NA
-    CustomersCount:
-      title: CustomersCount
+    UsersCount:
+      title: UsersCount
       type: object
       properties:
-        customers:
+        user:
           type: number
+    UsedUrlsCount:
+      title: UsedUrlsCount
+      type: object
+      properties:
+        count:
+          type: number
+        url:
+          type: string
     EmployeesCount:
       title: EmployeesCount
       type: object
       properties:
         employees:
           type: number
-    CombolistExposureCount:
-      title: CombolistExposureCount
+    CustomersCount:
+      title: CustomersCount
       type: object
       properties:
-        combolist_exposure:
-          type: number
-    DevicesCount:
-      title: DevicesCount
-      type: object
-      properties:
-        devices:
-          type: number
-    LeakCountryStats:
-      title: LeakCountryStats
-      type: object
-      properties:
-        Country:
-          type: string
-        CredentialsCount:
+        customers:
           type: number
     LeaksUsersSampleData:
       title: LeaksUsersSampleData
@@ -699,23 +703,19 @@ components:
           type: string
         log_date:
           type: string
-    UsedUrlsCount:
-      title: UsedUrlsCount
+    DevicesCount:
+      title: DevicesCount
       type: object
       properties:
-        count:
+        devices:
           type: number
-        url:
+    LeakCountryStats:
+      title: LeakCountryStats
+      type: object
+      properties:
+        Country:
           type: string
-    LeaksTimeline:
-      title: LeaksTimeline
-      type: object
-      properties:
         CredentialsCount:
-          type: number
-        Month:
-          type: number
-        Year:
           type: number
   securitySchemes:
     X-API-Key:

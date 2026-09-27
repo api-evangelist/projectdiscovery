@@ -180,6 +180,18 @@ paths:
         required: true
         description: '''Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'''
 components:
+  responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
   schemas:
     UserAuditLogItems:
       title: UserAuditLogItems
@@ -215,18 +227,6 @@ components:
           - platform
           - unknown
           description: Request origin - "api" for x-api-key authentication, "platform" for JWT token, "unknown" for fallback. NULL for historical records (displayed as "-" in UI)
-  responses:
-    MessageResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
   securitySchemes:
     X-API-Key:
       name: X-API-Key
