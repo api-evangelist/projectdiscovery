@@ -215,18 +215,89 @@ paths:
         description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
         name: X-Team-Id
 components:
+  responses:
+    AssetCountResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - asset_count
+            - async
+            properties:
+              message:
+                type: string
+              asset_count:
+                type: integer
+              async:
+                type: boolean
+                description: Whether the operation is running asynchronously
+    GetAssetChangelogsResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - current_page
+            - result_count
+            - total_results
+            - total_pages
+            - data
+            properties:
+              message:
+                type: string
+              current_page:
+                type: integer
+              result_count:
+                type: integer
+              total_results:
+                type: integer
+              total_pages:
+                type: integer
+              data:
+                type: array
+                items:
+                  type: object
+                  $ref: '#/components/schemas/AssetChangelogs'
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
   schemas:
-    VulnerabilityChangelogsEvent:
-      title: VulnerabilityChangelogsEvent
-      type: object
-      properties:
-        name:
-          description: The name of the event
-          type: string
-        from:
-          description: The from value of the event
-        to:
-          description: The to value of the event
     TimeRangeQueryParameter:
       title: TimeRangeQueryParameter
       type: string
@@ -238,6 +309,80 @@ components:
       - last_6_months
       - last_12_months
       - all_time
+    AssetChangelogs:
+      type: object
+      required:
+      - id
+      - enumeration_id
+      - name
+      - created_at
+      - updated_at
+      properties:
+        id:
+          type: integer
+          format: int64
+        enumeration_id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        status_code:
+          type: integer
+        technologies:
+          type: array
+          items:
+            type: string
+        webserver:
+          type: string
+        request:
+          type: string
+        response:
+          type: string
+        cname:
+          type: array
+          items:
+            type: string
+        labels:
+          type: array
+          items:
+            type: string
+        ip:
+          type: string
+        content_length:
+          type: integer
+        title:
+          type: string
+        host:
+          type: string
+        port:
+          type: integer
+        technology_details:
+          type: string
+          format: json
+        is_new:
+          type: boolean
+        body:
+          type: string
+        change_event:
+          type: array
+          items:
+            $ref: '#/components/schemas/VulnerabilityChangelogsEvent'
+    VulnerabilityChangelogsEvent:
+      title: VulnerabilityChangelogsEvent
+      type: object
+      properties:
+        name:
+          description: The name of the event
+          type: string
+        from:
+          description: The from value of the event
+        to:
+          description: The to value of the event
     AssetFilters:
       title: AssetFilters
       type: object
@@ -319,152 +464,19 @@ components:
           type: integer
           minimum: 1
           description: Return assets that haven't been seen in the last N days. An asset is only included if a scan that covers it has run during that period without rediscovering it, so assets that simply haven't been rescanned recently are not matched.
-    AssetChangelogs:
-      type: object
-      required:
-      - id
-      - enumeration_id
-      - name
-      - created_at
-      - updated_at
-      properties:
-        id:
-          type: integer
-          format: int64
-        enumeration_id:
-          type: string
-        name:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        status_code:
-          type: integer
-        technologies:
-          type: array
-          items:
-            type: string
-        webserver:
-          type: string
-        request:
-          type: string
-        response:
-          type: string
-        cname:
-          type: array
-          items:
-            type: string
-        labels:
-          type: array
-          items:
-            type: string
-        ip:
-          type: string
-        content_length:
-          type: integer
-        title:
-          type: string
-        host:
-          type: string
-        port:
-          type: integer
-        technology_details:
-          type: string
-          format: json
-        is_new:
-          type: boolean
-        body:
-          type: string
-        change_event:
-          type: array
-          items:
-            $ref: '#/components/schemas/VulnerabilityChangelogsEvent'
-  responses:
-    MessageResponse:
-      description: Example response
+  requestBodies:
+    AssetIdLabelsRequest:
       content:
         application/json:
           schema:
             type: object
             required:
-            - message
+            - labels
             properties:
-              message:
-                type: string
-    ErrorResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-              kind:
-                type: string
-              code:
-                type: string
-              error:
-                type: string
-              error_id:
-                type: string
-              param:
-                type: string
-              status:
-                type: integer
-    GetAssetChangelogsResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - current_page
-            - result_count
-            - total_results
-            - total_pages
-            - data
-            properties:
-              message:
-                type: string
-              current_page:
-                type: integer
-              result_count:
-                type: integer
-              total_results:
-                type: integer
-              total_pages:
-                type: integer
-              data:
+              labels:
                 type: array
                 items:
-                  type: object
-                  $ref: '#/components/schemas/AssetChangelogs'
-    AssetCountResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - asset_count
-            - async
-            properties:
-              message:
-                type: string
-              asset_count:
-                type: integer
-              async:
-                type: boolean
-                description: Whether the operation is running asynchronously
-  requestBodies:
+                  type: string
     UpdateAssetLabelsRequest:
       content:
         application/json:
@@ -476,18 +488,6 @@ components:
             properties:
               filters:
                 $ref: '#/components/schemas/AssetFilters'
-              labels:
-                type: array
-                items:
-                  type: string
-    AssetIdLabelsRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - labels
-            properties:
               labels:
                 type: array
                 items:

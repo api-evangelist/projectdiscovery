@@ -52,10 +52,6 @@ paths:
         description: Specifies the maximum number of revisions to be returned.
 components:
   schemas:
-    VulnerabilityHistoryDetail:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/VulnerabilityHistory'
     VulnerabilityHistory:
       type: object
       properties:
@@ -87,6 +83,10 @@ components:
       required:
       - history_count
       - history
+    VulnerabilityHistoryDetail:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/VulnerabilityHistory'
   responses:
     ErrorResponse:
       description: Example response

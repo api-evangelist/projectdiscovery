@@ -104,6 +104,17 @@ paths:
       description: Rotate user api-key
 components:
   responses:
+    DeleteUserAPIKeyResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+            - message
     MessageResponse:
       description: Example response
       content:
@@ -115,20 +126,6 @@ components:
             properties:
               message:
                 type: string
-    PostApiKeyRotateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-              api_key:
-                type: string
-            required:
-            - message
-            - api_key
     GetUserAPIKeyResponse:
       description: Example response
       content:
@@ -143,7 +140,7 @@ components:
             required:
             - message
             - api_key
-    DeleteUserAPIKeyResponse:
+    PostApiKeyRotateResponse:
       description: Example response
       content:
         application/json:
@@ -152,8 +149,11 @@ components:
             properties:
               message:
                 type: string
+              api_key:
+                type: string
             required:
             - message
+            - api_key
     ErrorResponse:
       description: Example response
       content:

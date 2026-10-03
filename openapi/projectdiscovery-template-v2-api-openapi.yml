@@ -125,79 +125,6 @@ paths:
       operationId: get-v2-template-search
 components:
   schemas:
-    TemplateStats:
-      type: object
-      x-examples:
-        Example 1:
-          date: '2024-02-03T08:40:19.911720715Z'
-          statistics:
-            authors:
-              0h1in9e: 1
-              0ri2n: 13
-              0ut0fb4nd: 1
-              0w4ys: 3
-            classification:
-              total: 4772
-              cvss-metrics: 4650
-              cvss-score: 2999
-              cve-id: 2349
-              cwe-id: 4679
-            description: 6665
-            directory:
-              total: 0
-            name: 7810
-            references: 5369
-            remediation: 2231
-            severity:
-              total: 7810
-              critical: 947
-              high: 1563
-              medium: 1457
-              low: 257
-              info: 3551
-              unknown: 35
-            tags:
-              '360': 1
-              '3600': 1
-              '''rpcms''': 1
-            total: 7810
-            type:
-              total: 7810
-              http: 7005
-              dns: 21
-              network: 134
-              file: 312
-              ssl: 27
-              websocket: 0
-              workflow: 191
-              headless: 16
-          template-version: main
-      required:
-      - buckets
-      - missing
-      - other
-      - total
-      properties:
-        is_new:
-          $ref: '#/components/schemas/StatBuckets'
-        creation_stats:
-          $ref: '#/components/schemas/StatBuckets'
-        author:
-          $ref: '#/components/schemas/StatBuckets'
-        is_early:
-          $ref: '#/components/schemas/StatBuckets'
-        dir:
-          $ref: '#/components/schemas/StatBuckets'
-        product:
-          $ref: '#/components/schemas/StatBuckets'
-        severity:
-          $ref: '#/components/schemas/StatBuckets'
-        tags:
-          $ref: '#/components/schemas/StatBuckets'
-        type:
-          $ref: '#/components/schemas/StatBuckets'
-        vendor:
-          $ref: '#/components/schemas/StatBuckets'
     TemplateData:
       description: Template Document or object
       type: object
@@ -292,6 +219,20 @@ components:
           type: boolean
         remediation:
           type: string
+    StatBuckets:
+      title: StatBuckets
+      type: object
+      properties:
+        buckets:
+          type: object
+          additionalProperties:
+            type: integer
+        missing:
+          type: integer
+        other:
+          type: integer
+        total:
+          type: integer
     AIMeta:
       type: object
       properties:
@@ -339,20 +280,79 @@ components:
         cpe:
           type: string
           description: CPE for the template
-    StatBuckets:
-      title: StatBuckets
+    TemplateStats:
       type: object
+      x-examples:
+        Example 1:
+          date: '2024-02-03T08:40:19.911720715Z'
+          statistics:
+            authors:
+              0h1in9e: 1
+              0ri2n: 13
+              0ut0fb4nd: 1
+              0w4ys: 3
+            classification:
+              total: 4772
+              cvss-metrics: 4650
+              cvss-score: 2999
+              cve-id: 2349
+              cwe-id: 4679
+            description: 6665
+            directory:
+              total: 0
+            name: 7810
+            references: 5369
+            remediation: 2231
+            severity:
+              total: 7810
+              critical: 947
+              high: 1563
+              medium: 1457
+              low: 257
+              info: 3551
+              unknown: 35
+            tags:
+              '360': 1
+              '3600': 1
+              '''rpcms''': 1
+            total: 7810
+            type:
+              total: 7810
+              http: 7005
+              dns: 21
+              network: 134
+              file: 312
+              ssl: 27
+              websocket: 0
+              workflow: 191
+              headless: 16
+          template-version: main
+      required:
+      - buckets
+      - missing
+      - other
+      - total
       properties:
-        buckets:
-          type: object
-          additionalProperties:
-            type: integer
-        missing:
-          type: integer
-        other:
-          type: integer
-        total:
-          type: integer
+        is_new:
+          $ref: '#/components/schemas/StatBuckets'
+        creation_stats:
+          $ref: '#/components/schemas/StatBuckets'
+        author:
+          $ref: '#/components/schemas/StatBuckets'
+        is_early:
+          $ref: '#/components/schemas/StatBuckets'
+        dir:
+          $ref: '#/components/schemas/StatBuckets'
+        product:
+          $ref: '#/components/schemas/StatBuckets'
+        severity:
+          $ref: '#/components/schemas/StatBuckets'
+        tags:
+          $ref: '#/components/schemas/StatBuckets'
+        type:
+          $ref: '#/components/schemas/StatBuckets'
+        vendor:
+          $ref: '#/components/schemas/StatBuckets'
   responses:
     MessageResponse:
       description: Example response

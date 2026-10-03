@@ -641,11 +641,25 @@ components:
               status:
                 type: integer
   schemas:
-    CombolistExposureCount:
-      title: CombolistExposureCount
+    LeaksEntityStatus:
+      title: LeaksEntityStatus
+      enum:
+      - fixed
+      - open
+      - NA
+    DevicesCount:
+      title: DevicesCount
       type: object
       properties:
-        combolist_exposure:
+        devices:
+          type: number
+    LeakCountryStats:
+      title: LeakCountryStats
+      type: object
+      properties:
+        Country:
+          type: string
+        CredentialsCount:
           type: number
     LeaksTimeline:
       title: LeaksTimeline
@@ -657,12 +671,12 @@ components:
           type: number
         Year:
           type: number
-    LeaksEntityStatus:
-      title: LeaksEntityStatus
-      enum:
-      - fixed
-      - open
-      - NA
+    CustomersCount:
+      title: CustomersCount
+      type: object
+      properties:
+        customers:
+          type: number
     UsersCount:
       title: UsersCount
       type: object
@@ -677,18 +691,6 @@ components:
           type: number
         url:
           type: string
-    EmployeesCount:
-      title: EmployeesCount
-      type: object
-      properties:
-        employees:
-          type: number
-    CustomersCount:
-      title: CustomersCount
-      type: object
-      properties:
-        customers:
-          type: number
     LeaksUsersSampleData:
       title: LeaksUsersSampleData
       type: object
@@ -703,19 +705,17 @@ components:
           type: string
         log_date:
           type: string
-    DevicesCount:
-      title: DevicesCount
+    EmployeesCount:
+      title: EmployeesCount
       type: object
       properties:
-        devices:
+        employees:
           type: number
-    LeakCountryStats:
-      title: LeakCountryStats
+    CombolistExposureCount:
+      title: CombolistExposureCount
       type: object
       properties:
-        Country:
-          type: string
-        CredentialsCount:
+        combolist_exposure:
           type: number
   securitySchemes:
     X-API-Key:
