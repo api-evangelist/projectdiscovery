@@ -331,6 +331,9 @@ apis:
   - type: APIReference
     url: https://docs.projectdiscovery.io/api-reference/introduction
 common:
+- type: CapabilityMap
+  url: capabilities/projectdiscovery-capability-edges.yml
+  name: ProjectDiscovery Business Capability Map
 - type: Overlay
   url: overlays/projectdiscovery-openapi-overlay.yaml
 - type: DeveloperPortal

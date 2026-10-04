@@ -1,0 +1,125 @@
+slug: projectdiscovery
+provider: ProjectDiscovery
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Vulnerability
+  spec_file: projectdiscovery-vulnerability-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.92
+  evidence: GET /v2/vulnerability/{id} Get Vulnerability by ID; GET /v2/vulnerability/{id}/timeline Get
+    Vulnerability Timeline; schemas VulnExposure, CVEInfo, KevInfo, Weakness
+  reason: Operations expose vulnerability records, CVE/KEV metadata and exposure timelines — unambiguously
+    vulnerability identification and tracking.
+- tag: Results
+  spec_file: projectdiscovery-results-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.9
+  evidence: GET /v1/scans/vuln/{vuln_id} 'Get Scan Vulnerability'; schemas VulnerabilityResults, VulnerabilityChangelogs,
+    VulnIssueTrackerItem
+  reason: Retrieval and tracking of scan-detected vulnerabilities, including issue-tracker linkage, is
+    plainly vulnerability management.
+- tag: Scans
+  spec_file: projectdiscovery-scans-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.9
+  evidence: POST /v1/scans 'Create Scan'; 'Retest vulnerability'; 'Set Scan Schedule'; schemas ScanSchedule,
+    VulnStatusEnum
+  reason: Creating, scheduling, rescanning and retesting vulnerabilities is the core vulnerability scanning
+    and remediation-verification loop.
+- tag: retests
+  spec_file: projectdiscovery-retests-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.78
+  evidence: GET /v1/retest/{vuln_id} Get Retest Vulnerability; schemas VulnerabilityEvent, VulnerabilityResults,
+    VulnIssueTrackerItem
+  reason: Retesting a vulnerability to confirm remediation is squarely vulnerability scanning/remediation
+    verification; schema names (VulnIssueTrackerItem) confirm remediation tracking.
+- tag: Asset
+  spec_file: projectdiscovery-asset-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.75
+  evidence: GET /v1/asset/enumerate/misconfiguration  List Misconfiguration Findings; AssetPolicy, EnumerationConfig
+  reason: Attack-surface asset enumeration plus listing of misconfiguration findings and policy-based
+    detection — security exposure discovery and remediation tracking, i.e. vulnerability management.
+- tag: Configurations
+  spec_file: projectdiscovery-configurations-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.75
+  evidence: '''Get excluded templates'', ''Add custom severity mapping''; schemas CustomSeverityMapping,
+    ExcludedTemplate'
+  reason: Configuration of scan templates, exclusions and vulnerability severity mappings is the tuning
+    layer of a vulnerability scanning programme, not generic app config.
+- tag: Enumerations
+  spec_file: projectdiscovery-enumerations-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.75
+  evidence: POST /v1/asset/enumerate 'Create Enumeration'; 'Rescan Enumeration'; schemas EnumerationLaunchConfig,
+    EnumerationSchedule
+  reason: Scheduled asset enumeration and rescanning is attack-surface discovery that drives vulnerability
+    scanning coverage.
+- tag: vuln
+  spec_file: projectdiscovery-vuln-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.75
+  evidence: GET /v1/scans/vulns/history Get scan log stats; schemas VulnerabilityHistory, VulnerabilityHistoryDetail
+  reason: Historical vulnerability counts from scan runs — vulnerability posture tracking over time, part
+    of vulnerability management rather than generic reporting.
+- tag: Assets
+  spec_file: projectdiscovery-assets-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.7
+  evidence: GET /v1/asset/{asset_id}/changelogs 'Get Asset Changelogs for a given asset_id'; schemas AssetChangelogs,
+    VulnerabilityChangelogsEvent
+  reason: Assets here are attack-surface assets tracked for exposure; changelogs tie to vulnerability
+    change events, so this supports vulnerability/exposure management rather than any generic asset accounting.
+- tag: History
+  spec_file: projectdiscovery-history-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.7
+  evidence: GET /v1/scans/vulns/history 'Get scan log stats of given scan id'; schemas VulnerabilityHistory,
+    VulnerabilityHistoryDetail
+  reason: Historical vulnerability scan statistics support tracking of vulnerability remediation over
+    time.
+- tag: Templates
+  spec_file: projectdiscovery-templates-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.7
+  evidence: GET /v1/template/public Get Public Template List; POST /v1/template/ai Generate AI Template;
+    schemas Classification, TemplateData — Nuclei detection templates driving "template-driven vulnerabil[ity
+    scanning]"
+  reason: The tag manages Nuclei scan templates, i.e. the detection content used for vulnerability scanning
+    on a security platform; closest fit is Vulnerability Management. Some ambiguity because the operations
+    are authoring/sharing of content rather than scanning itself.
