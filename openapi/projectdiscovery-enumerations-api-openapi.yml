@@ -1334,18 +1334,37 @@ paths:
       description: Get All enumeration content
 components:
   schemas:
-    EnumerationSourceValue:
+    EnumerationSchedule:
+      title: EnumerationSchedule
       type: object
       required:
-      - source
-      - metadata
+      - enumeration_id
+      - scan_frequency
+      - schedule_last_run
+      - schedule_next_run
       properties:
-        source:
+        enumeration_id:
           type: string
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
+        scan_frequency:
+          type: string
+        schedule_last_run:
+          type: string
+        schedule_next_run:
+          type: string
+        start_time:
+          type: string
+          format: time
+        hourly_frequency:
+          type: integer
+        custom_weekdays:
+          type: array
+          description: 'Array of integer denoting the weekdays on which the scan is supposed to run.
+
+            0-6 denoting Sunday-Saturday.'
+          items:
+            type: integer
+            minimum: 0
+            maximum: 6
     EnumerationLaunchConfig:
       title: EnumerationLaunchConfig
       type: object
@@ -1354,6 +1373,113 @@ components:
           type: boolean
         ports:
           type: string
+    SchedulerFrequency:
+      title: SchedulerFrequency
+      type: string
+      enum:
+      - hourly
+      - daily
+      - weekly
+      - monthly
+      - custom
+      description: Allowed frequencies for the scheduler
+    EnumerateData:
+      title: EnumerateData
+      type: object
+      required:
+      - id
+      - name
+      - status
+      - created_at
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        failure_reason:
+          type: string
+        completed_at:
+          type: string
+          format: date-time
+        enumeration_time:
+          type: string
+          format: duration
+        enumeration_type:
+          type: string
+        enumeration_stats:
+          $ref: '#/components/schemas/EnumerationStats'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        root_domains:
+          type: array
+          items:
+            type: string
+        exclusions:
+          type: array
+          items:
+            type: string
+          description: Combined inclusion (prefixed with +) and exclusion patterns for discovery scope
+        enrichment_hosts_count:
+          type: integer
+        is_rescan:
+          type: boolean
+        rescan_count:
+          type: integer
+        cloudlist_config_ids:
+          type: array
+          items:
+            type: string
+        cloudlist_provider_name:
+          type: string
+        enumeration_time_elapsed:
+          type: string
+        total_assets:
+          type: integer
+          format: int64
+        new_assets:
+          type: integer
+          format: int64
+        domain_names:
+          type: array
+          items:
+            type: string
+        schedule:
+          $ref: '#/components/schemas/EnumerationSchedule'
+        is_public:
+          type: boolean
+        asset_group_filters:
+          type: object
+          $ref: '#/components/schemas/AssetFilters'
+        body:
+          type: string
+        agent_id:
+          type: string
+        agent_tags:
+          type: array
+          items:
+            type: string
+        agent_networks:
+          type: array
+          items:
+            type: string
+        agent_behavior:
+          type: string
+          enum:
+          - distribute
+          - mirror
+          default: distribute
+        agent_auto_discover:
+          type: boolean
+        automatic_vuln_scans:
+          type: boolean
+        is_internal:
+          type: boolean
     AssetFilters:
       title: AssetFilters
       type: object
@@ -1435,40 +1561,24 @@ components:
           type: integer
           minimum: 1
           description: Return assets that haven't been seen in the last N days. An asset is only included if a scan that covers it has run during that period without rediscovering it, so assets that simply haven't been rescanned recently are not matched.
-    SchedulerFrequency:
-      title: SchedulerFrequency
+    EnumExportFormats:
+      title: EnumExportFormats
       type: string
       enum:
-      - hourly
-      - daily
-      - weekly
-      - monthly
-      - custom
-      description: Allowed frequencies for the scheduler
-    TimeRangeQueryParameter:
-      title: TimeRangeQueryParameter
-      type: string
-      enum:
-      - last_day
-      - last_week
-      - last_month
-      - last_3_months
-      - last_6_months
-      - last_12_months
-      - all_time
-    EnumerationContentTechnologyDetails:
-      title: EnumerationContentTechnologyDetails
+      - raw
+      - json
+      - csv
+    EnumerationSourceValue:
       type: object
+      required:
+      - source
+      - metadata
       properties:
-        description:
+        source:
           type: string
-        website:
-          type: string
-        icon:
-          type: string
-        categories:
-          type: array
-          items:
+        metadata:
+          type: object
+          additionalProperties:
             type: string
     EnumerationContent:
       title: EnumerationContent
@@ -1664,141 +1774,31 @@ components:
           description: Combined inclusion (prefixed with +) and exclusion patterns for discovery scope
         automatic_vuln_scans:
           type: boolean
-    EnumExportFormats:
-      title: EnumExportFormats
+    EnumerationContentTechnologyDetails:
+      title: EnumerationContentTechnologyDetails
+      type: object
+      properties:
+        description:
+          type: string
+        website:
+          type: string
+        icon:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+    TimeRangeQueryParameter:
+      title: TimeRangeQueryParameter
       type: string
       enum:
-      - raw
-      - json
-      - csv
-    EnumerateData:
-      title: EnumerateData
-      type: object
-      required:
-      - id
-      - name
-      - status
-      - created_at
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        status:
-          type: string
-        failure_reason:
-          type: string
-        completed_at:
-          type: string
-          format: date-time
-        enumeration_time:
-          type: string
-          format: duration
-        enumeration_type:
-          type: string
-        enumeration_stats:
-          $ref: '#/components/schemas/EnumerationStats'
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        root_domains:
-          type: array
-          items:
-            type: string
-        exclusions:
-          type: array
-          items:
-            type: string
-          description: Combined inclusion (prefixed with +) and exclusion patterns for discovery scope
-        enrichment_hosts_count:
-          type: integer
-        is_rescan:
-          type: boolean
-        rescan_count:
-          type: integer
-        cloudlist_config_ids:
-          type: array
-          items:
-            type: string
-        cloudlist_provider_name:
-          type: string
-        enumeration_time_elapsed:
-          type: string
-        total_assets:
-          type: integer
-          format: int64
-        new_assets:
-          type: integer
-          format: int64
-        domain_names:
-          type: array
-          items:
-            type: string
-        schedule:
-          $ref: '#/components/schemas/EnumerationSchedule'
-        is_public:
-          type: boolean
-        asset_group_filters:
-          type: object
-          $ref: '#/components/schemas/AssetFilters'
-        body:
-          type: string
-        agent_id:
-          type: string
-        agent_tags:
-          type: array
-          items:
-            type: string
-        agent_networks:
-          type: array
-          items:
-            type: string
-        agent_behavior:
-          type: string
-          enum:
-          - distribute
-          - mirror
-          default: distribute
-        agent_auto_discover:
-          type: boolean
-        automatic_vuln_scans:
-          type: boolean
-        is_internal:
-          type: boolean
-    EnumerationSchedule:
-      title: EnumerationSchedule
-      type: object
-      required:
-      - enumeration_id
-      - scan_frequency
-      - schedule_last_run
-      - schedule_next_run
-      properties:
-        enumeration_id:
-          type: string
-        scan_frequency:
-          type: string
-        schedule_last_run:
-          type: string
-        schedule_next_run:
-          type: string
-        start_time:
-          type: string
-          format: time
-        hourly_frequency:
-          type: integer
-        custom_weekdays:
-          type: array
-          description: 'Array of integer denoting the weekdays on which the scan is supposed to run.
-
-            0-6 denoting Sunday-Saturday.'
-          items:
-            type: integer
-            minimum: 0
-            maximum: 6
+      - last_day
+      - last_week
+      - last_month
+      - last_3_months
+      - last_6_months
+      - last_12_months
+      - all_time
     EnumerationStats:
       title: EnumerationStats
       type: object
@@ -1827,125 +1827,7 @@ components:
         total_asset_groups:
           type: integer
           format: int64
-  responses:
-    GetEnumerateIdContentsResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - data
-            properties:
-              message:
-                type: string
-              data:
-                $ref: '#/components/schemas/EnumerateData'
-    GetEnumerationScheduleResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - schedules
-            properties:
-              message:
-                type: string
-              schedules:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EnumerationSchedule'
-    EnumerateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - current_page
-            - result_count
-            - total_results
-            - total_pages
-            - data
-            properties:
-              current_page:
-                type: integer
-              result_count:
-                type: integer
-              total_results:
-                type: integer
-              total_pages:
-                type: integer
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EnumerateData'
-    MessageResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-    ErrorResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-              kind:
-                type: string
-              code:
-                type: string
-              error:
-                type: string
-              error_id:
-                type: string
-              param:
-                type: string
-              status:
-                type: integer
-    GetEnumerateIdContents:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - data
-            properties:
-              message:
-                type: string
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EnumerationContent'
   requestBodies:
-    CreateAssetGroupRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - filters
-            properties:
-              filters:
-                $ref: '#/components/schemas/AssetFilters'
-              name:
-                type: string
     SetEnumerationScheduleRequest:
       content:
         application/json:
@@ -1987,6 +1869,124 @@ components:
                 $ref: '#/components/schemas/AssetFilters'
               name:
                 type: string
+    CreateAssetGroupRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - filters
+            properties:
+              filters:
+                $ref: '#/components/schemas/AssetFilters'
+              name:
+                type: string
+  responses:
+    GetEnumerateIdContentsResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - data
+            properties:
+              message:
+                type: string
+              data:
+                $ref: '#/components/schemas/EnumerateData'
+    GetEnumerationScheduleResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - schedules
+            properties:
+              message:
+                type: string
+              schedules:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnumerationSchedule'
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    GetEnumerateIdContents:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - data
+            properties:
+              message:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnumerationContent'
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+    EnumerateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - current_page
+            - result_count
+            - total_results
+            - total_pages
+            - data
+            properties:
+              current_page:
+                type: integer
+              result_count:
+                type: integer
+              total_results:
+                type: integer
+              total_pages:
+                type: integer
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnumerateData'
   securitySchemes:
     X-API-Key:
       name: X-API-Key

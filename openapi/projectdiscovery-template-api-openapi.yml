@@ -80,27 +80,18 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
       operationId: delete-v1-template-share-template_id
 components:
-  schemas:
-    SharedTemplateMetaData:
-      title: SharedTemplateMetaData
-      type: object
-      properties:
-        expires_at:
-          type: string
-          format: date-time
-        organizations:
-          type: array
-          items:
-            type: string
-        share_type:
-          type: string
-        template_id:
-          type: string
-        users_email:
-          type: array
-          items:
-            type: string
   responses:
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
     ErrorResponse:
       description: Example response
       content:
@@ -138,17 +129,26 @@ components:
                 type: string
               result:
                 $ref: '#/components/schemas/SharedTemplateMetaData'
-    MessageResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
+  schemas:
+    SharedTemplateMetaData:
+      title: SharedTemplateMetaData
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+        organizations:
+          type: array
+          items:
+            type: string
+        share_type:
+          type: string
+        template_id:
+          type: string
+        users_email:
+          type: array
+          items:
+            type: string
   securitySchemes:
     X-API-Key:
       name: X-API-Key

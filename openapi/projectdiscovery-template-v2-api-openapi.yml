@@ -125,6 +125,140 @@ paths:
       operationId: get-v2-template-search
 components:
   schemas:
+    AIMeta:
+      type: object
+      properties:
+        model_used:
+          description: The AI model used to generate the template
+          type: string
+        is_prompt_by_human:
+          description: Whether the prompt was written by a human
+          type: boolean
+        is_template_by_human:
+          description: Whether the template was written by a human
+          type: boolean
+        prompt:
+          description: The prompt used to generate the template
+          type: string
+    Classification:
+      description: Classification of template including additional metadata like cve-id, cwe-id etc
+      type: object
+      properties:
+        cve-id:
+          type: array
+          items:
+            type: string
+          description: CVE IDs for the template
+        cwe-id:
+          type: array
+          items:
+            type: string
+          description: CWE IDs for the template
+        cvss-metrics:
+          type: string
+          description: CVSS Metrics for the template
+        cvss-score:
+          type: number
+          format: float
+          description: CVSS Score for the template
+        epss-score:
+          type: number
+          format: float
+          description: EPSS Score for the template
+        epss-percentile:
+          type: number
+          format: float
+          description: EPSS Percentile for the template
+        cpe:
+          type: string
+          description: CPE for the template
+    StatBuckets:
+      title: StatBuckets
+      type: object
+      properties:
+        buckets:
+          type: object
+          additionalProperties:
+            type: integer
+        missing:
+          type: integer
+        other:
+          type: integer
+        total:
+          type: integer
+    TemplateStats:
+      type: object
+      x-examples:
+        Example 1:
+          date: '2024-02-03T08:40:19.911720715Z'
+          statistics:
+            authors:
+              0h1in9e: 1
+              0ri2n: 13
+              0ut0fb4nd: 1
+              0w4ys: 3
+            classification:
+              total: 4772
+              cvss-metrics: 4650
+              cvss-score: 2999
+              cve-id: 2349
+              cwe-id: 4679
+            description: 6665
+            directory:
+              total: 0
+            name: 7810
+            references: 5369
+            remediation: 2231
+            severity:
+              total: 7810
+              critical: 947
+              high: 1563
+              medium: 1457
+              low: 257
+              info: 3551
+              unknown: 35
+            tags:
+              '360': 1
+              '3600': 1
+              '''rpcms''': 1
+            total: 7810
+            type:
+              total: 7810
+              http: 7005
+              dns: 21
+              network: 134
+              file: 312
+              ssl: 27
+              websocket: 0
+              workflow: 191
+              headless: 16
+          template-version: main
+      required:
+      - buckets
+      - missing
+      - other
+      - total
+      properties:
+        is_new:
+          $ref: '#/components/schemas/StatBuckets'
+        creation_stats:
+          $ref: '#/components/schemas/StatBuckets'
+        author:
+          $ref: '#/components/schemas/StatBuckets'
+        is_early:
+          $ref: '#/components/schemas/StatBuckets'
+        dir:
+          $ref: '#/components/schemas/StatBuckets'
+        product:
+          $ref: '#/components/schemas/StatBuckets'
+        severity:
+          $ref: '#/components/schemas/StatBuckets'
+        tags:
+          $ref: '#/components/schemas/StatBuckets'
+        type:
+          $ref: '#/components/schemas/StatBuckets'
+        vendor:
+          $ref: '#/components/schemas/StatBuckets'
     TemplateData:
       description: Template Document or object
       type: object
@@ -219,140 +353,6 @@ components:
           type: boolean
         remediation:
           type: string
-    StatBuckets:
-      title: StatBuckets
-      type: object
-      properties:
-        buckets:
-          type: object
-          additionalProperties:
-            type: integer
-        missing:
-          type: integer
-        other:
-          type: integer
-        total:
-          type: integer
-    AIMeta:
-      type: object
-      properties:
-        model_used:
-          description: The AI model used to generate the template
-          type: string
-        is_prompt_by_human:
-          description: Whether the prompt was written by a human
-          type: boolean
-        is_template_by_human:
-          description: Whether the template was written by a human
-          type: boolean
-        prompt:
-          description: The prompt used to generate the template
-          type: string
-    Classification:
-      description: Classification of template including additional metadata like cve-id, cwe-id etc
-      type: object
-      properties:
-        cve-id:
-          type: array
-          items:
-            type: string
-          description: CVE IDs for the template
-        cwe-id:
-          type: array
-          items:
-            type: string
-          description: CWE IDs for the template
-        cvss-metrics:
-          type: string
-          description: CVSS Metrics for the template
-        cvss-score:
-          type: number
-          format: float
-          description: CVSS Score for the template
-        epss-score:
-          type: number
-          format: float
-          description: EPSS Score for the template
-        epss-percentile:
-          type: number
-          format: float
-          description: EPSS Percentile for the template
-        cpe:
-          type: string
-          description: CPE for the template
-    TemplateStats:
-      type: object
-      x-examples:
-        Example 1:
-          date: '2024-02-03T08:40:19.911720715Z'
-          statistics:
-            authors:
-              0h1in9e: 1
-              0ri2n: 13
-              0ut0fb4nd: 1
-              0w4ys: 3
-            classification:
-              total: 4772
-              cvss-metrics: 4650
-              cvss-score: 2999
-              cve-id: 2349
-              cwe-id: 4679
-            description: 6665
-            directory:
-              total: 0
-            name: 7810
-            references: 5369
-            remediation: 2231
-            severity:
-              total: 7810
-              critical: 947
-              high: 1563
-              medium: 1457
-              low: 257
-              info: 3551
-              unknown: 35
-            tags:
-              '360': 1
-              '3600': 1
-              '''rpcms''': 1
-            total: 7810
-            type:
-              total: 7810
-              http: 7005
-              dns: 21
-              network: 134
-              file: 312
-              ssl: 27
-              websocket: 0
-              workflow: 191
-              headless: 16
-          template-version: main
-      required:
-      - buckets
-      - missing
-      - other
-      - total
-      properties:
-        is_new:
-          $ref: '#/components/schemas/StatBuckets'
-        creation_stats:
-          $ref: '#/components/schemas/StatBuckets'
-        author:
-          $ref: '#/components/schemas/StatBuckets'
-        is_early:
-          $ref: '#/components/schemas/StatBuckets'
-        dir:
-          $ref: '#/components/schemas/StatBuckets'
-        product:
-          $ref: '#/components/schemas/StatBuckets'
-        severity:
-          $ref: '#/components/schemas/StatBuckets'
-        tags:
-          $ref: '#/components/schemas/StatBuckets'
-        type:
-          $ref: '#/components/schemas/StatBuckets'
-        vendor:
-          $ref: '#/components/schemas/StatBuckets'
   responses:
     MessageResponse:
       description: Example response

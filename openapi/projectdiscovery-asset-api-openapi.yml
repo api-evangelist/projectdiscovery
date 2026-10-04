@@ -523,71 +523,6 @@ paths:
         description: supported format is csv, raw, or json (default json)
 components:
   schemas:
-    EnumerationHistoryDataResponse:
-      title: EnumerationHistoryDataResponse
-      type: object
-      required:
-      - enum_id
-      - name
-      - enum_type
-      - enum_started_at
-      - enum_finished_at
-      - enumeration_time
-      - status
-      - new_assets_discovered
-      - total_targets_processed
-      properties:
-        enum_id:
-          type: string
-        name:
-          type: string
-        enum_type:
-          type: string
-        enum_started_at:
-          type: string
-          format: date-time
-        enum_finished_at:
-          type: string
-          format: date-time
-        enumeration_time:
-          type: string
-          format: duration
-        status:
-          type: string
-        new_assets_discovered:
-          type: integer
-        total_targets_processed:
-          type: integer
-        error_details:
-          type: string
-    TimeRangeQueryParameter:
-      title: TimeRangeQueryParameter
-      type: string
-      enum:
-      - last_day
-      - last_week
-      - last_month
-      - last_3_months
-      - last_6_months
-      - last_12_months
-      - all_time
-    AssetPolicyListResponse:
-      title: AssetPolicyListResponse
-      type: object
-      required:
-      - policies
-      - total
-      properties:
-        policies:
-          type: array
-          description: Total number of asset policies for the user
-          items:
-            $ref: '#/components/schemas/AssetPolicy'
-        total:
-          type: integer
-          format: int64
-        message:
-          type: string
     MisconfigurationResponse:
       title: MisconfigurationResponse
       type: object
@@ -641,14 +576,6 @@ components:
           type: string
           format: date
           description: When the finding was last updated
-    EnumerationLaunchConfig:
-      title: EnumerationLaunchConfig
-      type: object
-      properties:
-        follow-redirect:
-          type: boolean
-        ports:
-          type: string
     AssetPolicySuggestionsResponse:
       title: AssetPolicySuggestionsResponse
       type: object
@@ -667,114 +594,15 @@ components:
           description: Total number of suggestions
         message:
           type: string
-    EnumerationConfig:
-      title: EnumerationConfig
-      type: object
-      properties:
-        name:
-          type: string
-        root_domains:
-          type: array
-          items:
-            type: string
-        enrichment_inputs:
-          type: array
-          items:
-            type: string
-        steps:
-          type: array
-          items:
-            type: string
-            enum:
-            - dns_resolve
-            - dns_bruteforce
-            - dns_permute
-            - port_scan
-            - http_probe
-            - http_screenshot
-            - endpoint_crawling
-            - dns_passive
-            - tls_scan
-            - uncover_assets
-            - dns_scraping
-        enum_ports:
-          type: string
-        enumeration_config:
-          $ref: '#/components/schemas/EnumerationLaunchConfig'
-        alerting_config_ids:
-          type: array
-          items:
-            type: string
-        subfinder_config_ids:
-          type: array
-          items:
-            type: string
-        exclusions:
-          type: array
-          items:
-            type: string
-          description: Combined inclusion (prefixed with +) and exclusion patterns for discovery scope
-        automatic_vuln_scans:
-          type: boolean
-    AssetPolicySuggestion:
-      title: AssetPolicySuggestion
-      type: object
-      required:
-      - id
-      - category
-      - title
-      - reason
-      - severity
-      - suggested_policy
-      - affected_count
-      properties:
-        id:
-          type: string
-          description: Unique identifier for this suggestion (deterministic based on pattern)
-        category:
-          type: string
-          description: Category of the suggestion (e.g., ip_concentration, repeated_title)
-        title:
-          type: string
-          description: Human-readable title for the suggestion
-        reason:
-          type: string
-          description: Detailed explanation of why this suggestion is made
-        severity:
-          type: string
-          description: Severity level of the suggestion
-        suggested_policy:
-          type: object
-          required:
-          - name
-          - policy_type
-          - policies
-          properties:
-            name:
-              type: string
-              description: Suggested name for the policy
-            policy_type:
-              $ref: '#/components/schemas/AssetPolicyType'
-            policies:
-              $ref: '#/components/schemas/AssetFilters'
-            labels:
-              type: array
-              description: Labels to apply (for set_label/remove_label types)
-              items:
-                type: string
-        affected_count:
-          type: integer
-          format: int64
-          description: Number of assets affected by this pattern
-        affected_percentage:
-          type: number
-          format: float
-          description: Percentage of total assets affected
-        sample_assets:
-          type: array
-          description: Sample assets matching this pattern
-          items:
-            type: object
+    AssetPolicyType:
+      title: AssetPolicyType
+      type: string
+      enum:
+      - alert
+      - delete
+      - set_label
+      - remove_label
+      description: Type of action to perform when policy matches assets
     AssetFilters:
       title: AssetFilters
       type: object
@@ -856,6 +684,187 @@ components:
           type: integer
           minimum: 1
           description: Return assets that haven't been seen in the last N days. An asset is only included if a scan that covers it has run during that period without rediscovering it, so assets that simply haven't been rescanned recently are not matched.
+    EnumerationLaunchConfig:
+      title: EnumerationLaunchConfig
+      type: object
+      properties:
+        follow-redirect:
+          type: boolean
+        ports:
+          type: string
+    AssetPolicySuggestion:
+      title: AssetPolicySuggestion
+      type: object
+      required:
+      - id
+      - category
+      - title
+      - reason
+      - severity
+      - suggested_policy
+      - affected_count
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this suggestion (deterministic based on pattern)
+        category:
+          type: string
+          description: Category of the suggestion (e.g., ip_concentration, repeated_title)
+        title:
+          type: string
+          description: Human-readable title for the suggestion
+        reason:
+          type: string
+          description: Detailed explanation of why this suggestion is made
+        severity:
+          type: string
+          description: Severity level of the suggestion
+        suggested_policy:
+          type: object
+          required:
+          - name
+          - policy_type
+          - policies
+          properties:
+            name:
+              type: string
+              description: Suggested name for the policy
+            policy_type:
+              $ref: '#/components/schemas/AssetPolicyType'
+            policies:
+              $ref: '#/components/schemas/AssetFilters'
+            labels:
+              type: array
+              description: Labels to apply (for set_label/remove_label types)
+              items:
+                type: string
+        affected_count:
+          type: integer
+          format: int64
+          description: Number of assets affected by this pattern
+        affected_percentage:
+          type: number
+          format: float
+          description: Percentage of total assets affected
+        sample_assets:
+          type: array
+          description: Sample assets matching this pattern
+          items:
+            type: object
+    EnumerationConfig:
+      title: EnumerationConfig
+      type: object
+      properties:
+        name:
+          type: string
+        root_domains:
+          type: array
+          items:
+            type: string
+        enrichment_inputs:
+          type: array
+          items:
+            type: string
+        steps:
+          type: array
+          items:
+            type: string
+            enum:
+            - dns_resolve
+            - dns_bruteforce
+            - dns_permute
+            - port_scan
+            - http_probe
+            - http_screenshot
+            - endpoint_crawling
+            - dns_passive
+            - tls_scan
+            - uncover_assets
+            - dns_scraping
+        enum_ports:
+          type: string
+        enumeration_config:
+          $ref: '#/components/schemas/EnumerationLaunchConfig'
+        alerting_config_ids:
+          type: array
+          items:
+            type: string
+        subfinder_config_ids:
+          type: array
+          items:
+            type: string
+        exclusions:
+          type: array
+          items:
+            type: string
+          description: Combined inclusion (prefixed with +) and exclusion patterns for discovery scope
+        automatic_vuln_scans:
+          type: boolean
+    EnumerationHistoryDataResponse:
+      title: EnumerationHistoryDataResponse
+      type: object
+      required:
+      - enum_id
+      - name
+      - enum_type
+      - enum_started_at
+      - enum_finished_at
+      - enumeration_time
+      - status
+      - new_assets_discovered
+      - total_targets_processed
+      properties:
+        enum_id:
+          type: string
+        name:
+          type: string
+        enum_type:
+          type: string
+        enum_started_at:
+          type: string
+          format: date-time
+        enum_finished_at:
+          type: string
+          format: date-time
+        enumeration_time:
+          type: string
+          format: duration
+        status:
+          type: string
+        new_assets_discovered:
+          type: integer
+        total_targets_processed:
+          type: integer
+        error_details:
+          type: string
+    TimeRangeQueryParameter:
+      title: TimeRangeQueryParameter
+      type: string
+      enum:
+      - last_day
+      - last_week
+      - last_month
+      - last_3_months
+      - last_6_months
+      - last_12_months
+      - all_time
+    AssetPolicyListResponse:
+      title: AssetPolicyListResponse
+      type: object
+      required:
+      - policies
+      - total
+      properties:
+        policies:
+          type: array
+          description: Total number of asset policies for the user
+          items:
+            $ref: '#/components/schemas/AssetPolicy'
+        total:
+          type: integer
+          format: int64
+        message:
+          type: string
     ActivityEvent:
       title: ActivityEvent
       type: object
@@ -962,16 +971,73 @@ components:
         apply_to_existing:
           type: boolean
           description: Whether this policy applies to existing matching assets in addition to future assets
-    AssetPolicyType:
-      title: AssetPolicyType
-      type: string
-      enum:
-      - alert
-      - delete
-      - set_label
-      - remove_label
-      description: Type of action to perform when policy matches assets
+  responses:
+    ErrorResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
   requestBodies:
+    UpdateAssetPolicyRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              policies:
+                $ref: '#/components/schemas/AssetFilters'
+              name:
+                type: string
+                description: Display name for the policy
+              enumeration_ids:
+                type: array
+                description: Optional list of enumeration IDs to scope this policy to specific enumerations
+                items:
+                  type: string
+              policy_type:
+                $ref: '#/components/schemas/AssetPolicyType'
+              labels:
+                type: array
+                description: List of labels to apply/remove (required when policy_type is set_label or remove_label). In append mode, merged with existing labels. In replace mode, replaces all labels.
+                items:
+                  type: string
+              alerting_config_ids:
+                type: array
+                description: List of alerting configuration IDs (required when policy_type is alert). In append mode, merged with existing configs. In replace mode, replaces all configs.
+                items:
+                  type: string
+              apply_to_existing:
+                type: boolean
+                description: When true, the policy action is applied to existing matching assets in addition to future assets.
     CreateAssetPolicyRequest:
       content:
         application/json:
@@ -1006,72 +1072,6 @@ components:
                 type: boolean
                 default: false
                 description: When true, the policy action is applied to existing assets that match the conditions in addition to future assets. When false (default), the policy only applies to newly discovered assets.
-    UpdateAssetPolicyRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              policies:
-                $ref: '#/components/schemas/AssetFilters'
-              name:
-                type: string
-                description: Display name for the policy
-              enumeration_ids:
-                type: array
-                description: Optional list of enumeration IDs to scope this policy to specific enumerations
-                items:
-                  type: string
-              policy_type:
-                $ref: '#/components/schemas/AssetPolicyType'
-              labels:
-                type: array
-                description: List of labels to apply/remove (required when policy_type is set_label or remove_label). In append mode, merged with existing labels. In replace mode, replaces all labels.
-                items:
-                  type: string
-              alerting_config_ids:
-                type: array
-                description: List of alerting configuration IDs (required when policy_type is alert). In append mode, merged with existing configs. In replace mode, replaces all configs.
-                items:
-                  type: string
-              apply_to_existing:
-                type: boolean
-                description: When true, the policy action is applied to existing matching assets in addition to future assets.
-  responses:
-    MessageResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-    ErrorResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            properties:
-              message:
-                type: string
-              kind:
-                type: string
-              code:
-                type: string
-              error:
-                type: string
-              error_id:
-                type: string
-              param:
-                type: string
-              status:
-                type: integer
   securitySchemes:
     X-API-Key:
       name: X-API-Key
