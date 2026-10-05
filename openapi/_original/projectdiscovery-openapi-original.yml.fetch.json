@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.projectdiscovery.io/openapi.yaml",
+ "requested_url": "https://docs.projectdiscovery.io/openapi.yaml",
+ "status": 200,
+ "content_type": "text/yaml",
+ "bytes": 392571,
+ "sha256": "b81128edddb87b67d03c003e67bcb86d579fc73e59f53e07889b23b579d6bc30",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
