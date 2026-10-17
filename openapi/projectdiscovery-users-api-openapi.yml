@@ -104,6 +104,34 @@ paths:
       description: Rotate user api-key
 components:
   responses:
+    GetUserAPIKeyResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              api_key:
+                type: string
+            required:
+            - message
+            - api_key
+    PostApiKeyRotateResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              api_key:
+                type: string
+            required:
+            - message
+            - api_key
     ErrorResponse:
       description: Example response
       content:
@@ -127,45 +155,6 @@ components:
                 type: string
               status:
                 type: integer
-    PostApiKeyRotateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-              api_key:
-                type: string
-            required:
-            - message
-            - api_key
-    DeleteUserAPIKeyResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-            required:
-            - message
-    GetUserAPIKeyResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-              api_key:
-                type: string
-            required:
-            - message
-            - api_key
     MessageResponse:
       description: Example response
       content:
@@ -177,6 +166,17 @@ components:
             properties:
               message:
                 type: string
+    DeleteUserAPIKeyResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+            - message
   securitySchemes:
     X-API-Key:
       name: X-API-Key

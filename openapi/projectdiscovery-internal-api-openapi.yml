@@ -347,25 +347,6 @@ paths:
         required: true
 components:
   requestBodies:
-    DeleteDefaultTeamMemberRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              email:
-                type: string
-                description: Email of specific member to remove. Omit to remove all
-    DeleteTeamMemberRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              email:
-                type: string
-            required:
-            - email
     SetDefaultTeamMembersRequest:
       content:
         application/json:
@@ -391,16 +372,6 @@ components:
                   - role
             required:
             - members
-    CreateTeamRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-            required:
-            - name
     AddTeamMemberRequest:
       content:
         application/json:
@@ -424,26 +395,36 @@ components:
                 description: Team member role. Valid values are ADMIN, MEMBER, VIEWER, GUEST.
             required:
             - email
-  responses:
-    GetTeamMembersResponse:
-      description: Example response
+    DeleteTeamMemberRequest:
       content:
         application/json:
           schema:
             type: object
             properties:
-              message:
+              email:
                 type: string
-              max_team_members:
-                type: integer
-              members:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TeamMemberItem'
             required:
-            - message
-            - members
-            - max_team_members
+            - email
+    DeleteDefaultTeamMemberRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: Email of specific member to remove. Omit to remove all
+    CreateTeamRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+            required:
+            - name
+  responses:
     GetDefaultTeamMembersResponse:
       description: Default team members response
       content:
@@ -468,6 +449,19 @@ components:
             required:
             - message
             - members
+    UpdateTeamResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              message:
+                type: string
+            required:
+            - message
     ErrorResponse:
       description: Example response
       content:
@@ -508,19 +502,6 @@ components:
                 type: string
             required:
             - message
-    UpdateTeamResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-              message:
-                type: string
-            required:
-            - message
     MessageResponse:
       description: Example response
       content:
@@ -532,27 +513,26 @@ components:
             properties:
               message:
                 type: string
+    GetTeamMembersResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              max_team_members:
+                type: integer
+              members:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamMemberItem'
+            required:
+            - message
+            - members
+            - max_team_members
   schemas:
-    WorkspaceItem:
-      title: TeamMemberItem
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        created_at:
-          type: string
-        member_count:
-          type: integer
-        owner_email:
-          type: string
-      required:
-      - id
-      - name
-      - created_at
-      - member_count
-      - owner_email
     TeamMemberItem:
       title: TeamMemberItem
       type: object
@@ -576,6 +556,26 @@ components:
       - email
       - status
       - role
+    WorkspaceItem:
+      title: TeamMemberItem
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+        member_count:
+          type: integer
+        owner_email:
+          type: string
+      required:
+      - id
+      - name
+      - created_at
+      - member_count
+      - owner_email
   securitySchemes:
     X-API-Key:
       name: X-API-Key

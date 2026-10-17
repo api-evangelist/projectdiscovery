@@ -1334,55 +1334,6 @@ paths:
       description: Get All enumeration content
 components:
   schemas:
-    EnumerationSchedule:
-      title: EnumerationSchedule
-      type: object
-      required:
-      - enumeration_id
-      - scan_frequency
-      - schedule_last_run
-      - schedule_next_run
-      properties:
-        enumeration_id:
-          type: string
-        scan_frequency:
-          type: string
-        schedule_last_run:
-          type: string
-        schedule_next_run:
-          type: string
-        start_time:
-          type: string
-          format: time
-        hourly_frequency:
-          type: integer
-        custom_weekdays:
-          type: array
-          description: 'Array of integer denoting the weekdays on which the scan is supposed to run.
-
-            0-6 denoting Sunday-Saturday.'
-          items:
-            type: integer
-            minimum: 0
-            maximum: 6
-    EnumerationLaunchConfig:
-      title: EnumerationLaunchConfig
-      type: object
-      properties:
-        follow-redirect:
-          type: boolean
-        ports:
-          type: string
-    SchedulerFrequency:
-      title: SchedulerFrequency
-      type: string
-      enum:
-      - hourly
-      - daily
-      - weekly
-      - monthly
-      - custom
-      description: Allowed frequencies for the scheduler
     EnumerateData:
       title: EnumerateData
       type: object
@@ -1561,25 +1512,80 @@ components:
           type: integer
           minimum: 1
           description: Return assets that haven't been seen in the last N days. An asset is only included if a scan that covers it has run during that period without rediscovering it, so assets that simply haven't been rescanned recently are not matched.
-    EnumExportFormats:
-      title: EnumExportFormats
+    TimeRangeQueryParameter:
+      title: TimeRangeQueryParameter
       type: string
       enum:
-      - raw
-      - json
-      - csv
-    EnumerationSourceValue:
+      - last_day
+      - last_week
+      - last_month
+      - last_3_months
+      - last_6_months
+      - last_12_months
+      - all_time
+    EnumerationLaunchConfig:
+      title: EnumerationLaunchConfig
+      type: object
+      properties:
+        follow-redirect:
+          type: boolean
+        ports:
+          type: string
+    EnumerationContentTechnologyDetails:
+      title: EnumerationContentTechnologyDetails
+      type: object
+      properties:
+        description:
+          type: string
+        website:
+          type: string
+        icon:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+    SchedulerFrequency:
+      title: SchedulerFrequency
+      type: string
+      enum:
+      - hourly
+      - daily
+      - weekly
+      - monthly
+      - custom
+      description: Allowed frequencies for the scheduler
+    EnumerationSchedule:
+      title: EnumerationSchedule
       type: object
       required:
-      - source
-      - metadata
+      - enumeration_id
+      - scan_frequency
+      - schedule_last_run
+      - schedule_next_run
       properties:
-        source:
+        enumeration_id:
           type: string
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
+        scan_frequency:
+          type: string
+        schedule_last_run:
+          type: string
+        schedule_next_run:
+          type: string
+        start_time:
+          type: string
+          format: time
+        hourly_frequency:
+          type: integer
+        custom_weekdays:
+          type: array
+          description: 'Array of integer denoting the weekdays on which the scan is supposed to run.
+
+            0-6 denoting Sunday-Saturday.'
+          items:
+            type: integer
+            minimum: 0
+            maximum: 6
     EnumerationContent:
       title: EnumerationContent
       type: object
@@ -1725,6 +1731,53 @@ components:
             $ref: '#/components/schemas/EnumerationSourceValue'
         is_internal:
           type: boolean
+    EnumerationStats:
+      title: EnumerationStats
+      type: object
+      required:
+      - hosts
+      - http
+      - endpoints
+      - ports
+      - total_assets
+      properties:
+        hosts:
+          type: integer
+          format: int64
+        http:
+          type: integer
+          format: int64
+        endpoints:
+          type: integer
+          format: int64
+        ports:
+          type: integer
+          format: int64
+        total_assets:
+          type: integer
+          format: int64
+        total_asset_groups:
+          type: integer
+          format: int64
+    EnumExportFormats:
+      title: EnumExportFormats
+      type: string
+      enum:
+      - raw
+      - json
+      - csv
+    EnumerationSourceValue:
+      type: object
+      required:
+      - source
+      - metadata
+      properties:
+        source:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
     EnumerationConfig:
       title: EnumerationConfig
       type: object
@@ -1774,60 +1827,31 @@ components:
           description: Combined inclusion (prefixed with +) and exclusion patterns for discovery scope
         automatic_vuln_scans:
           type: boolean
-    EnumerationContentTechnologyDetails:
-      title: EnumerationContentTechnologyDetails
-      type: object
-      properties:
-        description:
-          type: string
-        website:
-          type: string
-        icon:
-          type: string
-        categories:
-          type: array
-          items:
-            type: string
-    TimeRangeQueryParameter:
-      title: TimeRangeQueryParameter
-      type: string
-      enum:
-      - last_day
-      - last_week
-      - last_month
-      - last_3_months
-      - last_6_months
-      - last_12_months
-      - all_time
-    EnumerationStats:
-      title: EnumerationStats
-      type: object
-      required:
-      - hosts
-      - http
-      - endpoints
-      - ports
-      - total_assets
-      properties:
-        hosts:
-          type: integer
-          format: int64
-        http:
-          type: integer
-          format: int64
-        endpoints:
-          type: integer
-          format: int64
-        ports:
-          type: integer
-          format: int64
-        total_assets:
-          type: integer
-          format: int64
-        total_asset_groups:
-          type: integer
-          format: int64
   requestBodies:
+    CreateAssetGroupRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - filters
+            properties:
+              filters:
+                $ref: '#/components/schemas/AssetFilters'
+              name:
+                type: string
+    UpdateAssetGroupRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - filters
+            properties:
+              filters:
+                $ref: '#/components/schemas/AssetFilters'
+              name:
+                type: string
     SetEnumerationScheduleRequest:
       content:
         application/json:
@@ -1857,30 +1881,6 @@ components:
                   type: integer
                   minimum: 0
                   maximum: 6
-    UpdateAssetGroupRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - filters
-            properties:
-              filters:
-                $ref: '#/components/schemas/AssetFilters'
-              name:
-                type: string
-    CreateAssetGroupRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - filters
-            properties:
-              filters:
-                $ref: '#/components/schemas/AssetFilters'
-              name:
-                type: string
   responses:
     GetEnumerateIdContentsResponse:
       description: Example response
@@ -1896,22 +1896,31 @@ components:
                 type: string
               data:
                 $ref: '#/components/schemas/EnumerateData'
-    GetEnumerationScheduleResponse:
+    EnumerateResponse:
       description: Example response
       content:
         application/json:
           schema:
             type: object
             required:
-            - message
-            - schedules
+            - current_page
+            - result_count
+            - total_results
+            - total_pages
+            - data
             properties:
-              message:
-                type: string
-              schedules:
+              current_page:
+                type: integer
+              result_count:
+                type: integer
+              total_results:
+                type: integer
+              total_pages:
+                type: integer
+              data:
                 type: array
                 items:
-                  $ref: '#/components/schemas/EnumerationSchedule'
+                  $ref: '#/components/schemas/EnumerateData'
     ErrorResponse:
       description: Example response
       content:
@@ -1951,6 +1960,22 @@ components:
                 type: array
                 items:
                   $ref: '#/components/schemas/EnumerationContent'
+    GetEnumerationScheduleResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - schedules
+            properties:
+              message:
+                type: string
+              schedules:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnumerationSchedule'
     MessageResponse:
       description: Example response
       content:
@@ -1962,31 +1987,6 @@ components:
             properties:
               message:
                 type: string
-    EnumerateResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - current_page
-            - result_count
-            - total_results
-            - total_pages
-            - data
-            properties:
-              current_page:
-                type: integer
-              result_count:
-                type: integer
-              total_results:
-                type: integer
-              total_pages:
-                type: integer
-              data:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EnumerateData'
   securitySchemes:
     X-API-Key:
       name: X-API-Key

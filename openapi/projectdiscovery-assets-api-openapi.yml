@@ -215,100 +215,35 @@ paths:
         description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
         name: X-Team-Id
 components:
-  responses:
-    ErrorResponse:
-      description: Example response
+  requestBodies:
+    AssetIdLabelsRequest:
       content:
         application/json:
           schema:
             type: object
             required:
-            - message
+            - labels
             properties:
-              message:
-                type: string
-              kind:
-                type: string
-              code:
-                type: string
-              error:
-                type: string
-              error_id:
-                type: string
-              param:
-                type: string
-              status:
-                type: integer
-    AssetCountResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - asset_count
-            - async
-            properties:
-              message:
-                type: string
-              asset_count:
-                type: integer
-              async:
-                type: boolean
-                description: Whether the operation is running asynchronously
-    GetAssetChangelogsResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - message
-            - current_page
-            - result_count
-            - total_results
-            - total_pages
-            - data
-            properties:
-              message:
-                type: string
-              current_page:
-                type: integer
-              result_count:
-                type: integer
-              total_results:
-                type: integer
-              total_pages:
-                type: integer
-              data:
+              labels:
                 type: array
                 items:
-                  type: object
-                  $ref: '#/components/schemas/AssetChangelogs'
-    MessageResponse:
-      description: Example response
+                  type: string
+    UpdateAssetLabelsRequest:
       content:
         application/json:
           schema:
             type: object
             required:
-            - message
+            - filters
+            - labels
             properties:
-              message:
-                type: string
+              filters:
+                $ref: '#/components/schemas/AssetFilters'
+              labels:
+                type: array
+                items:
+                  type: string
   schemas:
-    VulnerabilityChangelogsEvent:
-      title: VulnerabilityChangelogsEvent
-      type: object
-      properties:
-        name:
-          description: The name of the event
-          type: string
-        from:
-          description: The from value of the event
-        to:
-          description: The to value of the event
     AssetFilters:
       title: AssetFilters
       type: object
@@ -464,34 +399,99 @@ components:
       - last_6_months
       - last_12_months
       - all_time
-  requestBodies:
-    UpdateAssetLabelsRequest:
+    VulnerabilityChangelogsEvent:
+      title: VulnerabilityChangelogsEvent
+      type: object
+      properties:
+        name:
+          description: The name of the event
+          type: string
+        from:
+          description: The from value of the event
+        to:
+          description: The to value of the event
+  responses:
+    ErrorResponse:
+      description: Example response
       content:
         application/json:
           schema:
             type: object
             required:
-            - filters
-            - labels
+            - message
             properties:
-              filters:
-                $ref: '#/components/schemas/AssetFilters'
-              labels:
-                type: array
-                items:
-                  type: string
-    AssetIdLabelsRequest:
+              message:
+                type: string
+              kind:
+                type: string
+              code:
+                type: string
+              error:
+                type: string
+              error_id:
+                type: string
+              param:
+                type: string
+              status:
+                type: integer
+    AssetCountResponse:
+      description: Example response
       content:
         application/json:
           schema:
             type: object
             required:
-            - labels
+            - message
+            - asset_count
+            - async
             properties:
-              labels:
+              message:
+                type: string
+              asset_count:
+                type: integer
+              async:
+                type: boolean
+                description: Whether the operation is running asynchronously
+    GetAssetChangelogsResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            - current_page
+            - result_count
+            - total_results
+            - total_pages
+            - data
+            properties:
+              message:
+                type: string
+              current_page:
+                type: integer
+              result_count:
+                type: integer
+              total_results:
+                type: integer
+              total_pages:
+                type: integer
+              data:
                 type: array
                 items:
-                  type: string
+                  type: object
+                  $ref: '#/components/schemas/AssetChangelogs'
+    MessageResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - message
+            properties:
+              message:
+                type: string
   securitySchemes:
     X-API-Key:
       name: X-API-Key

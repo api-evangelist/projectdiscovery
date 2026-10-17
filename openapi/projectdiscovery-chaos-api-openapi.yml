@@ -117,23 +117,6 @@ components:
             type: string
             description: Plain text list of domains when raw=true
   schemas:
-    AssociatedDomainResult:
-      title: AssociatedDomainResult
-      type: object
-      required:
-      - domain
-      - sources
-      properties:
-        domain:
-          description: Associated domain name
-          type: string
-        evidence:
-          $ref: '#/components/schemas/AssociatedDomainEvidence'
-        sources:
-          description: Sources that reported the association
-          type: array
-          items:
-            type: string
     AssociatedDomainEvidence:
       title: AssociatedDomainEvidence
       type: object
@@ -216,6 +199,23 @@ components:
         whois_server:
           description: WHOIS server
           type: string
+    AssociatedDomainResult:
+      title: AssociatedDomainResult
+      type: object
+      required:
+      - domain
+      - sources
+      properties:
+        domain:
+          description: Associated domain name
+          type: string
+        evidence:
+          $ref: '#/components/schemas/AssociatedDomainEvidence'
+        sources:
+          description: Sources that reported the association
+          type: array
+          items:
+            type: string
     AssociatedDomainsResultSet:
       title: AssociatedDomainsResultSet
       type: object

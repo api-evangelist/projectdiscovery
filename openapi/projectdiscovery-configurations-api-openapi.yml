@@ -459,6 +459,87 @@ paths:
         description: 'Retrieve the Team ID from: https://cloud.projectdiscovery.io/settings/team'
         name: X-Team-Id
 components:
+  requestBodies:
+    AddCustomSeverityMappingRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - template_id
+            - custom_severity
+            properties:
+              template_id:
+                type: string
+              custom_severity:
+                type: string
+              vuln_id:
+                type: string
+    VerifyConfigRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - config
+            properties:
+              config:
+                type: string
+              config_type:
+                type: string
+              oauth_config_id:
+                type: string
+    DeleteExcludedConfigRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - ids
+            properties:
+              ids:
+                type: array
+                items:
+                  type: integer
+                  format: int64
+    ExcludeConfigRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - values
+            - exclude_type
+            properties:
+              values:
+                type: array
+                items:
+                  type: string
+              scan_ids:
+                type: array
+                items:
+                  type: string
+                description: Optional scan IDs to scope these rules to specific scans. If not provided, rules apply globally.
+              enumeration_ids:
+                type: array
+                items:
+                  type: string
+                description: Optional enumeration IDs to scope these rules to specific enumerations. If not provided, rules apply globally.
+              exclude_type:
+                $ref: '#/components/schemas/ExcludeConfigRequestType'
+    DeleteCustomSeverityMappingRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - ids
+            properties:
+              ids:
+                type: array
+                items:
+                  type: integer
+                  format: int64
   responses:
     VerifyConfigResponse:
       description: Example response
@@ -476,6 +557,19 @@ components:
                 type: string
               event:
                 type: object
+    GetSeverityConfigResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - custom_severity_mappings
+            properties:
+              custom_severity_mappings:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomSeverityMapping'
     ExcludedTemplateResponse:
       description: Example response
       content:
@@ -525,19 +619,6 @@ components:
                 type: string
               message:
                 type: string
-    GetSeverityConfigResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - custom_severity_mappings
-            properties:
-              custom_severity_mappings:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CustomSeverityMapping'
     PostSeverityConfigResponse:
       description: Example response
       content:
@@ -564,88 +645,42 @@ components:
             properties:
               message:
                 type: string
-  requestBodies:
-    DeleteCustomSeverityMappingRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - ids
-            properties:
-              ids:
-                type: array
-                items:
-                  type: integer
-                  format: int64
-    AddCustomSeverityMappingRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - template_id
-            - custom_severity
-            properties:
-              template_id:
-                type: string
-              custom_severity:
-                type: string
-              vuln_id:
-                type: string
-    DeleteExcludedConfigRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - ids
-            properties:
-              ids:
-                type: array
-                items:
-                  type: integer
-                  format: int64
-    ExcludeConfigRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - values
-            - exclude_type
-            properties:
-              values:
-                type: array
-                items:
-                  type: string
-              scan_ids:
-                type: array
-                items:
-                  type: string
-                description: Optional scan IDs to scope these rules to specific scans. If not provided, rules apply globally.
-              enumeration_ids:
-                type: array
-                items:
-                  type: string
-                description: Optional enumeration IDs to scope these rules to specific enumerations. If not provided, rules apply globally.
-              exclude_type:
-                $ref: '#/components/schemas/ExcludeConfigRequestType'
-    VerifyConfigRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - config
-            properties:
-              config:
-                type: string
-              config_type:
-                type: string
-              oauth_config_id:
-                type: string
   schemas:
+    ExcludeConfigRequestType:
+      title: ExcludeConfigRequestType
+      type: string
+      enum:
+      - scan_target
+      - template
+      - enumeration_target
+    CustomSeverityMapping:
+      title: CustomSeverityMapping
+      type: object
+      required:
+      - id
+      - template_id
+      - original_severity
+      - custom_severity
+      - created_at
+      - updated_at
+      properties:
+        id:
+          type: integer
+          format: int64
+        template_id:
+          type: string
+        original_severity:
+          type: string
+        custom_severity:
+          type: string
+        vuln_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
     ExcludedTemplate:
       title: Excluded Templates and targets
       type: object
@@ -675,13 +710,6 @@ components:
       - exclude_type
       - created_at
       - updated_at
-    ExcludeConfigRequestType:
-      title: ExcludeConfigRequestType
-      type: string
-      enum:
-      - scan_target
-      - template
-      - enumeration_target
     ConfigTypeEnum:
       title: ConfigTypeEnum
       type: string
@@ -692,34 +720,6 @@ components:
       - alerting
       - cloudlist
       - subfinder
-    CustomSeverityMapping:
-      title: CustomSeverityMapping
-      type: object
-      required:
-      - id
-      - template_id
-      - original_severity
-      - custom_severity
-      - created_at
-      - updated_at
-      properties:
-        id:
-          type: integer
-          format: int64
-        template_id:
-          type: string
-        original_severity:
-          type: string
-        custom_severity:
-          type: string
-        vuln_id:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
     ConfigResponse:
       title: ConfigResponse
       type: object

@@ -641,6 +641,42 @@ components:
               status:
                 type: integer
   schemas:
+    LeaksTimeline:
+      title: LeaksTimeline
+      type: object
+      properties:
+        CredentialsCount:
+          type: number
+        Month:
+          type: number
+        Year:
+          type: number
+    CombolistExposureCount:
+      title: CombolistExposureCount
+      type: object
+      properties:
+        combolist_exposure:
+          type: number
+    LeaksEntityStatus:
+      title: LeaksEntityStatus
+      enum:
+      - fixed
+      - open
+      - NA
+    LeakCountryStats:
+      title: LeakCountryStats
+      type: object
+      properties:
+        Country:
+          type: string
+        CredentialsCount:
+          type: number
+    DevicesCount:
+      title: DevicesCount
+      type: object
+      properties:
+        devices:
+          type: number
     UsedUrlsCount:
       title: UsedUrlsCount
       type: object
@@ -649,11 +685,23 @@ components:
           type: number
         url:
           type: string
+    CustomersCount:
+      title: CustomersCount
+      type: object
+      properties:
+        customers:
+          type: number
     EmployeesCount:
       title: EmployeesCount
       type: object
       properties:
         employees:
+          type: number
+    UsersCount:
+      title: UsersCount
+      type: object
+      properties:
+        user:
           type: number
     LeaksUsersSampleData:
       title: LeaksUsersSampleData
@@ -669,54 +717,6 @@ components:
           type: string
         log_date:
           type: string
-    DevicesCount:
-      title: DevicesCount
-      type: object
-      properties:
-        devices:
-          type: number
-    LeaksTimeline:
-      title: LeaksTimeline
-      type: object
-      properties:
-        CredentialsCount:
-          type: number
-        Month:
-          type: number
-        Year:
-          type: number
-    LeakCountryStats:
-      title: LeakCountryStats
-      type: object
-      properties:
-        Country:
-          type: string
-        CredentialsCount:
-          type: number
-    CustomersCount:
-      title: CustomersCount
-      type: object
-      properties:
-        customers:
-          type: number
-    CombolistExposureCount:
-      title: CombolistExposureCount
-      type: object
-      properties:
-        combolist_exposure:
-          type: number
-    LeaksEntityStatus:
-      title: LeaksEntityStatus
-      enum:
-      - fixed
-      - open
-      - NA
-    UsersCount:
-      title: UsersCount
-      type: object
-      properties:
-        user:
-          type: number
   securitySchemes:
     X-API-Key:
       name: X-API-Key

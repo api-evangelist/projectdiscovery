@@ -342,6 +342,18 @@ paths:
                   type: string
                   description: Filter by specific hardware ID (used with group_by for drill-down)
 components:
+  schemas:
+    TimeRangeQueryParameter:
+      title: TimeRangeQueryParameter
+      type: string
+      enum:
+      - last_day
+      - last_week
+      - last_month
+      - last_3_months
+      - last_6_months
+      - last_12_months
+      - all_time
   responses:
     MessageResponse:
       description: Example response
@@ -377,18 +389,6 @@ components:
                 type: string
               status:
                 type: integer
-  schemas:
-    TimeRangeQueryParameter:
-      title: TimeRangeQueryParameter
-      type: string
-      enum:
-      - last_day
-      - last_week
-      - last_month
-      - last_3_months
-      - last_6_months
-      - last_12_months
-      - all_time
   securitySchemes:
     X-API-Key:
       name: X-API-Key
